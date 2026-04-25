@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Omar Ahmed — CV</title>
+<title>Omar Ahmed — Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
 <style>
 :root {
@@ -17,11 +17,8 @@
   --accent: #4ade80;
   --accent2: #22d3ee;
 }
-
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   background: var(--bg);
   color: var(--text);
@@ -30,465 +27,208 @@ body {
   overflow-x: hidden;
   cursor: none;
 }
+.cursor { width:12px;height:12px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s ease;mix-blend-mode:difference; }
+.cursor-ring { width:36px;height:36px;border:1px solid rgba(212,168,67,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all 0.08s linear; }
+body::before { content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6; }
 
-/* CURSOR */
-.cursor {
-  width: 12px; height: 12px;
-  background: var(--gold);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.15s ease, opacity 0.2s;
-  mix-blend-mode: difference;
+/* NAV */
+.top-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16px 40px;
+  background: rgba(6,6,8,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
 }
-.cursor-ring {
-  width: 36px; height: 36px;
-  border: 1px solid rgba(212,168,67,0.4);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9998;
-  transition: all 0.08s linear;
-}
-
-/* NOISE OVERLAY */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.6;
-}
-
-/* LANG TOGGLE */
-.lang-bar {
-  position: fixed;
-  top: 24px; right: 28px;
-  z-index: 100;
-  display: flex;
-  gap: 6px;
-  background: rgba(14,14,18,0.9);
-  border: 1px solid var(--border);
-  border-radius: 30px;
-  padding: 5px;
-  backdrop-filter: blur(12px);
-}
-.lang-btn {
-  padding: 6px 16px;
-  border-radius: 24px;
-  border: none;
-  background: transparent;
-  color: var(--muted);
+.nav-logo { font-family:'Instrument Serif',serif; font-size:1.1rem; color:var(--gold); text-decoration:none; }
+.nav-links { display:flex; gap:8px; align-items:center; }
+.nav-link {
+  padding: 7px 16px; border-radius: 20px; border: 1px solid transparent;
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  text-decoration: none; color: var(--muted); cursor: pointer; background: transparent;
   font-family: 'Syne', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 1px;
   transition: all 0.2s;
 }
-.lang-btn.active { background: var(--gold); color: #060608; }
+.nav-link:hover, .nav-link.active { border-color: var(--gold); color: var(--gold); }
+.nav-link.active { background: rgba(212,168,67,0.08); }
+.lang-bar { display:flex;gap:4px;background:rgba(14,14,18,0.9);border:1px solid var(--border);border-radius:30px;padding:4px;backdrop-filter:blur(12px); }
+.lang-btn { padding:5px 14px;border-radius:24px;border:none;background:transparent;color:var(--muted);font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s; }
+.lang-btn.active { background:var(--gold);color:#060608; }
 
-/* HERO */
+/* PAGES */
+.page { display:none; min-height:100vh; padding-top:70px; }
+.page.active { display:block; }
+
+/* ===== PAGE 1: CV ===== */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 60px 60px;
-  position: relative;
-  z-index: 1;
+  min-height: calc(100vh - 70px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 60px 60px 60px;
+  position: relative; z-index: 1;
 }
+.hero-grid { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;width:100%; }
+.hero-eyebrow { font-size:0.7rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 0.8s 0.1s forwards; }
+.hero-name { font-family:'Instrument Serif',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1.05;margin-bottom:12px;opacity:0;animation:fadeUp 0.8s 0.2s forwards; }
+.hero-name em { font-style:italic;color:var(--gold); }
+.hero-title { font-size:clamp(0.85rem,1.5vw,1rem);color:var(--muted);font-weight:400;letter-spacing:0.5px;margin-bottom:32px;line-height:1.6;opacity:0;animation:fadeUp 0.8s 0.35s forwards; }
+.hero-badges { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;opacity:0;animation:fadeUp 0.8s 0.45s forwards; }
+.badge { padding:6px 14px;border-radius:20px;font-size:0.72rem;font-weight:700;letter-spacing:0.8px;border:1px solid; }
+.badge-web { border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,0.07); }
+.badge-sec { border-color:var(--accent);color:var(--accent);background:rgba(74,222,128,0.07); }
+.badge-ai  { border-color:var(--accent2);color:var(--accent2);background:rgba(34,211,238,0.07); }
+.hero-contacts { display:flex;flex-direction:column;gap:10px;opacity:0;animation:fadeUp 0.8s 0.55s forwards; }
+.contact-row { display:flex;align-items:center;gap:10px;font-size:0.8rem;color:var(--muted);text-decoration:none;transition:color 0.2s; }
+.contact-row:hover { color:var(--gold); }
+.contact-icon { width:28px;height:28px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0; }
+.hero-right { opacity:0;animation:fadeIn 1s 0.6s forwards; }
+.stats-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
+.stat-card { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.3s; }
+.stat-card:hover { border-color:var(--gold);transform:translateY(-4px); }
+.stat-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity 0.3s; }
+.stat-card:hover::before { opacity:1; }
+.stat-num { font-family:'Instrument Serif',serif;font-size:2.8rem;color:var(--gold);line-height:1;margin-bottom:6px; }
+.stat-label { font-size:0.72rem;color:var(--muted);letter-spacing:0.5px; }
+.stat-card.wide { grid-column:span 2; }
+.availability { display:flex;align-items:center;gap:10px;margin-top:8px; }
+.dot-green { width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite; }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,0.4)}50%{box-shadow:0 0 0 8px rgba(74,222,128,0)} }
+.avail-text { font-size:0.82rem;color:var(--accent);font-weight:600; }
 
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
-  max-width: 1100px;
-  margin: 0 auto;
-  width: 100%;
-}
+.section-divider { height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0 60px;width:calc(100% - 120px); }
+.section { max-width:1100px;margin:0 auto;padding:70px 60px;position:relative;z-index:1; }
+.section-label { font-size:0.65rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:40px;display:flex;align-items:center;gap:14px; }
+.section-label::after { content:'';flex:1;height:1px;background:var(--border); }
 
-.hero-eyebrow {
-  font-size: 0.7rem;
-  letter-spacing: 3px;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 20px;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.1s forwards;
-}
+.skills-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
+.skill-group { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color 0.3s; }
+.skill-group:hover { border-color:rgba(212,168,67,0.3); }
+.skill-group-title { font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px; }
+.skill-tags { display:flex;flex-wrap:wrap;gap:7px; }
+.skill-tag { padding:5px 11px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;font-size:0.75rem;color:var(--text);transition:all 0.2s; }
+.skill-tag:hover { border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,0.06); }
+.bar-skills { display:flex;flex-direction:column;gap:14px;margin-top:20px; }
+.bar-header { display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.8rem; }
+.bar-pct { color:var(--gold);font-size:0.75rem; }
+.bar-track { height:4px;background:var(--border);border-radius:2px;overflow:hidden; }
+.bar-fill { height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1); }
 
-.hero-name {
-  font-family: 'Instrument Serif', serif;
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  font-weight: 400;
-  line-height: 1.05;
-  margin-bottom: 12px;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.2s forwards;
-}
-.hero-name em { font-style: italic; color: var(--gold); }
-
-.hero-title {
-  font-size: clamp(0.85rem, 1.5vw, 1rem);
-  color: var(--muted);
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  margin-bottom: 32px;
-  line-height: 1.6;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.35s forwards;
-}
-
-.hero-badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 36px;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.45s forwards;
-}
-.badge {
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.8px;
-  border: 1px solid;
-}
-.badge-web { border-color: var(--gold); color: var(--gold); background: rgba(212,168,67,0.07); }
-.badge-sec { border-color: var(--accent); color: var(--accent); background: rgba(74,222,128,0.07); }
-.badge-ai  { border-color: var(--accent2); color: var(--accent2); background: rgba(34,211,238,0.07); }
-
-.hero-contacts {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  opacity: 0;
-  animation: fadeUp 0.8s 0.55s forwards;
-}
-.contact-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.8rem;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-.contact-row:hover { color: var(--gold); }
-.contact-icon { width: 28px; height: 28px; border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0; }
-
-/* RIGHT SIDE — stats */
-.hero-right {
-  opacity: 0;
-  animation: fadeIn 1s 0.6s forwards;
-}
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-.stat-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.3s, transform 0.3s;
-}
-.stat-card:hover { border-color: var(--gold); transform: translateY(-4px); }
-.stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.stat-card:hover::before { opacity: 1; }
-.stat-num {
-  font-family: 'Instrument Serif', serif;
-  font-size: 2.8rem;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 6px;
-}
-.stat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.5px; }
-
-.stat-card.wide { grid-column: span 2; }
-.availability {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 8px;
-}
-.dot-green {
-  width: 8px; height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-  animation: pulse 2s infinite;
-}
-@keyframes pulse {
-  0%,100% { box-shadow: 0 0 0 0 rgba(74,222,128,0.4); }
-  50% { box-shadow: 0 0 0 8px rgba(74,222,128,0); }
-}
-.avail-text { font-size: 0.82rem; color: var(--accent); font-weight: 600; }
-
-/* DIVIDER LINE */
-.section-divider {
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
-  margin: 0 60px;
-  width: calc(100% - 120px);
-}
-
-/* SECTIONS */
-.section {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 70px 60px;
-  position: relative;
-  z-index: 1;
-}
-
-.section-label {
-  font-size: 0.65rem;
-  letter-spacing: 3px;
-  color: var(--gold);
-  text-transform: uppercase;
-  margin-bottom: 40px;
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.section-label::after {
-  content: '';
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* SKILLS */
-.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-
-.skill-group {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 22px;
-  transition: border-color 0.3s;
-}
-.skill-group:hover { border-color: rgba(212,168,67,0.3); }
-
-.skill-group-title {
-  font-size: 0.65rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 14px;
-}
-.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
-.skill-tag {
-  padding: 5px 11px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.75rem;
-  color: var(--text);
-  transition: all 0.2s;
-}
-.skill-tag:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,168,67,0.06); }
-
-/* BAR SKILLS */
-.bar-skills { display: flex; flex-direction: column; gap: 14px; margin-top: 20px; }
-.bar-item {}
-.bar-header { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 0.8rem; }
-.bar-pct { color: var(--gold); font-size: 0.75rem; }
-.bar-track { height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.bar-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--gold), var(--gold2));
-  border-radius: 2px;
-  width: 0;
-  transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
-}
-
-/* PROJECTS */
-.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-
+/* Featured projects (CV page) */
+.projects-grid { display:grid;grid-template-columns:1fr 1fr;gap:18px; }
 .project-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 28px;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s;
-  cursor: default;
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;
+  position:relative;overflow:hidden;transition:all 0.3s;
+  cursor:pointer; text-decoration:none; display:block; color:inherit;
 }
-.project-card:hover { border-color: var(--gold); transform: translateY(-4px); box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+.project-card:hover { border-color:var(--gold);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.5); }
+.project-card::after { content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(212,168,67,0.04),transparent);opacity:0;transition:opacity 0.3s; }
+.project-card:hover::after { opacity:1; }
+.project-num { font-family:'Instrument Serif',serif;font-size:3rem;color:var(--border);position:absolute;top:16px;right:20px;line-height:1;transition:color 0.3s; }
+.project-card:hover .project-num { color:rgba(212,168,67,0.15); }
+.project-name { font-size:1rem;font-weight:700;margin-bottom:8px;line-height:1.3; }
+.project-desc { font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:16px; }
+.project-stack { display:flex;flex-wrap:wrap;gap:6px; }
+.stack-chip { padding:3px 10px;background:rgba(255,255,255,0.04);border-radius:6px;font-size:0.68rem;color:var(--muted);font-weight:600;letter-spacing:0.5px; }
+.project-gh-link {
+  display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--gold);
+  margin-top:14px;font-weight:700;letter-spacing:0.5px;transition:gap 0.2s;
+}
+.project-card:hover .project-gh-link { gap:10px; }
 
-.project-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 60px;
-  background: linear-gradient(to top, rgba(212,168,67,0.04), transparent);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-.project-card:hover::after { opacity: 1; }
+.certs-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:14px; }
+.cert-card { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all 0.3s;display:flex;align-items:flex-start;gap:12px; }
+.cert-card:hover { border-color:var(--gold);transform:translateY(-3px); }
+.cert-emoji { font-size:1.3rem;flex-shrink:0;margin-top:2px; }
+.cert-issuer { font-size:0.62rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px; }
+.cert-name { font-size:0.82rem;font-weight:600;line-height:1.4;margin-bottom:4px; }
+.cert-date { font-size:0.68rem;color:var(--muted); }
+.cert-verify { display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;color:var(--accent2);text-decoration:none;margin-top:6px;font-weight:600;transition:gap 0.2s; }
+.cert-verify:hover { gap:8px; }
 
-.project-num {
-  font-family: 'Instrument Serif', serif;
-  font-size: 3rem;
-  color: var(--border);
-  position: absolute;
-  top: 16px; right: 20px;
-  line-height: 1;
-  transition: color 0.3s;
-}
-.project-card:hover .project-num { color: rgba(212,168,67,0.15); }
+.edu-card { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px;display:flex;gap:24px;align-items:flex-start;transition:border-color 0.3s; }
+.edu-card:hover { border-color:rgba(212,168,67,0.3); }
+.edu-icon { font-size:2rem;flex-shrink:0; }
+.edu-school { font-size:1rem;font-weight:700;margin-bottom:4px; }
+.edu-degree { font-size:0.82rem;color:var(--muted);margin-bottom:10px; }
+.edu-year { font-size:0.7rem;color:var(--gold);letter-spacing:1px;font-weight:600; }
 
-.project-name {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-.project-desc {
-  font-size: 0.8rem;
-  color: var(--muted);
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-.project-stack { display: flex; flex-wrap: wrap; gap: 6px; }
-.stack-chip {
-  padding: 3px 10px;
-  background: rgba(255,255,255,0.04);
-  border-radius: 6px;
-  font-size: 0.68rem;
-  color: var(--muted);
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-.project-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 0.72rem;
-  color: var(--gold);
-  text-decoration: none;
-  margin-top: 14px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  transition: gap 0.2s;
-}
-.project-link:hover { gap: 10px; }
+.lang-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:14px; }
+.lang-card { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;transition:all 0.3s; }
+.lang-card:hover { border-color:var(--gold);transform:translateY(-3px); }
+.lang-name { font-size:0.9rem;font-weight:700;margin-bottom:6px; }
+.lang-level { font-size:0.68rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase; }
 
-/* CERTS */
-.certs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.cert-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  transition: all 0.3s;
-}
-.cert-card:hover { border-color: var(--gold); }
-.cert-issuer { font-size: 0.62rem; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 8px; }
-.cert-name { font-size: 0.82rem; font-weight: 600; line-height: 1.4; }
+.cv-footer { border-top:1px solid var(--border);padding:40px 60px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1; }
+.footer-name { font-family:'Instrument Serif',serif;font-size:1.2rem; }
+.footer-note { font-size:0.72rem;color:var(--muted); }
 
-/* EDUCATION */
-.edu-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 30px;
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
-  transition: border-color 0.3s;
+/* ===== PAGE 2: ALL PROJECTS ===== */
+.all-projects-page { padding: 100px 60px 60px; max-width: 1100px; margin: 0 auto; }
+.all-projects-header { margin-bottom: 60px; }
+.all-projects-header h1 { font-family:'Instrument Serif',serif; font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:12px; }
+.all-projects-header h1 em { font-style:italic; color:var(--gold); }
+.all-projects-header p { color:var(--muted); font-size:0.9rem; line-height:1.7; max-width:500px; }
+.repos-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.repo-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:22px; text-decoration:none; color:inherit;
+  display:flex; flex-direction:column; gap:10px;
+  transition:all 0.3s; position:relative; overflow:hidden;
 }
-.edu-card:hover { border-color: rgba(212,168,67,0.3); }
-.edu-icon { font-size: 2rem; flex-shrink: 0; }
-.edu-school { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-.edu-degree { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
-.edu-year { font-size: 0.7rem; color: var(--gold); letter-spacing: 1px; font-weight: 600; }
-
-/* LANG */
-.lang-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.lang-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  transition: all 0.3s;
+.repo-card:hover { border-color:var(--gold); transform:translateY(-4px); box-shadow:0 16px 50px rgba(0,0,0,0.4); }
+.repo-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity 0.3s; }
+.repo-card:hover::before { opacity:1; }
+.repo-icon { font-size:1.4rem; }
+.repo-name { font-size:0.88rem; font-weight:700; color:var(--text); line-height:1.3; }
+.repo-desc { font-size:0.75rem; color:var(--muted); line-height:1.55; flex:1; }
+.repo-tag {
+  display:inline-flex; align-items:center; gap:4px;
+  font-size:0.65rem; font-weight:700; letter-spacing:0.8px;
+  padding:3px 9px; border-radius:6px; width:fit-content;
+  text-transform:uppercase;
 }
-.lang-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-.lang-name { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
-.lang-level { font-size: 0.68rem; color: var(--gold); letter-spacing: 1px; text-transform: uppercase; }
-
-/* FOOTER */
-.cv-footer {
-  border-top: 1px solid var(--border);
-  padding: 40px 60px;
-  max-width: 1100px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-}
-.footer-name { font-family: 'Instrument Serif', serif; font-size: 1.2rem; }
-.footer-note { font-size: 0.72rem; color: var(--muted); }
-
-/* ARABIC MODE */
-body.ar { font-family: 'Cairo', sans-serif; direction: rtl; }
-body.ar .section-label::after { order: -1; }
-body.ar .contact-row { flex-direction: row-reverse; }
-body.ar .project-num { left: 20px; right: auto; }
-body.ar .bar-header { flex-direction: row-reverse; }
-body.ar .cv-footer { flex-direction: row-reverse; }
+.tag-web { background:rgba(212,168,67,0.1); color:var(--gold); border:1px solid rgba(212,168,67,0.2); }
+.tag-ai  { background:rgba(34,211,238,0.08); color:var(--accent2); border:1px solid rgba(34,211,238,0.2); }
+.tag-py  { background:rgba(74,222,128,0.08); color:var(--accent); border:1px solid rgba(74,222,128,0.2); }
+.tag-ecom{ background:rgba(167,139,250,0.08); color:#a78bfa; border:1px solid rgba(167,139,250,0.2); }
+.tag-data{ background:rgba(251,146,60,0.08); color:#fb923c; border:1px solid rgba(251,146,60,0.2); }
+.repo-arrow { font-size:0.72rem; color:var(--muted); transition:color 0.2s,transform 0.2s; margin-top:4px; }
+.repo-card:hover .repo-arrow { color:var(--gold); transform:translateX(4px); }
 
 /* ANIMATIONS */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn { from{opacity:0}to{opacity:1} }
+.reveal { opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease; }
+.reveal.visible { opacity:1;transform:none; }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity: 1; transform: none; }
+/* Arabic */
+body.ar { font-family:'Cairo',sans-serif;direction:rtl; }
+body.ar .section-label::after { order:-1; }
+body.ar .contact-row { flex-direction:row-reverse; }
+body.ar .project-num { left:20px;right:auto; }
+body.ar .bar-header { flex-direction:row-reverse; }
+body.ar .cv-footer { flex-direction:row-reverse; }
+body.ar .top-nav { flex-direction:row-reverse; }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .hero { padding: 80px 24px 40px; }
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .section { padding: 50px 24px; }
-  .skills-grid { grid-template-columns: 1fr 1fr; }
-  .projects-grid { grid-template-columns: 1fr; }
-  .certs-grid { grid-template-columns: 1fr 1fr; }
-  .lang-grid { grid-template-columns: 1fr 1fr; }
-  .cv-footer { padding: 30px 24px; flex-direction: column; gap: 12px; text-align: center; }
-  .section-divider { margin: 0 24px; width: calc(100% - 48px); }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
+/* Responsive */
+@media(max-width:768px){
+  .hero{padding:60px 24px 40px;}
+  .hero-grid{grid-template-columns:1fr;gap:40px;}
+  .section{padding:50px 24px;}
+  .skills-grid{grid-template-columns:1fr 1fr;}
+  .projects-grid{grid-template-columns:1fr;}
+  .certs-grid{grid-template-columns:1fr 1fr;}
+  .lang-grid{grid-template-columns:1fr 1fr;}
+  .cv-footer{padding:30px 24px;flex-direction:column;gap:12px;text-align:center;}
+  .section-divider{margin:0 24px;width:calc(100% - 48px);}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .repos-grid{grid-template-columns:1fr 1fr;}
+  .all-projects-page{padding:90px 24px 40px;}
+  .top-nav{padding:14px 20px;}
+  .nav-links{gap:4px;}
+  .nav-link{padding:6px 10px;font-size:0.65rem;}
+}
+@media(max-width:480px){
+  .repos-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -497,13 +237,22 @@ body.ar .cv-footer { flex-direction: row-reverse; }
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="ring"></div>
 
-<!-- LANG TOGGLE -->
-<div class="lang-bar">
-  <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
-  <button class="lang-btn" onclick="setLang('ar')" id="btn-ar">ع</button>
-</div>
+<!-- TOP NAV -->
+<nav class="top-nav">
+  <a class="nav-logo" href="#">Omar Ahmed</a>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('cv')" id="nav-cv">CV</button>
+    <button class="nav-link" onclick="showPage('projects')" id="nav-projects">All Projects</button>
+    <div class="lang-bar">
+      <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+      <button class="lang-btn" onclick="setLang('ar')" id="btn-ar">ع</button>
+    </div>
+  </div>
+</nav>
 
-<!-- HERO -->
+<!-- ===== PAGE 1: CV ===== -->
+<div class="page active" id="page-cv">
+
 <section class="hero">
   <div class="hero-grid">
     <div class="hero-left">
@@ -522,42 +271,25 @@ body.ar .cv-footer { flex-direction: row-reverse; }
       </div>
       <div class="hero-contacts">
         <a class="contact-row" href="mailto:omarahameds2010@gmail.com">
-          <span class="contact-icon">✉</span>
-          omarahameds2010@gmail.com
+          <span class="contact-icon">✉</span>omarahameds2010@gmail.com
         </a>
         <a class="contact-row" href="https://github.com/omarahameds2010-lab" target="_blank">
-          <span class="contact-icon">⌥</span>
-          github.com/omarahameds2010-lab
+          <span class="contact-icon">⌥</span>github.com/omarahameds2010-lab
         </a>
         <a class="contact-row" href="https://linkedin.com/in/omar-ahmed-7b97613b1" target="_blank">
-          <span class="contact-icon">in</span>
-          linkedin.com/in/omar-ahmed-7b97613b1
+          <span class="contact-icon">in</span>linkedin.com/in/omar-ahmed-7b97613b1
         </a>
         <a class="contact-row" href="https://omarahameds2010-lab.github.io/omar-os/" target="_blank">
-          <span class="contact-icon">◈</span>
-          Portfolio — OmarOS v2.0
+          <span class="contact-icon">◈</span>Portfolio — OmarOS v2.0
         </a>
       </div>
     </div>
-
     <div class="hero-right">
       <div class="stats-grid">
-        <div class="stat-card">
-          <div class="stat-num">10+</div>
-          <div class="stat-label" id="stat1">Projects Shipped</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">5</div>
-          <div class="stat-label" id="stat2">Certificates</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">3</div>
-          <div class="stat-label" id="stat3">Languages Spoken</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num">15</div>
-          <div class="stat-label" id="stat4">Years Old — Already Building</div>
-        </div>
+        <div class="stat-card"><div class="stat-num">18</div><div class="stat-label" id="stat1">GitHub Repos</div></div>
+        <div class="stat-card"><div class="stat-num">7</div><div class="stat-label" id="stat2">Certificates</div></div>
+        <div class="stat-card"><div class="stat-num">3</div><div class="stat-label" id="stat3">Languages Spoken</div></div>
+        <div class="stat-card"><div class="stat-num">15</div><div class="stat-label" id="stat4">Years Old — Already Building</div></div>
         <div class="stat-card wide">
           <div class="stat-label" id="stat5" style="margin-bottom:10px">Current Status</div>
           <div class="availability">
@@ -576,149 +308,98 @@ body.ar .cv-footer { flex-direction: row-reverse; }
 <section class="section reveal">
   <div class="section-label" id="label-skills">Skills & Technologies</div>
   <div class="skills-grid">
-    <div class="skill-group">
-      <div class="skill-group-title" id="sg1">Frontend</div>
-      <div class="skill-tags">
-        <span class="skill-tag">HTML5</span>
-        <span class="skill-tag">CSS3</span>
-        <span class="skill-tag">JavaScript</span>
-        <span class="skill-tag">React</span>
-        <span class="skill-tag">Responsive Design</span>
-        <span class="skill-tag">RTL Layouts</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title" id="sg2">Backend</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Node.js</span>
-        <span class="skill-tag">Python</span>
-        <span class="skill-tag">MongoDB</span>
-        <span class="skill-tag">REST APIs</span>
-        <span class="skill-tag">Auth Systems</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title" id="sg3">Cybersecurity</div>
-      <div class="skill-tags">
-        <span class="skill-tag">XSS Prevention</span>
-        <span class="skill-tag">SQL Injection</span>
-        <span class="skill-tag">Brute Force Protection</span>
-        <span class="skill-tag">Secure Auth</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title" id="sg4">AI & Data</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Machine Learning</span>
-        <span class="skill-tag">VQ-VAE</span>
-        <span class="skill-tag">Data Visualization</span>
-        <span class="skill-tag">AI Chatbots</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title" id="sg5">Tools</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Git & GitHub</span>
-        <span class="skill-tag">GitHub Pages</span>
-        <span class="skill-tag">VS Code</span>
-        <span class="skill-tag">MongoDB Atlas</span>
-        <span class="skill-tag">Figma</span>
-      </div>
-    </div>
-    <div class="skill-group">
-      <div class="skill-group-title" id="sg6">Other</div>
-      <div class="skill-tags">
-        <span class="skill-tag">Excel</span>
-        <span class="skill-tag">Statistics</span>
-        <span class="skill-tag">Brand Building</span>
-        <span class="skill-tag">LinkedIn</span>
-        <span class="skill-tag">Technical Writing</span>
-      </div>
-    </div>
+    <div class="skill-group"><div class="skill-group-title" id="sg1">Frontend</div><div class="skill-tags"><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">React</span><span class="skill-tag">Responsive Design</span><span class="skill-tag">RTL Layouts</span></div></div>
+    <div class="skill-group"><div class="skill-group-title" id="sg2">Backend</div><div class="skill-tags"><span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">MongoDB</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Auth Systems</span></div></div>
+    <div class="skill-group"><div class="skill-group-title" id="sg3">Cybersecurity</div><div class="skill-tags"><span class="skill-tag">XSS Prevention</span><span class="skill-tag">SQL Injection</span><span class="skill-tag">Brute Force Protection</span><span class="skill-tag">Secure Auth</span></div></div>
+    <div class="skill-group"><div class="skill-group-title" id="sg4">AI & Data</div><div class="skill-tags"><span class="skill-tag">Machine Learning</span><span class="skill-tag">VQ-VAE</span><span class="skill-tag">Prompt Engineering</span><span class="skill-tag">AI Chatbots</span><span class="skill-tag">Data Visualization</span></div></div>
+    <div class="skill-group"><div class="skill-group-title" id="sg5">Tools</div><div class="skill-tags"><span class="skill-tag">Git & GitHub</span><span class="skill-tag">GitHub Pages</span><span class="skill-tag">VS Code</span><span class="skill-tag">MongoDB Atlas</span><span class="skill-tag">WordPress</span></div></div>
+    <div class="skill-group"><div class="skill-group-title" id="sg6">Other</div><div class="skill-tags"><span class="skill-tag">Excel (Advanced)</span><span class="skill-tag">Statistics</span><span class="skill-tag">Cash Flow</span><span class="skill-tag">Brand Building</span><span class="skill-tag">Technical Writing</span></div></div>
   </div>
-
-  <div class="bar-skills" style="margin-top:36px; max-width:600px;">
-    <div class="bar-item">
-      <div class="bar-header"><span>Python</span><span class="bar-pct">85%</span></div>
-      <div class="bar-track"><div class="bar-fill" data-width="85"></div></div>
-    </div>
-    <div class="bar-item">
-      <div class="bar-header"><span>HTML / CSS / JS</span><span class="bar-pct">90%</span></div>
-      <div class="bar-track"><div class="bar-fill" data-width="90"></div></div>
-    </div>
-    <div class="bar-item">
-      <div class="bar-header"><span>Node.js / MongoDB</span><span class="bar-pct">70%</span></div>
-      <div class="bar-track"><div class="bar-fill" data-width="70"></div></div>
-    </div>
-    <div class="bar-item">
-      <div class="bar-header"><span>Cybersecurity</span><span class="bar-pct">75%</span></div>
-      <div class="bar-track"><div class="bar-fill" data-width="75"></div></div>
-    </div>
+  <div class="bar-skills" style="margin-top:36px;max-width:600px;">
+    <div class="bar-item"><div class="bar-header"><span>HTML / CSS / JS</span><span class="bar-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-width="90"></div></div></div>
+    <div class="bar-item"><div class="bar-header"><span>Python</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-width="85"></div></div></div>
+    <div class="bar-item"><div class="bar-header"><span>Node.js / MongoDB</span><span class="bar-pct">70%</span></div><div class="bar-track"><div class="bar-fill" data-width="70"></div></div></div>
+    <div class="bar-item"><div class="bar-header"><span>Cybersecurity</span><span class="bar-pct">75%</span></div><div class="bar-track"><div class="bar-fill" data-width="75"></div></div></div>
   </div>
 </section>
 
 <div class="section-divider"></div>
 
-<!-- PROJECTS -->
+<!-- FEATURED PROJECTS -->
 <section class="section reveal">
   <div class="section-label" id="label-projects">Featured Projects</div>
   <div class="projects-grid">
 
-    <div class="project-card">
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
       <div class="project-num">01</div>
       <div class="project-name" id="p1-name">OmarOS v2.0</div>
       <div class="project-desc" id="p1-desc">Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart. Deployed on GitHub Pages.</div>
-      <div class="project-stack">
-        <span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">Canvas API</span>
-      </div>
-      <a class="project-link" href="https://omarahameds2010-lab.github.io/omar-os/" target="_blank">Live Demo →</a>
-    </div>
+      <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">Canvas API</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
 
-    <div class="project-card">
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/LinguaStory" target="_blank">
       <div class="project-num">02</div>
-      <div class="project-name" id="p2-name">OmarPizza Ultimate</div>
-      <div class="project-desc" id="p2-desc">Full restaurant web app with cart, live order tracking, and a secured admin dashboard with XSS, SQL injection, and brute-force protection.</div>
-      <div class="project-stack">
-        <span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">Security</span>
-      </div>
-    </div>
+      <div class="project-name" id="p2-name">LinguaStory</div>
+      <div class="project-desc" id="p2-desc">Full React app for English learning via AI collaborative storytelling. Story Builder, Fix My Sentence, Daily Challenge modes, XP system, and streak counter.</div>
+      <div class="project-stack"><span class="stack-chip">React</span><span class="stack-chip">JavaScript</span><span class="stack-chip">AI</span><span class="stack-chip">XP System</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
 
-    <div class="project-card">
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/Saleh-Arabic-Platform" target="_blank">
       <div class="project-num">03</div>
-      <div class="project-name" id="p3-name">Arabic Teacher Platform</div>
-      <div class="project-desc" id="p3-desc">8-file Arabic RTL educational platform with auth, admin dashboard, exam system, student dashboard, and a protected video player. Built as a gift for his teacher.</div>
-      <div class="project-stack">
-        <span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">RTL</span><span class="stack-chip">Auth</span>
-      </div>
-    </div>
+      <div class="project-name" id="p3-name">Saleh Arabic Platform</div>
+      <div class="project-desc" id="p3-desc">Complete 8-file Arabic RTL educational platform gifted to a teacher: auth, admin dashboard, student dashboard, exam engine, and protected video player.</div>
+      <div class="project-stack"><span class="stack-chip">HTML5</span><span class="stack-chip">CSS3</span><span class="stack-chip">JS</span><span class="stack-chip">RTL</span><span class="stack-chip">Auth</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
 
-    <div class="project-card">
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/Ultra-Efficient-Semantic-Communication" target="_blank">
       <div class="project-num">04</div>
       <div class="project-name" id="p4-name">Semantic Communication AI</div>
-      <div class="project-desc" id="p4-desc">VQ-VAE architecture for IoT data compression. Full GitHub-ready repo with training scripts, compression demos, architecture flow visualizations, and LinkedIn assets.</div>
-      <div class="project-stack">
-        <span class="stack-chip">Python</span><span class="stack-chip">ML</span><span class="stack-chip">VQ-VAE</span><span class="stack-chip">IoT</span>
-      </div>
-    </div>
+      <div class="project-desc" id="p4-desc">VQ-VAE architecture for IoT semantic data compression using PyTorch. Full repo with training scripts, matplotlib visualizations, and professional README.</div>
+      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">PyTorch</span><span class="stack-chip">VQ-VAE</span><span class="stack-chip">IoT</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
 
-    <div class="project-card">
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">
       <div class="project-num">05</div>
-      <div class="project-name" id="p5-name">OmarBot Ultra v3.0</div>
-      <div class="project-desc" id="p5-desc">Python chatbot with random responses, datetime, calculator, scoring system, and Arabic language support. Built iteratively in a live class environment.</div>
-      <div class="project-stack">
-        <span class="stack-chip">Python</span><span class="stack-chip">NLP</span><span class="stack-chip">Arabic</span>
-      </div>
-    </div>
+      <div class="project-name" id="p5-name">Wave Streetwear Platform</div>
+      <div class="project-desc" id="p5-desc">Full-stack e-commerce for Wave streetwear brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.</div>
+      <div class="project-stack"><span class="stack-chip">Node.js</span><span class="stack-chip">MongoDB</span><span class="stack-chip">Express</span><span class="stack-chip">HTML/CSS</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
 
-    <div class="project-card">
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/OmarPizza" target="_blank">
       <div class="project-num">06</div>
-      <div class="project-name" id="p6-name">Wave Streetwear — Web Platform</div>
-      <div class="project-desc" id="p6-desc">Full e-commerce web presence and Node.js/MongoDB Atlas backend for Wave, a streetwear brand under Prado Clothing, co-founded and led by Omar.</div>
-      <div class="project-stack">
-        <span class="stack-chip">Node.js</span><span class="stack-chip">MongoDB</span><span class="stack-chip">HTML/CSS</span>
-      </div>
-    </div>
+      <div class="project-name" id="p6-name">OmarPizza Ultimate</div>
+      <div class="project-desc" id="p6-desc">Full restaurant web app with live cart, checkout, real-time order tracking, and hardened admin dashboard against XSS, SQL Injection, and brute-force.</div>
+      <div class="project-stack"><span class="stack-chip">HTML/CSS/JS</span><span class="stack-chip">Node.js</span><span class="stack-chip">Security</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
 
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
+      <div class="project-num">07</div>
+      <div class="project-name" id="p7-name">Dr. Ahmed Clinic Website</div>
+      <div class="project-desc" id="p7-desc">Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.</div>
+      <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">GitHub Pages</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
+
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
+      <div class="project-num">08</div>
+      <div class="project-name" id="p8-name">OmarBot Ultra</div>
+      <div class="project-desc" id="p8-desc">Advanced Python chatbot with datetime, calculator, scoring system, Arabic language support, and full conversation history. Built iteratively in live classes.</div>
+      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">NLP</span><span class="stack-chip">Arabic</span><span class="stack-chip">OOP</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
+
+  </div>
+
+  <div style="text-align:center;margin-top:40px;">
+    <button class="nav-link" onclick="showPage('projects')" style="font-size:0.8rem;padding:12px 28px;border-color:var(--gold);color:var(--gold);cursor:pointer;" id="see-all-btn">
+      See All 18 Projects →
+    </button>
   </div>
 </section>
 
@@ -727,23 +408,10 @@ body.ar .cv-footer { flex-direction: row-reverse; }
 <!-- EDUCATION -->
 <section class="section reveal">
   <div class="section-label" id="label-edu">Education</div>
-  <div style="display:flex; flex-direction:column; gap:16px;">
-    <div class="edu-card">
-      <div class="edu-icon">🏫</div>
-      <div>
-        <div class="edu-school" id="edu1-school">Secondary School</div>
-        <div class="edu-degree" id="edu1-deg">First Year — Cairo, Egypt</div>
-        <div class="edu-year">2024 – PRESENT</div>
-      </div>
-    </div>
-    <div class="edu-card">
-      <div class="edu-icon">📊</div>
-      <div>
-        <div class="edu-school" id="edu2-school">DECI Level One Program</div>
-        <div class="edu-degree" id="edu2-deg">Excel · Statistics · Web Design</div>
-        <div class="edu-year">COMPLETED</div>
-      </div>
-    </div>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div class="edu-card"><div class="edu-icon">🏫</div><div><div class="edu-school" id="edu1-school">Secondary School</div><div class="edu-degree" id="edu1-deg">First Year — Cairo, Egypt</div><div class="edu-year">2024 – PRESENT</div></div></div>
+    <div class="edu-card"><div class="edu-icon">📊</div><div><div class="edu-school" id="edu2-school">DECI Level One — Udacity × MCIT Egypt</div><div class="edu-degree" id="edu2-deg">Excel · Statistics · Web Design</div><div class="edu-year">COMPLETED · NOV 2025</div></div></div>
+    <div class="edu-card"><div class="edu-icon">💻</div><div><div class="edu-school" id="edu3-school">iSchool — Advanced AI & Web Dev Tracks</div><div class="edu-degree" id="edu3-deg">Coding Course — AI Tools & Web Development</div><div class="edu-year">2025 – PRESENT</div></div></div>
   </div>
 </section>
 
@@ -753,26 +421,13 @@ body.ar .cv-footer { flex-direction: row-reverse; }
 <section class="section reveal">
   <div class="section-label" id="label-certs">Certificates</div>
   <div class="certs-grid">
-    <div class="cert-card">
-      <div class="cert-issuer">Udacity / MCIT</div>
-      <div class="cert-name">Digital Egypt Cubs Program</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">HP LIFE</div>
-      <div class="cert-name">AI Foundations</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Coursera</div>
-      <div class="cert-name">Introduction to Cybersecurity</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Coursera</div>
-      <div class="cert-name">Python for Everybody</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-issuer">Coursera</div>
-      <div class="cert-name">Web Development Fundamentals</div>
-    </div>
+    <div class="cert-card"><div class="cert-emoji">🏛️</div><div><div class="cert-issuer">Udacity × MCIT Egypt</div><div class="cert-name">Digital Egypt Cubs Initiative — Level One</div><div class="cert-date">Nov 2025</div><a href="https://confirm.udacity.com/RP7C69Q5" target="_blank" class="cert-verify">Verify ↗</a></div></div>
+    <div class="cert-card"><div class="cert-emoji">🤖</div><div><div class="cert-issuer">Dubai Centre for AI</div><div class="cert-name">1 Million Prompters — AI Prompt Engineering</div><div class="cert-date">2025</div></div></div>
+    <div class="cert-card"><div class="cert-emoji">💰</div><div><div class="cert-issuer">HP LIFE Foundation</div><div class="cert-name">Cash Flow Management</div><div class="cert-date">Apr 2026</div></div></div>
+    <div class="cert-card"><div class="cert-emoji">💼</div><div><div class="cert-issuer">HP LIFE Foundation</div><div class="cert-name">AI for Business Professionals</div><div class="cert-date">Feb 2026</div></div></div>
+    <div class="cert-card"><div class="cert-emoji">📊</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Business Analysis & Process Management</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/87EMP8I564TY" target="_blank" class="cert-verify">Verify ↗</a></div></div>
+    <div class="cert-card"><div class="cert-emoji">🌐</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Build a Free Website with WordPress</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/9PD129TWX9NH" target="_blank" class="cert-verify">Verify ↗</a></div></div>
+    <div class="cert-card"><div class="cert-emoji">📗</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Getting Started with Microsoft Excel</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/48ZU8RWGPWJ9" target="_blank" class="cert-verify">Verify ↗</a></div></div>
   </div>
 </section>
 
@@ -782,145 +437,302 @@ body.ar .cv-footer { flex-direction: row-reverse; }
 <section class="section reveal">
   <div class="section-label" id="label-langs">Languages</div>
   <div class="lang-grid">
-    <div class="lang-card">
-      <div class="lang-name">🇪🇬 Arabic</div>
-      <div class="lang-level">Native</div>
-    </div>
-    <div class="lang-card">
-      <div class="lang-name">🇬🇧 English</div>
-      <div class="lang-level">B2+ Proficient</div>
-    </div>
-    <div class="lang-card">
-      <div class="lang-name">🇩🇪 German</div>
-      <div class="lang-level">Beginner (A1)</div>
-    </div>
+    <div class="lang-card"><div class="lang-name">🇪🇬 Arabic</div><div class="lang-level">Native</div></div>
+    <div class="lang-card"><div class="lang-name">🇬🇧 English</div><div class="lang-level">B2+ Proficient</div></div>
+    <div class="lang-card"><div class="lang-name">🇩🇪 German</div><div class="lang-level">Beginner (A1)</div></div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="cv-footer">
   <div class="footer-name">Omar Ahmed</div>
-  <div class="footer-note" id="footer-note">Built with code · Cairo, Egypt · 2025</div>
+  <div class="footer-note" id="footer-note">Built with code · Cairo, Egypt · 2026</div>
 </footer>
+
+</div><!-- end page-cv -->
+
+<!-- ===== PAGE 2: ALL PROJECTS ===== -->
+<div class="page" id="page-projects">
+  <div class="all-projects-page">
+    <div class="all-projects-header reveal">
+      <h1>All <em>Projects</em></h1>
+      <p>18 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.</p>
+    </div>
+    <div class="repos-grid">
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
+        <div class="repo-icon">🖥️</div>
+        <div class="repo-name">OmarOS v2.0</div>
+        <div class="repo-desc">Browser OS-style portfolio with draggable windows, terminal, Snake game, music player & skills radar. Deployed live.</div>
+        <span class="repo-tag tag-web">Web App</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/LinguaStory" target="_blank">
+        <div class="repo-icon">📖</div>
+        <div class="repo-name">LinguaStory</div>
+        <div class="repo-desc">React app for English learning via AI storytelling. XP system, streak counter, 3 challenge modes.</div>
+        <span class="repo-tag tag-ai">React · AI</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Saleh-Arabic-Platform" target="_blank">
+        <div class="repo-icon">🎓</div>
+        <div class="repo-name">Saleh Arabic Platform</div>
+        <div class="repo-desc">8-file RTL Arabic educational platform with auth, admin dashboard, exam engine & protected video player.</div>
+        <span class="repo-tag tag-web">Full Platform</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Saleh--Arabic--Platform" target="_blank">
+        <div class="repo-icon">📚</div>
+        <div class="repo-name">Saleh Arabic Platform v2</div>
+        <div class="repo-desc">Updated version of the Arabic educational platform with refined design system and improved UX.</div>
+        <span class="repo-tag tag-web">Full Platform</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Ultra-Efficient-Semantic-Communication" target="_blank">
+        <div class="repo-icon">🤖</div>
+        <div class="repo-name">Semantic Communication AI</div>
+        <div class="repo-desc">VQ-VAE for IoT data compression using PyTorch. Training scripts, matplotlib visualizations & professional README.</div>
+        <span class="repo-tag tag-ai">Python · ML</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">
+        <div class="repo-icon">👕</div>
+        <div class="repo-name">Wave Streetwear Store</div>
+        <div class="repo-desc">Full-stack e-commerce for Wave brand (Prado Clothing). Node.js + MongoDB Atlas REST API + frontend.</div>
+        <span class="repo-tag tag-ecom">E-Commerce</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/OmarPizza" target="_blank">
+        <div class="repo-icon">🍕</div>
+        <div class="repo-name">OmarPizza Ultimate</div>
+        <div class="repo-desc">Restaurant web app with live cart, order tracking & hardened admin dashboard (XSS, SQLi, brute-force protected).</div>
+        <span class="repo-tag tag-web">Full Stack</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
+        <div class="repo-icon">🏥</div>
+        <div class="repo-name">Dr. Ahmed Clinic Website</div>
+        <div class="repo-desc">Professional medical clinic site — first real paid project. Deployed on GitHub Pages and delivered to client.</div>
+        <span class="repo-tag tag-web">Client Work</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
+        <div class="repo-icon">🐍</div>
+        <div class="repo-name">OmarBot / Python Basics</div>
+        <div class="repo-desc">Python chatbot with datetime, calculator, scoring, Arabic support & conversation history. Built in live classes.</div>
+        <span class="repo-tag tag-py">Python</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/OMAR--Portofolio-Extreme-V.3" target="_blank">
+        <div class="repo-icon">⚡</div>
+        <div class="repo-name">Portfolio Extreme V.3</div>
+        <div class="repo-desc">Advanced portfolio version with extreme UI effects and animations. An earlier flagship showcase site.</div>
+        <span class="repo-tag tag-web">Portfolio</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/portfolio-" target="_blank">
+        <div class="repo-icon">📄</div>
+        <div class="repo-name">Portfolio CV</div>
+        <div class="repo-desc">Professional CV-style portfolio with bilingual support (EN/AR), skill bars, project cards & certificates.</div>
+        <span class="repo-tag tag-web">Portfolio</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/GH-Bags" target="_blank">
+        <div class="repo-icon">👜</div>
+        <div class="repo-name">GH Bags</div>
+        <div class="repo-desc">E-commerce store for bags brand. Product showcase with shopping functionality and clean design.</div>
+        <span class="repo-tag tag-ecom">E-Commerce</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/DOKAN---LBS" target="_blank">
+        <div class="repo-icon">🏪</div>
+        <div class="repo-name">DOKAN LBS</div>
+        <div class="repo-desc">Location-based store (DOKAN) — web app with local business features and dynamic product listing.</div>
+        <span class="repo-tag tag-web">Web App</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/DOKAN-LBS" target="_blank">
+        <div class="repo-icon">🛍️</div>
+        <div class="repo-name">DOKAN LBS v2</div>
+        <div class="repo-desc">Updated DOKAN location-based store with improved UI and product management features.</div>
+        <span class="repo-tag tag-web">Web App</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Cinematic-bike-race-" target="_blank">
+        <div class="repo-icon">🚴</div>
+        <div class="repo-name">Cinematic Bike Race</div>
+        <div class="repo-desc">Cinematic-style web experience for a bike race theme. Creative UI with bold visual storytelling.</div>
+        <span class="repo-tag tag-web">Creative UI</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/temperature-converte-web" target="_blank">
+        <div class="repo-icon">🌡️</div>
+        <div class="repo-name">Temperature Converter</div>
+        <div class="repo-desc">Clean web-based temperature converter tool. Simple, fast, and functional utility app.</div>
+        <span class="repo-tag tag-web">Tool</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/cuddly-octo-system-Expanses-" target="_blank">
+        <div class="repo-icon">💸</div>
+        <div class="repo-name">Expenses Tracker</div>
+        <div class="repo-desc">Personal expense tracking web app with data entry, categorization, and spending summaries.</div>
+        <span class="repo-tag tag-data">Finance Tool</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Codewars-live" target="_blank">
+        <div class="repo-icon">⚔️</div>
+        <div class="repo-name">Codewars Live</div>
+        <div class="repo-desc">Live coding challenge solutions and algorithm practice. Ongoing problem-solving portfolio on Codewars.</div>
+        <span class="repo-tag tag-py">Algorithms</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+    </div>
+  </div>
+</div><!-- end page-projects -->
 
 <script>
 // CURSOR
 const cursor = document.getElementById('cursor');
 const ring = document.getElementById('ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => {
-  mx = e.clientX; my = e.clientY;
-  cursor.style.left = mx - 6 + 'px';
-  cursor.style.top = my - 6 + 'px';
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx-6+'px'; cursor.style.top=my-6+'px';
 });
-function animRing() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) *.12;
-  ring.style.left = rx - 18 + 'px';
-  ring.style.top = ry - 18 + 'px';
+function animRing(){
+  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
+  ring.style.left=rx-18+'px'; ring.style.top=ry-18+'px';
   requestAnimationFrame(animRing);
 }
 animRing();
-document.querySelectorAll('a,button,.stat-card,.project-card,.skill-tag').forEach(el => {
-  el.addEventListener('mouseenter', () => { cursor.style.transform = 'scale(2.5)'; ring.style.transform = 'scale(1.5)'; });
-  el.addEventListener('mouseleave', () => { cursor.style.transform = 'scale(1)'; ring.style.transform = 'scale(1)'; });
+document.querySelectorAll('a,button,.stat-card,.skill-tag,.cert-card,.lang-card,.repo-card,.project-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';});
+  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';});
 });
 
+// PAGE SWITCHING
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  document.querySelectorAll('.nav-link[id^="nav-"]').forEach(b=>b.classList.remove('active'));
+  document.getElementById('nav-'+id).classList.add('active');
+  window.scrollTo(0,0);
+  setTimeout(initReveal,100);
+}
+
 // SCROLL REVEAL
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver(entries => {
-  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); } });
-}, { threshold: 0.15 });
-revealEls.forEach(el => io.observe(el));
+function initReveal(){
+  const io=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+  },{threshold:0.1});
+  document.querySelectorAll('.page.active .reveal').forEach(el=>{ el.classList.remove('visible'); io.observe(el); });
+}
+initReveal();
 
 // BAR ANIMATION
-const barIO = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting) {
-      e.target.querySelectorAll('.bar-fill').forEach(b => {
-        b.style.width = b.dataset.width + '%';
-      });
-    }
+const barIO=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.querySelectorAll('.bar-fill').forEach(b=>{ b.style.width=b.dataset.width+'%'; });
   });
-}, { threshold: 0.3 });
-document.querySelectorAll('.bar-skills').forEach(el => barIO.observe(el));
+},{threshold:0.3});
+document.querySelectorAll('.bar-skills').forEach(el=>barIO.observe(el));
 
-// LANGUAGE SWITCH
-const content = {
-  en: {
-    eyebrow: 'Cairo, Egypt · Open to Opportunities',
-    heroTitle: 'Software Engineer · Web Developer · Cybersecurity Enthusiast<br/>Building real products from Cairo at 15.',
-    stat1: 'Projects Shipped', stat2: 'Certificates',
-    stat3: 'Languages Spoken', stat4: 'Years Old — Already Building',
-    stat5: 'Current Status', availText: 'Available for internships & freelance',
-    labelSkills: 'Skills & Technologies', labelProjects: 'Featured Projects',
-    labelEdu: 'Education', labelCerts: 'Certificates', labelLangs: 'Languages',
-    sg1:'Frontend', sg2:'Backend', sg3:'Cybersecurity', sg4:'AI & Data', sg5:'Tools', sg6:'Other',
-    p1name:'OmarOS v2.0', p1desc:'Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart. Deployed on GitHub Pages.',
-    p2name:'OmarPizza Ultimate', p2desc:'Full restaurant web app with cart, live order tracking, and a secured admin dashboard with XSS, SQL injection, and brute-force protection.',
-    p3name:'Arabic Teacher Platform', p3desc:'8-file Arabic RTL educational platform with auth, admin dashboard, exam system, student dashboard, and a protected video player. Built as a gift for his teacher.',
-    p4name:'Semantic Communication AI', p4desc:'VQ-VAE architecture for IoT data compression. Full GitHub-ready repo with training scripts, compression demos, architecture flow visualizations, and LinkedIn assets.',
-    p5name:'OmarBot Ultra v3.0', p5desc:'Python chatbot with random responses, datetime, calculator, scoring system, and Arabic language support. Built iteratively in a live class environment.',
-    p6name:'Wave Streetwear — Web Platform', p6desc:'Full e-commerce web presence and Node.js/MongoDB Atlas backend for Wave, a streetwear brand under Prado Clothing, co-founded and led by Omar.',
-    edu1school:'Secondary School', edu1deg:'First Year — Cairo, Egypt',
-    edu2school:'DECI Level One Program', edu2deg:'Excel · Statistics · Web Design',
-    footerNote: 'Built with code · Cairo, Egypt · 2025',
+// LANGUAGE
+const content={
+  en:{
+    eyebrow:'Cairo, Egypt · Open to Opportunities',
+    heroTitle:'Software Engineer · Web Developer · Cybersecurity Enthusiast<br/>Building real products from Cairo at 15.',
+    stat1:'GitHub Repos',stat2:'Certificates',stat3:'Languages Spoken',stat4:'Years Old — Already Building',stat5:'Current Status',availText:'Available for internships & freelance',
+    labelSkills:'Skills & Technologies',labelProjects:'Featured Projects',labelEdu:'Education',labelCerts:'Certificates',labelLangs:'Languages',
+    sg1:'Frontend',sg2:'Backend',sg3:'Cybersecurity',sg4:'AI & Data',sg5:'Tools',sg6:'Other',
+    p1name:'OmarOS v2.0',p1desc:'Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart.',
+    p2name:'LinguaStory',p2desc:'Full React app for English learning via AI collaborative storytelling. Story Builder, Fix My Sentence, Daily Challenge, XP system, streak counter.',
+    p3name:'Saleh Arabic Platform',p3desc:'Complete 8-file Arabic RTL educational platform gifted to a teacher: auth, admin, student dashboard, exam engine, and protected video player.',
+    p4name:'Semantic Communication AI',p4desc:'VQ-VAE architecture for IoT semantic data compression using PyTorch. Training scripts, matplotlib visualizations, professional README.',
+    p5name:'Wave Streetwear Platform',p5desc:'Full-stack e-commerce for Wave brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.',
+    p6name:'OmarPizza Ultimate',p6desc:'Full restaurant web app with live cart, order tracking, and hardened admin dashboard against XSS, SQL Injection, and brute-force.',
+    p7name:'Dr. Ahmed Clinic Website',p7desc:'Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.',
+    p8name:'OmarBot Ultra',p8desc:'Advanced Python chatbot with datetime, calculator, scoring system, Arabic support, and full conversation history.',
+    edu1school:'Secondary School',edu1deg:'First Year — Cairo, Egypt',
+    edu2school:'DECI Level One — Udacity × MCIT Egypt',edu2deg:'Excel · Statistics · Web Design',
+    edu3school:'iSchool — Advanced AI & Web Dev Tracks',edu3deg:'Coding Course — AI Tools & Web Development',
+    footerNote:'Built with code · Cairo, Egypt · 2026',
+    navCV:'CV',navProjects:'All Projects',seeAll:'See All 18 Projects →',
+    allTitle:'All <em>Projects</em>',allDesc:'18 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.',
   },
-  ar: {
-    eyebrow: 'القاهرة، مصر · متاح للفرص',
-    heroTitle: 'مهندس برمجيات · مطوّر ويب · متحمس للأمن السيبراني<br/>يبني منتجات حقيقية من القاهرة وعمره 15 عامًا.',
-    stat1: 'مشروع منجز', stat2: 'شهادة',
-    stat3: 'لغات يتحدثها', stat4: 'عامًا — يبني بالفعل',
-    stat5: 'الحالة الحالية', availText: 'متاح للتدريب والعمل الحر',
-    labelSkills: 'المهارات والتقنيات', labelProjects: 'المشاريع المميزة',
-    labelEdu: 'التعليم', labelCerts: 'الشهادات', labelLangs: 'اللغات',
-    sg1:'الواجهة الأمامية', sg2:'الخادم', sg3:'الأمن السيبراني', sg4:'الذكاء الاصطناعي والبيانات', sg5:'الأدوات', sg6:'أخرى',
-    p1name:'OmarOS v2.0', p1desc:'بورتفوليو بنظام تشغيل متكامل في المتصفح: نوافذ قابلة للسحب، محاكي طرفية، لعبة ثعبان، مشغل موسيقى، ومخطط مهارات راداري.',
-    p2name:'OmarPizza Ultimate', p2desc:'تطبيق مطعم كامل بعربة تسوق وتتبع طلبات مباشر، مع لوحة تحكم مؤمّنة ضد XSS وحقن SQL وهجمات القوة الغاشمة.',
-    p3name:'منصة المعلم العربي', p3desc:'منصة تعليمية عربية RTL بـ8 ملفات: تسجيل دخول، لوحة إدارة، نظام امتحانات، لوحة طلاب، ومشغل فيديو محمي. أُهديت لمعلمه.',
-    p4name:'الذكاء الاصطناعي للاتصال الدلالي', p4desc:'معمارية VQ-VAE لضغط بيانات إنترنت الأشياء. مستودع GitHub كامل مع سكريبتات تدريب وعروض ضغط ومخططات بصرية.',
-    p5name:'OmarBot Ultra v3.0', p5desc:'شات بوت بايثون بردود عشوائية، تاريخ ووقت، حاسبة، نظام نقاط، ودعم اللغة العربية. مبني بشكل تكراري في بيئة صف حية.',
-    p6name:'Wave Streetwear — المنصة الرقمية', p6desc:'موقع تجارة إلكترونية كامل وخادم Node.js/MongoDB لماركة Wave للملابس، التي يؤسسها ويقودها عمر.',
-    edu1school:'المرحلة الثانوية', edu1deg:'السنة الأولى — القاهرة، مصر',
-    edu2school:'برنامج DECI المستوى الأول', edu2deg:'Excel · الإحصاء · تصميم الويب',
-    footerNote: 'مبني بالكود · القاهرة، مصر · 2025',
+  ar:{
+    eyebrow:'القاهرة، مصر · متاح للفرص',
+    heroTitle:'مهندس برمجيات · مطوّر ويب · متحمس للأمن السيبراني<br/>يبني منتجات حقيقية من القاهرة وعمره 15 عامًا.',
+    stat1:'مستودع GitHub',stat2:'شهادة',stat3:'لغات يتحدثها',stat4:'عامًا — يبني بالفعل',stat5:'الحالة الحالية',availText:'متاح للتدريب والعمل الحر',
+    labelSkills:'المهارات والتقنيات',labelProjects:'المشاريع المميزة',labelEdu:'التعليم',labelCerts:'الشهادات',labelLangs:'اللغات',
+    sg1:'الواجهة الأمامية',sg2:'الخادم',sg3:'الأمن السيبراني',sg4:'الذكاء الاصطناعي والبيانات',sg5:'الأدوات',sg6:'أخرى',
+    p1name:'OmarOS v2.0',p1desc:'بورتفوليو بنظام تشغيل في المتصفح: نوافذ قابلة للسحب، محاكي طرفية، لعبة ثعبان، مشغل موسيقى، ومخطط مهارات راداري.',
+    p2name:'LinguaStory',p2desc:'تطبيق React كامل لتعلم الإنجليزية عبر AI. Story Builder، Fix My Sentence، Daily Challenge، نظام XP وعداد streak.',
+    p3name:'منصة سالح العربية',p3desc:'منصة تعليمية عربية RTL كاملة أُهديت لمعلم: تسجيل دخول، لوحة إدارة، نظام امتحانات، ومشغل فيديو محمي.',
+    p4name:'الذكاء الاصطناعي للاتصال الدلالي',p4desc:'معمارية VQ-VAE لضغط بيانات إنترنت الأشياء باستخدام PyTorch. سكريبتات تدريب ومخططات matplotlib.',
+    p5name:'Wave Streetwear Platform',p5desc:'منصة تجارة إلكترونية لماركة Wave — شارك عمر في تأسيسها. Frontend وخادم Node.js/MongoDB Atlas.',
+    p6name:'OmarPizza Ultimate',p6desc:'تطبيق مطعم كامل بعربة تسوق وتتبع طلبات، مع لوحة تحكم مؤمّنة ضد XSS وحقن SQL وهجمات القوة الغاشمة.',
+    p7name:'موقع عيادة د. أحمد',p7desc:'موقع عيادة طبية احترافي على GitHub Pages. أول مشروع حقيقي مدفوع — تم التسليم والنشر.',
+    p8name:'OmarBot Ultra',p8desc:'شات بوت Python متقدم بتاريخ ووقت وحاسبة ونظام نقاط ودعم عربي وسجل محادثات كامل.',
+    edu1school:'المرحلة الثانوية',edu1deg:'السنة الأولى — القاهرة، مصر',
+    edu2school:'برنامج DECI المستوى الأول — Udacity × MCIT مصر',edu2deg:'Excel · الإحصاء · تصميم الويب',
+    edu3school:'iSchool — مسارات AI والويب المتقدمة',edu3deg:'دورة برمجة — أدوات AI وتطوير الويب',
+    footerNote:'مبني بالكود · القاهرة، مصر · 2026',
+    navCV:'السيرة الذاتية',navProjects:'كل المشاريع',seeAll:'عرض كل 18 مشروع →',
+    allTitle:'كل <em>المشاريع</em>',allDesc:'18 مستودع عام — كل واحد منهم مبني ومُسلَّم. اضغط على أي كارد لفتح الـ repo على GitHub.',
   }
 };
-
-let currentLang = 'en';
-function setLang(lang) {
-  currentLang = lang;
-  const d = content[lang];
-  document.getElementById('eyebrow').textContent = d.eyebrow;
-  document.getElementById('hero-title').innerHTML = d.heroTitle;
-  ['stat1','stat2','stat3','stat4','stat5'].forEach(k => { document.getElementById(k).textContent = d[k]; });
-  document.getElementById('avail-text').textContent = d.availText;
-  ['label-skills','label-projects','label-edu','label-certs','label-langs'].forEach(k => {
-    const el = document.getElementById(k);
-    if(el) el.innerHTML = d[k.replace('label-','label').replace('-','').replace('label','label-') ] || d['label'+k.replace('label-','')] || d[k] || el.innerHTML;
-  });
-  // fix keys
-  document.getElementById('label-skills').textContent = d.labelSkills;
-  document.getElementById('label-projects').textContent = d.labelProjects;
-  document.getElementById('label-edu').textContent = d.labelEdu;
-  document.getElementById('label-certs').textContent = d.labelCerts;
-  document.getElementById('label-langs').textContent = d.labelLangs;
-  ['sg1','sg2','sg3','sg4','sg5','sg6'].forEach(k => { const el=document.getElementById(k); if(el) el.textContent = d[k]; });
-  for(let i=1;i<=6;i++) {
-    const n=document.getElementById('p'+i+'-name'); const desc=document.getElementById('p'+i+'-desc');
-    if(n) n.textContent = d['p'+i+'name'];
-    if(desc) desc.textContent = d['p'+i+'desc'];
+function setLang(lang){
+  const d=content[lang];
+  document.getElementById('eyebrow').textContent=d.eyebrow;
+  document.getElementById('hero-title').innerHTML=d.heroTitle;
+  ['stat1','stat2','stat3','stat4','stat5'].forEach(k=>document.getElementById(k).textContent=d[k]);
+  document.getElementById('avail-text').textContent=d.availText;
+  document.getElementById('label-skills').textContent=d.labelSkills;
+  document.getElementById('label-projects').textContent=d.labelProjects;
+  document.getElementById('label-edu').textContent=d.labelEdu;
+  document.getElementById('label-certs').textContent=d.labelCerts;
+  document.getElementById('label-langs').textContent=d.labelLangs;
+  ['sg1','sg2','sg3','sg4','sg5','sg6'].forEach(k=>{ const el=document.getElementById(k);if(el)el.textContent=d[k]; });
+  for(let i=1;i<=8;i++){
+    const n=document.getElementById('p'+i+'-name');
+    const desc=document.getElementById('p'+i+'-desc');
+    if(n) n.textContent=d['p'+i+'name'];
+    if(desc) desc.textContent=d['p'+i+'desc'];
   }
-  document.getElementById('edu1-school').textContent = d.edu1school;
-  document.getElementById('edu1-deg').textContent = d.edu1deg;
-  document.getElementById('edu2-school').textContent = d.edu2school;
-  document.getElementById('edu2-deg').textContent = d.edu2deg;
-  document.getElementById('footer-note').textContent = d.footerNote;
-
-  document.body.classList.toggle('ar', lang === 'ar');
-  document.getElementById('btn-en').classList.toggle('active', lang==='en');
-  document.getElementById('btn-ar').classList.toggle('active', lang==='ar');
-  document.documentElement.setAttribute('lang', lang);
+  document.getElementById('edu1-school').textContent=d.edu1school;
+  document.getElementById('edu1-deg').textContent=d.edu1deg;
+  document.getElementById('edu2-school').textContent=d.edu2school;
+  document.getElementById('edu2-deg').textContent=d.edu2deg;
+  document.getElementById('edu3-school').textContent=d.edu3school;
+  document.getElementById('edu3-deg').textContent=d.edu3deg;
+  document.getElementById('footer-note').textContent=d.footerNote;
+  document.getElementById('nav-cv').textContent=d.navCV;
+  document.getElementById('nav-projects').textContent=d.navProjects;
+  document.getElementById('see-all-btn').textContent=d.seeAll;
+  document.querySelector('.all-projects-header h1').innerHTML=d.allTitle;
+  document.querySelector('.all-projects-header p').textContent=d.allDesc;
+  document.body.classList.toggle('ar',lang==='ar');
+  document.getElementById('btn-en').classList.toggle('active',lang==='en');
+  document.getElementById('btn-ar').classList.toggle('active',lang==='ar');
+  document.documentElement.setAttribute('lang',lang);
 }
 </script>
 </body>
