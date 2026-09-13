@@ -191,6 +191,7 @@ body::before { content:'';position:fixed;inset:0;background-image:url("data:imag
 .tag-py  { background:rgba(74,222,128,0.08); color:var(--accent); border:1px solid rgba(74,222,128,0.2); }
 .tag-ecom{ background:rgba(167,139,250,0.08); color:#a78bfa; border:1px solid rgba(167,139,250,0.2); }
 .tag-data{ background:rgba(251,146,60,0.08); color:#fb923c; border:1px solid rgba(251,146,60,0.2); }
+.tag-iot { background:rgba(244,63,94,0.08); color:#fb7185; border:1px solid rgba(244,63,94,0.2); }
 .repo-arrow { font-size:0.72rem; color:var(--muted); transition:color 0.2s,transform 0.2s; margin-top:4px; }
 .repo-card:hover .repo-arrow { color:var(--gold); transform:translateX(4px); }
 
@@ -286,7 +287,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
     </div>
     <div class="hero-right">
       <div class="stats-grid">
-        <div class="stat-card"><div class="stat-num">18</div><div class="stat-label" id="stat1">GitHub Repos</div></div>
+        <div class="stat-card"><div class="stat-num">20</div><div class="stat-label" id="stat1">GitHub Repos</div></div>
         <div class="stat-card"><div class="stat-num">7</div><div class="stat-label" id="stat2">Certificates</div></div>
         <div class="stat-card"><div class="stat-num">3</div><div class="stat-label" id="stat3">Languages Spoken</div></div>
         <div class="stat-card"><div class="stat-num">15</div><div class="stat-label" id="stat4">Years Old — Already Building</div></div>
@@ -394,11 +395,27 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/secure-smart-home-ecosystem" target="_blank">
+      <div class="project-num">09</div>
+      <div class="project-name" id="p9-name">Secure Smart Home Eco-System</div>
+      <div class="project-desc" id="p9-desc">Graduation project for Digital Egypt Cubs: Flask REST API backend powering a Dashboard UI, a pandas-based Energy Calculator, ESP32/Wokwi Biometric Access with confidence-threshold logic, and a logic-gate Safety Circuit built on the CIA Triad.</div>
+      <div class="project-stack"><span class="stack-chip">Flask</span><span class="stack-chip">ESP32</span><span class="stack-chip">Python</span><span class="stack-chip">IoT Security</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
+
+    <a class="project-card" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">
+      <div class="project-num">10</div>
+      <div class="project-name" id="p10-name">SANAD — Arabic RAG Evaluation Platform</div>
+      <div class="project-desc" id="p10-desc">AI engineering flagship project: an Arabic-first RAG evaluation platform with Arabic-aware chunking, multi-embedding-model comparison, and a golden dataset measuring real precision, recall, groundedness, and hallucination — no invented benchmarks.</div>
+      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">RAG</span><span class="stack-chip">Embeddings</span><span class="stack-chip">Docker</span></div>
+      <div class="project-gh-link">View on GitHub →</div>
+    </a>
+
   </div>
 
   <div style="text-align:center;margin-top:40px;">
     <button class="nav-link" onclick="showPage('projects')" style="font-size:0.8rem;padding:12px 28px;border-color:var(--gold);color:var(--gold);cursor:pointer;" id="see-all-btn">
-      See All 18 Projects →
+      See All 20 Projects →
     </button>
   </div>
 </section>
@@ -455,7 +472,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
   <div class="all-projects-page">
     <div class="all-projects-header reveal">
       <h1>All <em>Projects</em></h1>
-      <p>18 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.</p>
+      <p>20 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.</p>
     </div>
     <div class="repos-grid">
 
@@ -603,6 +620,22 @@ body.ar .top-nav { flex-direction:row-reverse; }
         <div class="repo-arrow">View on GitHub →</div>
       </a>
 
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/secure-smart-home-ecosystem" target="_blank">
+        <div class="repo-icon">🏠</div>
+        <div class="repo-name">Secure Smart Home Eco-System</div>
+        <div class="repo-desc">Graduation project: Flask API, Dashboard UI, pandas Energy Calculator, ESP32 Biometric Access & logic-gate Safety Circuit (CIA Triad).</div>
+        <span class="repo-tag tag-iot">IoT · Security</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
+      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">
+        <div class="repo-icon">🔎</div>
+        <div class="repo-name">SANAD — Arabic RAG Platform</div>
+        <div class="repo-desc">Arabic-first RAG evaluation platform: Arabic-aware chunking, multi-embedding comparison & a golden dataset with real precision/recall/hallucination metrics.</div>
+        <span class="repo-tag tag-ai">AI · RAG</span>
+        <div class="repo-arrow">View on GitHub →</div>
+      </a>
+
     </div>
   </div>
 </div><!-- end page-projects -->
@@ -670,12 +703,14 @@ const content={
     p6name:'OmarPizza Ultimate',p6desc:'Full restaurant web app with live cart, order tracking, and hardened admin dashboard against XSS, SQL Injection, and brute-force.',
     p7name:'Dr. Ahmed Clinic Website',p7desc:'Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.',
     p8name:'OmarBot Ultra',p8desc:'Advanced Python chatbot with datetime, calculator, scoring system, Arabic support, and full conversation history.',
+    p9name:'Secure Smart Home Eco-System',p9desc:'Graduation project for Digital Egypt Cubs: Flask REST API backend powering a Dashboard UI, a pandas-based Energy Calculator, ESP32/Wokwi Biometric Access with confidence-threshold logic, and a logic-gate Safety Circuit built on the CIA Triad.',
+    p10name:'SANAD — Arabic RAG Evaluation Platform',p10desc:'AI engineering flagship project: an Arabic-first RAG evaluation platform with Arabic-aware chunking, multi-embedding-model comparison, and a golden dataset measuring real precision, recall, groundedness, and hallucination — no invented benchmarks.',
     edu1school:'Secondary School',edu1deg:'First Year — Cairo, Egypt',
     edu2school:'DECI Level One — Udacity × MCIT Egypt',edu2deg:'Excel · Statistics · Web Design',
     edu3school:'iSchool — Advanced AI & Web Dev Tracks',edu3deg:'Coding Course — AI Tools & Web Development',
     footerNote:'Built with code · Cairo, Egypt · 2026',
-    navCV:'CV',navProjects:'All Projects',seeAll:'See All 18 Projects →',
-    allTitle:'All <em>Projects</em>',allDesc:'18 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.',
+    navCV:'CV',navProjects:'All Projects',seeAll:'See All 20 Projects →',
+    allTitle:'All <em>Projects</em>',allDesc:'20 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.',
   },
   ar:{
     eyebrow:'القاهرة، مصر · متاح للفرص',
@@ -691,12 +726,14 @@ const content={
     p6name:'OmarPizza Ultimate',p6desc:'تطبيق مطعم كامل بعربة تسوق وتتبع طلبات، مع لوحة تحكم مؤمّنة ضد XSS وحقن SQL وهجمات القوة الغاشمة.',
     p7name:'موقع عيادة د. أحمد',p7desc:'موقع عيادة طبية احترافي على GitHub Pages. أول مشروع حقيقي مدفوع — تم التسليم والنشر.',
     p8name:'OmarBot Ultra',p8desc:'شات بوت Python متقدم بتاريخ ووقت وحاسبة ونظام نقاط ودعم عربي وسجل محادثات كامل.',
+    p9name:'منظومة المنزل الذكي الآمن',p9desc:'مشروع تخرج لـ Digital Egypt Cubs: خادم Flask REST API يدير لوحة تحكم، حاسبة استهلاك طاقة بـ pandas، نظام دخول بيومتري بـ ESP32/Wokwi بمنطق عتبة ثقة، ودائرة أمان بالبوابات المنطقية مبنية على إطار CIA Triad.',
+    p10name:'SANAD — منصة تقييم RAG العربية',p10desc:'مشروع هندسة الذكاء الاصطناعي الرئيسي: منصة تقييم RAG عربية أولاً بتقطيع نص واعٍ باللغة العربية، مقارنة بين عدة نماذج تضمين (embedding)، ومجموعة بيانات ذهبية تقيس دقة واستدعاء وهلوسة حقيقية — بدون أرقام مُختلَقة.',
     edu1school:'المرحلة الثانوية',edu1deg:'السنة الأولى — القاهرة، مصر',
     edu2school:'برنامج DECI المستوى الأول — Udacity × MCIT مصر',edu2deg:'Excel · الإحصاء · تصميم الويب',
     edu3school:'iSchool — مسارات AI والويب المتقدمة',edu3deg:'دورة برمجة — أدوات AI وتطوير الويب',
     footerNote:'مبني بالكود · القاهرة، مصر · 2026',
-    navCV:'السيرة الذاتية',navProjects:'كل المشاريع',seeAll:'عرض كل 18 مشروع →',
-    allTitle:'كل <em>المشاريع</em>',allDesc:'18 مستودع عام — كل واحد منهم مبني ومُسلَّم. اضغط على أي كارد لفتح الـ repo على GitHub.',
+    navCV:'السيرة الذاتية',navProjects:'كل المشاريع',seeAll:'عرض كل 20 مشروع →',
+    allTitle:'كل <em>المشاريع</em>',allDesc:'20 مستودع عام — كل واحد منهم مبني ومُسلَّم. اضغط على أي كارد لفتح الـ repo على GitHub.',
   }
 };
 function setLang(lang){
@@ -711,7 +748,7 @@ function setLang(lang){
   document.getElementById('label-certs').textContent=d.labelCerts;
   document.getElementById('label-langs').textContent=d.labelLangs;
   ['sg1','sg2','sg3','sg4','sg5','sg6'].forEach(k=>{ const el=document.getElementById(k);if(el)el.textContent=d[k]; });
-  for(let i=1;i<=8;i++){
+  for(let i=1;i<=10;i++){
     const n=document.getElementById('p'+i+'-name');
     const desc=document.getElementById('p'+i+'-desc');
     if(n) n.textContent=d['p'+i+'name'];
