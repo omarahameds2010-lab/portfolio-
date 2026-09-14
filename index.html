@@ -29,6 +29,16 @@ body {
 }
 .cursor { width:12px;height:12px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s ease;mix-blend-mode:difference; }
 .cursor-ring { width:36px;height:36px;border:1px solid rgba(212,168,67,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all 0.08s linear; }
+.hero-actions { display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 28px; }
+.hero-btn { padding:12px 22px;border-radius:8px;text-decoration:none;font-family:inherit;font-weight:700;font-size:0.78rem;letter-spacing:0.02em;cursor:pointer;transition:0.25s ease;display:inline-block; }
+.hero-btn.primary { background:var(--gold);color:#060608;border:1px solid var(--gold); }
+.hero-btn.secondary { color:var(--gold);border:1px solid var(--gold);background:transparent; }
+.hero-btn:hover { transform:translateY(-3px); }
+.project-filters { display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 28px; }
+.filter-btn { padding:9px 18px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:inherit;font-size:0.75rem;font-weight:600;letter-spacing:0.02em;cursor:pointer;transition:0.25s ease; }
+.filter-btn:hover { border-color:var(--gold);color:var(--gold); }
+.filter-btn.active { background:var(--gold);color:#060608;border-color:var(--gold); }
+@media (hover:none),(pointer:coarse){ body{ cursor:auto; } .cursor,.cursor-ring{ display:none; } }
 body::before { content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6; }
 
 /* NAV */
@@ -288,6 +298,10 @@ body.ar .top-nav { flex-direction:row-reverse; }
         <span class="badge badge-web">Python</span>
         <span class="badge badge-sec">Node.js</span>
       </div>
+      <div class="hero-actions">
+        <button class="hero-btn primary" onclick="showPage('projects')">View Featured Projects →</button>
+        <a class="hero-btn secondary" href="mailto:omarahameds2010@gmail.com">Contact Me</a>
+      </div>
       <div class="hero-contacts">
         <a class="contact-row" href="mailto:omarahameds2010@gmail.com">
           <span class="contact-icon">✉</span>omarahameds2010@gmail.com
@@ -347,9 +361,17 @@ body.ar .top-nav { flex-direction:row-reverse; }
 <!-- FEATURED PROJECTS -->
 <section class="section reveal">
   <div class="section-label" id="label-projects">Featured Projects</div>
+  <div class="project-filters">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="web">Web</button>
+    <button class="filter-btn" data-filter="ai">AI & ML</button>
+    <button class="filter-btn" data-filter="education">Education</button>
+    <button class="filter-btn" data-filter="security">Security</button>
+    <button class="filter-btn" data-filter="tools">Tools</button>
+  </div>
   <div class="projects-grid">
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
+    <a class="project-card" data-category="web tools" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
       <div class="project-num">01</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarOS v2.0 desktop-style portfolio preview" src="https://lh3.googleusercontent.com/d/1owy7xOOvQRI-UAUadaUdKuzwiAd6wWlS=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p1-name">OmarOS v2.0</div>
@@ -358,7 +380,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/LinguaStory" target="_blank">
+    <a class="project-card" data-category="web ai education" href="https://github.com/omarahameds2010-lab/LinguaStory" target="_blank">
       <div class="project-num">02</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="LinguaStory app preview" src="https://lh3.googleusercontent.com/d/1ifSQqNkt3vZ131jb5Ucg14iI_-owFStL=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p2-name">LinguaStory</div>
@@ -367,16 +389,16 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/Saleh-Arabic-Platform" target="_blank">
+    <a class="project-card" data-category="web education" href="https://github.com/omarahameds2010-lab/Saleh-Arabic-Platform" target="_blank">
       <div class="project-num">03</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Saleh Arabic learning platform preview" src="https://lh3.googleusercontent.com/d/1kPP8XAvzeJIplkeCJzC0aE1NZ9Kah2sU=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p3-name">Saleh Arabic Platform</div>
+      <div class="project-name" id="p3-name">Arabic Learning Platform</div>
       <div class="project-desc" id="p3-desc">Complete 8-file Arabic RTL educational platform gifted to a teacher: auth, admin dashboard, student dashboard, exam engine, and protected video player.</div>
       <div class="project-stack"><span class="stack-chip">HTML5</span><span class="stack-chip">CSS3</span><span class="stack-chip">JS</span><span class="stack-chip">RTL</span><span class="stack-chip">Auth</span></div>
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/Ultra-Efficient-Semantic-Communication" target="_blank">
+    <a class="project-card" data-category="ai" href="https://github.com/omarahameds2010-lab/Ultra-Efficient-Semantic-Communication" target="_blank">
       <div class="project-num">04</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Semantic Communication AI project preview" src="https://lh3.googleusercontent.com/d/1thhpKGo88xI1lNlF6CGYdeWKjDjxyvIr=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p4-name">Semantic Communication AI</div>
@@ -385,7 +407,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">
+    <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">
       <div class="project-num">05</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Wave streetwear campaign poster" src="https://lh3.googleusercontent.com/d/1iEf73IqPPy4TIyzpQG4mnAcmJanwoe1n=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p5-name">Wave Streetwear Platform</div>
@@ -394,7 +416,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/OmarPizza" target="_blank">
+    <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/OmarPizza" target="_blank">
       <div class="project-num">06</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarPizza Ultimate app preview" src="https://lh3.googleusercontent.com/d/1hogmMH4-1GdmEROxb9kC3yLrp8qSptXe=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p6-name">OmarPizza Ultimate</div>
@@ -403,7 +425,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
+    <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
       <div class="project-num">07</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Dr. Ahmed Clinic website preview" src="https://lh3.googleusercontent.com/d/1Knou5MvacYli2dYOOCaOORr_NLo0_H9Q=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p7-name">Dr. Ahmed Clinic Website</div>
@@ -412,7 +434,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
+    <a class="project-card" data-category="tools ai" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
       <div class="project-num">08</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Python Basics course thumbnail" src="https://lh3.googleusercontent.com/d/1Hg_fxVoj7AkUXjXQhh6tVN9U3AZtQ6sE=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p8-name">OmarBot Ultra</div>
@@ -421,7 +443,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/-smart-home-ecosystem" target="_blank">
+    <a class="project-card" data-category="ai security tools" href="https://github.com/omarahameds2010-lab/-smart-home-ecosystem" target="_blank">
       <div class="project-num">09</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Secure Smart Home Eco-System preview" src="https://lh3.googleusercontent.com/d/1QbsMB92pOwZIGmTfq01Ceu5Gr3ZR-h1z=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p9-name">Secure Smart Home Eco-System</div>
@@ -430,7 +452,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">
+    <a class="project-card" data-category="ai" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">
       <div class="project-num">10</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="SANAD Arabic RAG evaluation platform poster" src="https://lh3.googleusercontent.com/d/1N342r5h1KN-enYdOZB-Ga9LeOV3RaPjQ=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p10-name">SANAD — Arabic RAG Evaluation Platform</div>
@@ -522,7 +544,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
       <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Saleh-Arabic-Platform" target="_blank">
         <div class="repo-icon">🎓</div>
-        <div class="repo-name">Saleh Arabic Platform</div>
+        <div class="repo-name">Arabic Learning Platform</div>
         <div class="repo-desc">8-file RTL Arabic educational platform with auth, admin dashboard, exam engine & protected video player.</div>
         <span class="repo-tag tag-web">Full Platform</span>
         <div class="repo-arrow">View on GitHub →</div>
@@ -530,7 +552,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
       <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Saleh--Arabic--Platform" target="_blank">
         <div class="repo-icon">📚</div>
-        <div class="repo-name">Saleh Arabic Platform v2</div>
+        <div class="repo-name">Arabic Learning Platform v2</div>
         <div class="repo-desc">Updated version of the Arabic educational platform with refined design system and improved UX.</div>
         <span class="repo-tag tag-web">Full Platform</span>
         <div class="repo-arrow">View on GitHub →</div>
@@ -732,7 +754,7 @@ const content={
     sg1:'Frontend',sg2:'Backend',sg3:'Cybersecurity',sg4:'AI & Data',sg5:'Tools',sg6:'Other',
     p1name:'OmarOS v2.0',p1desc:'Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart.',
     p2name:'LinguaStory',p2desc:'Full React app for English learning via AI collaborative storytelling. Story Builder, Fix My Sentence, Daily Challenge, XP system, streak counter.',
-    p3name:'Saleh Arabic Platform',p3desc:'Complete 8-file Arabic RTL educational platform gifted to a teacher: auth, admin, student dashboard, exam engine, and protected video player.',
+    p3name:'Arabic Learning Platform',p3desc:'Complete 8-file Arabic RTL educational platform gifted to a teacher: auth, admin, student dashboard, exam engine, and protected video player.',
     p4name:'Semantic Communication AI',p4desc:'VQ-VAE architecture for IoT semantic data compression using PyTorch. Training scripts, matplotlib visualizations, professional README.',
     p5name:'Wave Streetwear Platform',p5desc:'Full-stack e-commerce for Wave brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.',
     p6name:'OmarPizza Ultimate',p6desc:'Full restaurant web app with live cart, order tracking, and hardened admin dashboard against XSS, SQL Injection, and brute-force.',
@@ -755,7 +777,7 @@ const content={
     sg1:'الواجهة الأمامية',sg2:'الخادم',sg3:'الأمن السيبراني',sg4:'الذكاء الاصطناعي والبيانات',sg5:'الأدوات',sg6:'أخرى',
     p1name:'OmarOS v2.0',p1desc:'بورتفوليو بنظام تشغيل في المتصفح: نوافذ قابلة للسحب، محاكي طرفية، لعبة ثعبان، مشغل موسيقى، ومخطط مهارات راداري.',
     p2name:'LinguaStory',p2desc:'تطبيق React كامل لتعلم الإنجليزية عبر AI. Story Builder، Fix My Sentence، Daily Challenge، نظام XP وعداد streak.',
-    p3name:'منصة سالح العربية',p3desc:'منصة تعليمية عربية RTL كاملة أُهديت لمعلم: تسجيل دخول، لوحة إدارة، نظام امتحانات، ومشغل فيديو محمي.',
+    p3name:'منصة تعليم اللغة العربية',p3desc:'منصة تعليمية عربية RTL كاملة أُهديت لمعلم: تسجيل دخول، لوحة إدارة، نظام امتحانات، ومشغل فيديو محمي.',
     p4name:'الذكاء الاصطناعي للاتصال الدلالي',p4desc:'معمارية VQ-VAE لضغط بيانات إنترنت الأشياء باستخدام PyTorch. سكريبتات تدريب ومخططات matplotlib.',
     p5name:'Wave Streetwear Platform',p5desc:'منصة تجارة إلكترونية لماركة Wave — شارك عمر في تأسيسها. Frontend وخادم Node.js/MongoDB Atlas.',
     p6name:'OmarPizza Ultimate',p6desc:'تطبيق مطعم كامل بعربة تسوق وتتبع طلبات، مع لوحة تحكم مؤمّنة ضد XSS وحقن SQL وهجمات القوة الغاشمة.',
@@ -842,6 +864,19 @@ function closePosterModal(){ posterModal.classList.remove('open'); posterModalIm
 document.getElementById('posterModalClose').addEventListener('click', closePosterModal);
 posterModal.addEventListener('click', e=>{ if(e.target===posterModal) closePosterModal(); });
 document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePosterModal(); });
+
+// Project filters
+document.querySelectorAll('.filter-btn').forEach(button=>{
+  button.addEventListener('click', ()=>{
+    document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active'));
+    button.classList.add('active');
+    const filter = button.dataset.filter;
+    document.querySelectorAll('.project-card').forEach(card=>{
+      const categories = card.dataset.category || '';
+      card.style.display = (filter==='all' || categories.includes(filter)) ? '' : 'none';
+    });
+  });
+});
 </script>
 </body>
 </html>
