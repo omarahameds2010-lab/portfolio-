@@ -172,6 +172,12 @@ body::after {
 .project-desc { font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:16px; }
 .project-stack { display:flex;flex-wrap:wrap;gap:6px; }
 .stack-chip { padding:3px 10px;background:rgba(255,255,255,0.04);border-radius:6px;font-size:0.68rem;color:var(--muted);font-weight:600;letter-spacing:0.5px; }
+
+.demo-link { display:inline-flex; margin-top:8px; color:var(--accent2); text-decoration:none; font-size:.7rem; font-weight:700; letter-spacing:.4px; }
+.demo-link:hover { color:var(--gold); }
+body.ar { direction:rtl; }
+body.ar .section-label::after { order:-1; }
+body.ar .journey-copy { border-left:0; border-right:1px solid var(--border); padding-left:0; padding-right:16px; }
 .project-gh-link {
   display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--gold);
   margin-top:14px;font-weight:700;letter-spacing:0.5px;transition:gap 0.2s;
@@ -323,15 +329,15 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="hero-eyebrow" id="eyebrow">Cairo, Egypt · Open to Opportunities</div>
       <h1 class="hero-name">Omar<br/><em>Ahmed</em></h1>
       <p class="hero-title" id="hero-title">
-        BUILDER · AI · TECHNOLOGY<br/>
-        I build technology, learn through real experiences, and document the journey.
+        BUILDER · TECHNOLOGY · AI<br/>
+        I build technology, lead real projects, learn through real experiences, and document the journey.
       </p>
       <div class="hero-badges">
-        <span class="badge badge-web">Web Dev</span>
-        <span class="badge badge-sec">Cybersecurity</span>
-        <span class="badge badge-ai">AI Projects</span>
-        <span class="badge badge-web">Python</span>
-        <span class="badge badge-sec">Node.js</span>
+        <span class="badge badge-ai">AI Systems</span>
+        <span class="badge badge-web">Products</span>
+        <span class="badge badge-sec">Leadership</span>
+        <span class="badge badge-web">Web</span>
+        <span class="badge badge-sec">Security</span>
       </div>
       <div class="hero-actions">
         <button class="hero-btn primary" onclick="showPage('projects')">View Featured Projects →</button>
@@ -376,6 +382,9 @@ body.ar .top-nav { flex-direction:row-reverse; }
 <style>
 /* Story-led portfolio sections */
 .story-grid { display:grid; grid-template-columns:1.15fr 0.85fr; gap:18px; }
+.focus-panel { margin-top:28px; padding:18px 20px; border:1px solid var(--border); border-radius:14px; background:rgba(255,255,255,0.02); }
+.focus-tags { display:flex; flex-wrap:wrap; gap:8px; }
+
 .story-card, .proof-card, .leadership-card, .now-card {
   background:var(--surface); border:1px solid var(--border); border-radius:16px;
   padding:26px; position:relative; overflow:hidden;
@@ -425,29 +434,29 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
 <!-- STORY / PROOF -->
 <section class="section reveal" id="journey">
-  <div class="section-label">The Story Behind The Builds</div>
+  <div class="section-label" id="label-story">The Story Behind The Builds</div>
   <div class="story-grid">
     <div class="story-card">
-      <div class="section-kicker">THE JOURNEY</div>
-      <h2 class="story-title">From learning code to building systems.</h2>
-      <p class="story-intro">The portfolio is not a list of finished answers. It is a record of how Omar learns, builds with others, and turns ideas into real products.</p>
+      <div class="section-kicker" id="story-kicker">THE JOURNEY</div>
+      <h2 class="story-title" id="story-title">From learning code to building systems.</h2>
+      <p class="story-intro" id="story-intro">The portfolio is not a list of finished answers. It is a record of how Omar learns, builds with others, and turns ideas into real products.</p>
       <div class="journey-list">
-        <div class="journey-item"><div class="journey-year">2024</div><div class="journey-copy"><strong>Started building with code</strong>Python fundamentals, experiments, and the first small tools.</div></div>
-        <div class="journey-item"><div class="journey-year">2025</div><div class="journey-copy"><strong>Built real products & explored AI</strong>Web platforms, educational systems, chatbots, and data-driven ideas.</div></div>
-        <div class="journey-item"><div class="journey-year">2026</div><div class="journey-copy"><strong>Teams, competitions, and public work</strong>Real-world delivery, collaboration, IoT security, RAG evaluation, and a growing public presence.</div></div>
-        <div class="journey-item"><div class="journey-year">NEXT</div><div class="journey-copy"><strong>Leadership · Entrepreneurship · International experiences</strong>Keep building, communicate the work, and learn in wider environments.</div></div>
+        <div class="journey-item"><div class="journey-year">2024 · BUILD</div><div class="journey-copy"><strong>Started with code</strong>Built small things and learned by making.</div></div>
+        <div class="journey-item"><div class="journey-year">2025 · EXPERIMENT</div><div class="journey-copy"><strong>Moved from exercises to products</strong>Explored AI experiments and real use cases through shipped work.</div></div>
+        <div class="journey-item"><div class="journey-year">2026 · LEAD</div><div class="journey-copy"><strong>Teams, competitions, and real responsibility</strong>Client work, AI systems, IoT security, collaboration, and public work.</div></div>
+        <div class="journey-item"><div class="journey-year">NOW · EXPAND</div><div class="journey-copy"><strong>Building, speaking, and entering wider rooms</strong>Keep building, collaborate more, and turn experience into direction.</div></div>
       </div>
     </div>
     <div class="proof-card">
-      <div class="section-kicker">PROOF</div>
-      <h2 class="story-title">Evidence over claims.</h2>
+      <div class="section-kicker" id="proof-kicker">PROOF</div>
+      <h2 class="story-title" id="proof-title">Evidence over claims.</h2>
       <div class="proof-grid">
-        <div class="proof-item"><span class="proof-value">20+</span><span class="proof-label">Public repositories built and shipped</span></div>
-        <div class="proof-item"><span class="proof-value">Final 5</span><span class="proof-label">National competition journey</span></div>
+        <div class="proof-item"><span class="proof-value">20+</span><span class="proof-label">Public repositories</span></div>
+        <div class="proof-item"><span class="proof-value">Final 5</span><span class="proof-label">National competition</span></div>
         <div class="proof-item"><span class="proof-value">Team Lead</span><span class="proof-label">Secure Smart Home project</span></div>
-        <div class="proof-item"><span class="proof-value">Real Client</span><span class="proof-label">Medical website delivered live</span></div>
-        <div class="proof-item"><span class="proof-value">AI Systems</span><span class="proof-label">RAG and semantic communication</span></div>
-        <div class="proof-item"><span class="proof-value">Public</span><span class="proof-label">Open-source work and documentation</span></div>
+        <div class="proof-item"><span class="proof-value">1st PAID CLIENT</span><span class="proof-label">Medical website</span></div>
+        <div class="proof-item"><span class="proof-value">AI SYSTEMS</span><span class="proof-label">RAG + Semantic Communication</span></div>
+        <div class="proof-item"><span class="proof-value">20+ BUILDS</span><span class="proof-label">Public work, tests, and shipped ideas</span></div>
       </div>
     </div>
   </div>
@@ -457,15 +466,15 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
 <!-- FLAGSHIP -->
 <section class="section reveal" id="featured-work">
-  <div class="section-label">Featured Work</div>
+  <div class="section-label" id="label-featured-work">Featured Work</div>
   <div class="story-card flagship">
     <div class="flagship-copy">
-      <div class="section-kicker">01 — FLAGSHIP PROJECT</div>
-      <h3>SANAD — Arabic RAG Evaluation Platform</h3>
-      <p>An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination.</p>
-      <a class="flagship-link" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">Explore SANAD on GitHub →</a>
+      <div class="section-kicker" id="flagship-kicker">01 — FLAGSHIP PROJECT</div>
+      <h3 id="flagship-title">SANAD — Arabic RAG Evaluation Platform</h3>
+      <p id="flagship-desc">An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination.</p>
+      <a class="flagship-link" id="flagship-link" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">Explore SANAD on GitHub →</a>
     </div>
-    <div class="flagship-metric"><div class="metric">RAG</div><p>Retrieval quality, grounded answers, and measurable AI systems — not just generated text.</p></div>
+    <div class="flagship-metric"><div class="metric" id="flagship-metric">EVALUATION<br/>FIRST</div><p id="flagship-metric-desc">Retrieval · Groundedness · Recall · Hallucination</p></div>
   </div>
 </section>
 
@@ -473,23 +482,23 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
 <!-- LEADERSHIP / BEYOND CODE -->
 <section class="section reveal" id="experience">
-  <div class="section-label">Leadership & Experience</div>
+  <div class="section-label" id="label-experience">Leadership & Experience</div>
   <div class="story-grid">
     <div class="leadership-card">
-      <div class="section-kicker">REAL-WORLD RESPONSIBILITY</div>
+      <div class="section-kicker" id="experience-kicker">REAL-WORLD RESPONSIBILITY</div>
       <div class="leadership-list">
-        <div class="leadership-item"><div class="leadership-icon">01</div><div><strong>Team Lead — Secure Smart Home</strong><span>Led a team through a national graduation competition and helped move the project from concept to the final stage.</span></div></div>
-        <div class="leadership-item"><div class="leadership-icon">02</div><div><strong>Team / Product Collaboration — Wave Store</strong><span>Worked with a team to build a real e-commerce and streetwear product.</span></div></div>
-        <div class="leadership-item"><div class="leadership-icon">03</div><div><strong>Real Client Work — Medical Website</strong><span>Built and delivered a live website for a healthcare-related business.</span></div></div>
+        <div class="leadership-item"><div class="leadership-icon">01</div><div><strong>Team Lead — Secure Smart Home</strong><span>Led the team from concept to the national Final 5, coordinated responsibilities across the project, and owned the technical direction.</span></div></div>
+        <div class="leadership-item"><div class="leadership-icon">02</div><div><strong>Team / Product Collaboration — Wave Store</strong><span>Worked with a team to shape and build a real e-commerce and streetwear product from brand idea to working platform.</span></div></div>
+        <div class="leadership-item"><div class="leadership-icon">03</div><div><strong>Real Client Work — Medical Website</strong><span>Built and delivered a live healthcare-related website, taking responsibility for the final product and deployment.</span></div></div>
       </div>
     </div>
     <div class="leadership-card">
-      <div class="section-kicker">BEYOND CODE</div>
+      <div class="section-kicker" id="beyond-kicker">BEYOND CODE</div>
       <div class="beyond-grid">
-        <div class="beyond-item"><strong>LEAD</strong><span>Teams · Projects · Competitions</span></div>
-        <div class="beyond-item"><strong>SPEAK</strong><span>Presentations · Content · Communication</span></div>
-        <div class="beyond-item"><strong>BUILD</strong><span>AI · Products · Web</span></div>
-        <div class="beyond-item"><strong>EXPLORE</strong><span>New environments · Collaboration</span></div>
+        <div class="beyond-item"><strong>LEAD</strong><span>Team leadership · Competitions · Projects</span></div>
+        <div class="beyond-item"><strong>SPEAK</strong><span>Presentations · Public speaking · Content</span></div>
+        <div class="beyond-item"><strong>BUILD</strong><span>AI systems · Products · Technology</span></div>
+        <div class="beyond-item"><strong>EXPLORE</strong><span>International · Collaboration · New environments</span></div>
       </div>
     </div>
   </div>
@@ -499,10 +508,10 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
 <!-- NOW / NEXT -->
 <section class="section reveal" id="direction">
-  <div class="section-label">Direction</div>
+  <div class="section-label" id="label-direction">Direction</div>
   <div class="now-next">
-    <div class="now-card"><div class="section-kicker">NOW</div><h3>Building in public.</h3><p>Building products, exploring AI systems, improving security-aware development, and documenting the journey through real work.</p></div>
-    <div class="now-card"><div class="section-kicker">NEXT</div><h3>Wider rooms, bigger systems.</h3><p>Leadership → Public speaking → International collaboration → Entrepreneurship.</p></div>
+    <div class="now-card"><div class="section-kicker">NOW</div><h3>Build. Lead. Document.</h3><p>Building technology, taking responsibility in real projects, and documenting what I learn along the way.</p></div>
+    <div class="now-card"><div class="section-kicker">NEXT</div><h3>Wider rooms. Bigger problems.</h3><p>More teams. More conversations. More international experiences. More ambitious products.</p></div>
   </div>
 </section>
 
@@ -519,11 +528,15 @@ body.ar .top-nav { flex-direction:row-reverse; }
     <div class="skill-group"><div class="skill-group-title" id="sg5">Tools</div><div class="skill-tags"><span class="skill-tag">Git & GitHub</span><span class="skill-tag">GitHub Pages</span><span class="skill-tag">VS Code</span><span class="skill-tag">MongoDB Atlas</span><span class="skill-tag">WordPress</span></div></div>
     <div class="skill-group"><div class="skill-group-title" id="sg6">Other</div><div class="skill-tags"><span class="skill-tag">Excel (Advanced)</span><span class="skill-tag">Statistics</span><span class="skill-tag">Cash Flow</span><span class="skill-tag">Brand Building</span><span class="skill-tag">Technical Writing</span></div></div>
   </div>
-  <div class="bar-skills" style="margin-top:36px;max-width:600px;">
-    <div class="bar-item"><div class="bar-header"><span>HTML / CSS / JS</span><span class="bar-pct">90%</span></div><div class="bar-track"><div class="bar-fill" data-width="90"></div></div></div>
-    <div class="bar-item"><div class="bar-header"><span>Python</span><span class="bar-pct">85%</span></div><div class="bar-track"><div class="bar-fill" data-width="85"></div></div></div>
-    <div class="bar-item"><div class="bar-header"><span>Node.js / MongoDB</span><span class="bar-pct">70%</span></div><div class="bar-track"><div class="bar-fill" data-width="70"></div></div></div>
-    <div class="bar-item"><div class="bar-header"><span>Cybersecurity</span><span class="bar-pct">75%</span></div><div class="bar-track"><div class="bar-fill" data-width="75"></div></div></div>
+  <div class="focus-panel">
+    <div class="section-kicker" id="focus-kicker">CURRENT TECHNICAL FOCUS</div>
+    <div class="focus-tags">
+      <span class="skill-tag">AI Systems</span>
+      <span class="skill-tag">Full-stack Applications</span>
+      <span class="skill-tag">Backend / API Architecture</span>
+      <span class="skill-tag">Security-aware Development</span>
+      <span class="skill-tag">Data & ML Experimentation</span>
+    </div>
   </div>
 </section>
 
@@ -533,19 +546,19 @@ body.ar .top-nav { flex-direction:row-reverse; }
 <section class="section reveal">
   <div class="section-label" id="label-projects">Featured Projects</div>
   <div class="project-filters">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="web">Web</button>
-    <button class="filter-btn" data-filter="ai">AI & ML</button>
-    <button class="filter-btn" data-filter="education">Education</button>
-    <button class="filter-btn" data-filter="security">Security</button>
-    <button class="filter-btn" data-filter="tools">Tools</button>
+    <button class="filter-btn active" id="filter-all" data-filter="all">All</button>
+    <button class="filter-btn" id="filter-web" data-filter="web">Web</button>
+    <button class="filter-btn" id="filter-ai" data-filter="ai">AI & ML</button>
+    <button class="filter-btn" id="filter-education" data-filter="education">Education</button>
+    <button class="filter-btn" id="filter-security" data-filter="security">Security</button>
+    <button class="filter-btn" id="filter-tools" data-filter="tools">Tools</button>
   </div>
   <div class="projects-grid">
 
     <a class="project-card featured" data-category="web tools" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
       <div class="project-num">01</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarOS v2.0 desktop-style portfolio preview" src="https://lh3.googleusercontent.com/d/1owy7xOOvQRI-UAUadaUdKuzwiAd6wWlS=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p1-name">OmarOS v2.0</div>
+      <div class="project-name" id="p1-name">OmarOS v2.0</div><a class="demo-link" href="https://omarahameds2010-lab.github.io/omar-os/" target="_blank">Live Demo ↗</a>
       <div class="project-desc" id="p1-desc">Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart. Deployed on GitHub Pages.</div>
       <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">Canvas API</span></div>
       <div class="project-gh-link">View on GitHub →</div>
@@ -581,7 +594,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
     <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">
       <div class="project-num">05</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Wave streetwear campaign poster" src="https://lh3.googleusercontent.com/d/1iEf73IqPPy4TIyzpQG4mnAcmJanwoe1n=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p5-name">Wave Streetwear Platform</div>
+      <div class="project-name" id="p5-name">Wave Streetwear Platform</div><a class="demo-link" href="https://omarahameds2010-lab.github.io/wave-store/" target="_blank">Live Demo ↗</a>
       <div class="project-desc" id="p5-desc">Full-stack e-commerce for Wave streetwear brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.</div>
       <div class="project-stack"><span class="stack-chip">Node.js</span><span class="stack-chip">MongoDB</span><span class="stack-chip">Express</span><span class="stack-chip">HTML/CSS</span></div>
       <div class="project-gh-link">View on GitHub →</div>
@@ -692,8 +705,8 @@ body.ar .top-nav { flex-direction:row-reverse; }
 <div class="page" id="page-projects">
   <div class="all-projects-page">
     <div class="all-projects-header reveal">
-      <h1>All <em>Projects</em></h1>
-      <p>20 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.</p>
+      <h1 id="archive-title">The <em>Archive</em></h1>
+      <p id="archive-desc">20 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.</p>
     </div>
     <div class="repos-grid">
 
@@ -763,8 +776,8 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
       <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
         <div class="repo-icon">🐍</div>
-        <div class="repo-name">OmarBot / Python Basics</div>
-        <div class="repo-desc">Python chatbot with datetime, calculator, scoring, Arabic support & conversation history. Built in live classes.</div>
+        <div class="repo-name">Python Basics Course</div>
+        <div class="repo-desc">Beginner Python course covering variables, strings, numbers, data types, print statements, and functions.</div>
         <span class="repo-tag tag-py">Python</span>
         <div class="repo-arrow">View on GitHub →</div>
       </a>
@@ -907,6 +920,37 @@ function initReveal(){
 }
 initReveal();
 
+// Phase-two language overlay for story sections, filters, badges, and archive.
+const phaseTwoCopy = {
+  en: {
+    heroTitle: 'BUILDER · TECHNOLOGY · AI<br/>I build technology, lead real projects, learn through real experiences, and document the journey.',
+    storyLabel: 'The Story Behind The Builds', storyKicker: 'THE JOURNEY', storyTitle: 'From learning code to building systems.', storyIntro: 'The portfolio is not a list of finished answers. It is a record of how Omar learns, builds with others, and turns ideas into real products.',
+    proofKicker: 'PROOF', proofTitle: 'Evidence over claims.', featuredLabel: 'Featured Work', flagshipKicker: '01 — FLAGSHIP PROJECT', flagshipTitle: 'SANAD — Arabic RAG Evaluation Platform', flagshipDesc: 'An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination.', flagshipLink: 'Explore SANAD on GitHub →', metric: 'EVALUATION<br/>FIRST', metricDesc: 'Retrieval · Groundedness · Recall · Hallucination',
+    experienceLabel: 'Leadership & Experience', experienceKicker: 'REAL-WORLD RESPONSIBILITY', beyondKicker: 'BEYOND CODE', directionLabel: 'Direction', focusKicker: 'CURRENT TECHNICAL FOCUS', archiveTitle: 'The <em>Archive</em>', archiveDesc: '20 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.',
+    filters: ['All','Web','AI & ML','Education','Security','Tools'], badges: ['AI Systems','Products','Leadership','Web','Security']
+  },
+  ar: {
+    heroTitle: 'بُنّاء · تكنولوجيا · ذكاء اصطناعي<br/>أبني التكنولوجيا، وأقود المشاريع الحقيقية، وأتعلم من التجارب، وأوثّق الرحلة.',
+    storyLabel: 'القصة وراء المشاريع', storyKicker: 'الرحلة', storyTitle: 'من تعلّم البرمجة إلى بناء الأنظمة.', storyIntro: 'هذا البورتفوليو ليس قائمة بإجابات جاهزة؛ بل سجل لطريقة تعلّم عمر وبنائه مع الآخرين وتحويل الأفكار إلى منتجات حقيقية.',
+    proofKicker: 'الدليل', proofTitle: 'الدليل قبل الادعاء.', featuredLabel: 'أعمال مختارة', flagshipKicker: '01 — المشروع الرئيسي', flagshipTitle: 'SANAD — منصة تقييم RAG العربية', flagshipDesc: 'نظام RAG عربي يركز على التقييم، ويعتمد على تقطيع واعٍ بالعربية، ومقارنة نماذج التضمين، ومجموعة بيانات تقيس الدقة والاستدعاء والارتكاز والهلوسة.', flagshipLink: 'استكشف SANAD على GitHub ←', metric: 'التقييم<br/>أولًا', metricDesc: 'الاسترجاع · الارتكاز · الاستدعاء · الهلوسة',
+    experienceLabel: 'القيادة والخبرة', experienceKicker: 'مسؤولية حقيقية', beyondKicker: 'ما وراء الكود', directionLabel: 'الاتجاه', focusKicker: 'التركيز التقني الحالي', archiveTitle: 'أرشيف <em>المشاريع</em>', archiveDesc: 'أكثر من 20 مستودعًا عامًا — سجل لما بنيته واختبرته وتعلمته ونشرته. اضغط على أي بطاقة لفتح المستودع على GitHub.',
+    filters: ['الكل','الويب','الذكاء الاصطناعي','التعليم','الأمن','الأدوات'], badges: ['أنظمة AI','منتجات','قيادة','ويب','أمن']
+  }
+};
+
+function applyPhaseTwoLanguage(lang) {
+  const d = phaseTwoCopy[lang];
+  const set = (id, value, html=false) => { const el = document.getElementById(id); if (el) html ? el.innerHTML = value : el.textContent = value; };
+  set('hero-title', d.heroTitle, true);
+  set('label-story', d.storyLabel); set('story-kicker', d.storyKicker); set('story-title', d.storyTitle); set('story-intro', d.storyIntro);
+  set('proof-kicker', d.proofKicker); set('proof-title', d.proofTitle); set('label-featured-work', d.featuredLabel); set('flagship-kicker', d.flagshipKicker); set('flagship-title', d.flagshipTitle); set('flagship-desc', d.flagshipDesc); set('flagship-link', d.flagshipLink); set('flagship-metric', d.metric, true); set('flagship-metric-desc', d.metricDesc);
+  set('label-experience', d.experienceLabel); set('experience-kicker', d.experienceKicker); set('beyond-kicker', d.beyondKicker); set('label-direction', d.directionLabel); set('focus-kicker', d.focusKicker); set('archive-title', d.archiveTitle, true); set('archive-desc', d.archiveDesc);
+  ['filter-all','filter-web','filter-ai','filter-education','filter-security','filter-tools'].forEach((id, i) => set(id, d.filters[i]));
+  document.querySelectorAll('.hero-badges .badge').forEach((el, i) => { if (d.badges[i]) el.textContent = d.badges[i]; });
+}
+
+applyPhaseTwoLanguage('en');
+
 // BAR ANIMATION
 const barIO=new IntersectionObserver(entries=>{
   entries.forEach(e=>{
@@ -952,8 +996,8 @@ const content={
     p4name:'الذكاء الاصطناعي للاتصال الدلالي',p4desc:'معمارية VQ-VAE لضغط بيانات إنترنت الأشياء باستخدام PyTorch. سكريبتات تدريب ومخططات matplotlib.',
     p5name:'Wave Streetwear Platform',p5desc:'منصة تجارة إلكترونية لماركة Wave — شارك عمر في تأسيسها. Frontend وخادم Node.js/MongoDB Atlas.',
     p6name:'OmarPizza Ultimate',p6desc:'تطبيق مطعم كامل بعربة تسوق وتتبع طلبات، مع لوحة تحكم مؤمّنة ضد XSS وحقن SQL وهجمات القوة الغاشمة.',
-    p7name:'موقع عيادة د. أحمد',p7desc:'موقع عيادة طبية احترافي على GitHub Pages. أول مشروع حقيقي مدفوع — تم التسليم والنشر.',
-    p8name:'OmarBot Ultra',p8desc:'شات بوت Python متقدم بتاريخ ووقت وحاسبة ونظام نقاط ودعم عربي وسجل محادثات كامل.',
+    p7name:'موقع عيادة طبية',p7desc:'موقع عيادة طبية احترافي على GitHub Pages. أول مشروع حقيقي مدفوع — تم التسليم والنشر.',
+    p8name:'دورة أساسيات Python',p8desc:'دورة للمبتدئين تغطي المتغيرات والنصوص والأرقام وأنواع البيانات وأوامر الطباعة والدوال.',
     p9name:'منظومة المنزل الذكي الآمن',p9desc:'مشروع تخرج لـ Digital Egypt Cubs: خادم Flask REST API يدير لوحة تحكم، حاسبة استهلاك طاقة بـ pandas، نظام دخول بيومتري بـ ESP32/Wokwi بمنطق عتبة ثقة، ودائرة أمان بالبوابات المنطقية مبنية على إطار CIA Triad.',
     p10name:'SANAD — منصة تقييم RAG العربية',p10desc:'مشروع هندسة الذكاء الاصطناعي الرئيسي: منصة تقييم RAG عربية أولاً بتقطيع نص واعٍ باللغة العربية، مقارنة بين عدة نماذج تضمين (embedding)، ومجموعة بيانات ذهبية تقيس دقة واستدعاء وهلوسة حقيقية — بدون أرقام مُختلَقة.',
     edu1school:'المرحلة الثانوية',edu1deg:'باكالوريا — السنة الثانية — القاهرة، مصر',
@@ -998,6 +1042,7 @@ function setLang(lang){
   document.getElementById('btn-en').classList.toggle('active',lang==='en');
   document.getElementById('btn-ar').classList.toggle('active',lang==='ar');
   document.documentElement.setAttribute('lang',lang);
+  applyPhaseTwoLanguage(lang);
 }
 // Poster tilt + spotlight effect (Wave / Smart Home / SANAD covers)
 document.querySelectorAll('.project-poster').forEach(poster=>{
