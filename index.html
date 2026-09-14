@@ -124,6 +124,40 @@ body::before { content:'';position:fixed;inset:0;background-image:url("data:imag
 
 /* Featured projects (CV page) */
 .projects-grid { display:grid;grid-template-columns:1fr 1fr;gap:18px; }
+
+/* Neural OS background */
+body::before { z-index: -3; opacity: 0.22; }
+#neural-bg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.62;
+}
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 15%, rgba(212,168,67,0.08), transparent 34%),
+    linear-gradient(120deg, rgba(34,211,238,0.025), transparent 45%, rgba(212,168,67,0.025));
+}
+.top-nav, .page, .section, .hero, .cv-footer { position: relative; z-index: 1; }
+.project-card.featured { grid-column: span 2; }
+.project-card.featured .project-poster { aspect-ratio: 21 / 9; }
+@media (max-width: 700px) {
+  #neural-bg { opacity: 0.30; }
+  .project-card.featured { grid-column: span 1; }
+  .project-card.featured .project-poster { aspect-ratio: 16 / 9; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #neural-bg { display: none; }
+}
+
 .project-card {
   background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;
   position:relative;overflow:hidden;transition:all 0.3s;
@@ -262,6 +296,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
 </style>
 </head>
 <body>
+<canvas id="neural-bg" aria-hidden="true"></canvas>
 
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="ring"></div>
@@ -371,7 +406,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
   </div>
   <div class="projects-grid">
 
-    <a class="project-card" data-category="web tools" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
+    <a class="project-card featured" data-category="web tools" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
       <div class="project-num">01</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarOS v2.0 desktop-style portfolio preview" src="https://lh3.googleusercontent.com/d/1owy7xOOvQRI-UAUadaUdKuzwiAd6wWlS=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p1-name">OmarOS v2.0</div>
@@ -427,19 +462,19 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
     <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
       <div class="project-num">07</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Dr. Ahmed Clinic website preview" src="https://lh3.googleusercontent.com/d/1Knou5MvacYli2dYOOCaOORr_NLo0_H9Q=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p7-name">Dr. Ahmed Clinic Website</div>
+      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Medical clinic website preview" src="https://lh3.googleusercontent.com/d/1Knou5MvacYli2dYOOCaOORr_NLo0_H9Q=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
+      <div class="project-name" id="p7-name">Medical Clinic Website</div>
       <div class="project-desc" id="p7-desc">Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.</div>
       <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">GitHub Pages</span></div>
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" data-category="tools ai" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
+    <a class="project-card" data-category="tools education" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
       <div class="project-num">08</div>
       <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Python Basics course thumbnail" src="https://lh3.googleusercontent.com/d/1Hg_fxVoj7AkUXjXQhh6tVN9U3AZtQ6sE=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p8-name">OmarBot Ultra</div>
-      <div class="project-desc" id="p8-desc">Advanced Python chatbot with datetime, calculator, scoring system, Arabic language support, and full conversation history. Built iteratively in live classes.</div>
-      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">NLP</span><span class="stack-chip">Arabic</span><span class="stack-chip">OOP</span></div>
+      <div class="project-name" id="p8-name">Python Basics Course</div>
+      <div class="project-desc" id="p8-desc">Beginner Python course covering variables, strings, numbers, print statements, data types, and functions.</div>
+      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">Beginner Course</span><span class="stack-chip">Programming</span></div>
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
@@ -584,7 +619,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
       <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
         <div class="repo-icon">🏥</div>
-        <div class="repo-name">Dr. Ahmed Clinic Website</div>
+        <div class="repo-name">Medical Clinic Website</div>
         <div class="repo-desc">Professional medical clinic site — first real paid project. Deployed on GitHub Pages and delivered to client.</div>
         <span class="repo-tag tag-web">Client Work</span>
         <div class="repo-arrow">View on GitHub →</div>
@@ -758,8 +793,8 @@ const content={
     p4name:'Semantic Communication AI',p4desc:'VQ-VAE architecture for IoT semantic data compression using PyTorch. Training scripts, matplotlib visualizations, professional README.',
     p5name:'Wave Streetwear Platform',p5desc:'Full-stack e-commerce for Wave brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.',
     p6name:'OmarPizza Ultimate',p6desc:'Full restaurant web app with live cart, order tracking, and hardened admin dashboard against XSS, SQL Injection, and brute-force.',
-    p7name:'Dr. Ahmed Clinic Website',p7desc:'Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.',
-    p8name:'OmarBot Ultra',p8desc:'Advanced Python chatbot with datetime, calculator, scoring system, Arabic support, and full conversation history.',
+    p7name:'Medical Clinic Website',p7desc:'Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.',
+    p8name:'Python Basics Course',p8desc:'Beginner Python course covering variables, strings, numbers, data types, print statements, and functions.',
     p9name:'Secure Smart Home Eco-System',p9desc:'Graduation project for Digital Egypt Cubs: Flask REST API backend powering a Dashboard UI, a pandas-based Energy Calculator, ESP32/Wokwi Biometric Access with confidence-threshold logic, and a logic-gate Safety Circuit built on the CIA Triad.',
     p10name:'SANAD — Arabic RAG Evaluation Platform',p10desc:'AI engineering flagship project: an Arabic-first RAG evaluation platform with Arabic-aware chunking, multi-embedding-model comparison, and a golden dataset measuring real precision, recall, groundedness, and hallucination — no invented benchmarks.',
     edu1school:'Secondary School',edu1deg:'Baccalauréat — Second Year — Cairo, Egypt',
@@ -877,6 +912,104 @@ document.querySelectorAll('.filter-btn').forEach(button=>{
     });
   });
 });
+
+
+// Neural OS background: subtle AI/data network with mouse interaction.
+const neuralCanvas = document.getElementById('neural-bg');
+const neuralCtx = neuralCanvas.getContext('2d');
+let neuralWidth = 0;
+let neuralHeight = 0;
+let neuralParticles = [];
+const neuralMouse = { x: null, y: null, radius: 150 };
+
+function resizeNeuralCanvas() {
+  const ratio = window.devicePixelRatio || 1;
+  neuralWidth = window.innerWidth;
+  neuralHeight = window.innerHeight;
+  neuralCanvas.width = neuralWidth * ratio;
+  neuralCanvas.height = neuralHeight * ratio;
+  neuralCanvas.style.width = neuralWidth + 'px';
+  neuralCanvas.style.height = neuralHeight + 'px';
+  neuralCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
+
+  const amount = neuralWidth < 700
+    ? 35
+    : Math.min(110, Math.floor((neuralWidth * neuralHeight) / 13000));
+
+  neuralParticles = Array.from({ length: amount }, () => ({
+    x: Math.random() * neuralWidth,
+    y: Math.random() * neuralHeight,
+    vx: (Math.random() - 0.5) * 0.25,
+    vy: (Math.random() - 0.5) * 0.25,
+    size: Math.random() * 1.8 + 0.5,
+    color: Math.random() > 0.82 ? '#22d3ee' : '#d4a843'
+  }));
+}
+
+function animateNeuralBackground() {
+  neuralCtx.clearRect(0, 0, neuralWidth, neuralHeight);
+
+  for (const particle of neuralParticles) {
+    particle.x += particle.vx;
+    particle.y += particle.vy;
+    if (particle.x < 0 || particle.x > neuralWidth) particle.vx *= -1;
+    if (particle.y < 0 || particle.y > neuralHeight) particle.vy *= -1;
+
+    if (neuralMouse.x !== null) {
+      const dx = neuralMouse.x - particle.x;
+      const dy = neuralMouse.y - particle.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < neuralMouse.radius) {
+        particle.x -= dx * 0.0007;
+        particle.y -= dy * 0.0007;
+      }
+    }
+
+    neuralCtx.beginPath();
+    neuralCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+    neuralCtx.fillStyle = particle.color;
+    neuralCtx.globalAlpha = 0.65;
+    neuralCtx.fill();
+  }
+
+  for (let i = 0; i < neuralParticles.length; i++) {
+    for (let j = i + 1; j < neuralParticles.length; j++) {
+      const first = neuralParticles[i];
+      const second = neuralParticles[j];
+      const dx = first.x - second.x;
+      const dy = first.y - second.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      if (distance < 125) {
+        neuralCtx.beginPath();
+        neuralCtx.moveTo(first.x, first.y);
+        neuralCtx.lineTo(second.x, second.y);
+        neuralCtx.strokeStyle = `rgba(212,168,67,${(1 - distance / 125) * 0.22})`;
+        neuralCtx.lineWidth = 0.6;
+        neuralCtx.stroke();
+      }
+    }
+  }
+
+  neuralCtx.globalAlpha = 1;
+  requestAnimationFrame(animateNeuralBackground);
+}
+
+window.addEventListener('resize', resizeNeuralCanvas);
+window.addEventListener('mousemove', event => {
+  neuralMouse.x = event.clientX;
+  neuralMouse.y = event.clientY;
+});
+window.addEventListener('mouseleave', () => {
+  neuralMouse.x = null;
+  neuralMouse.y = null;
+});
+
+if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  resizeNeuralCanvas();
+  animateNeuralBackground();
+}
+
 </script>
 </body>
 </html>
+
