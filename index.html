@@ -116,7 +116,7 @@ body::before { content:'';position:fixed;inset:0;background-image:url("data:imag
 .skill-tags { display:flex;flex-wrap:wrap;gap:7px; }
 .skill-tag { padding:5px 11px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;font-size:0.75rem;color:var(--text);transition:all 0.2s; }
 .skill-tag:hover { border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,0.06); }
-.bar-skills { display:flex;flex-direction:column;gap:14px;margin-top:20px; }
+.bar-skills { opacity:0.72; display:flex;flex-direction:column;gap:14px;margin-top:20px; }
 .bar-header { display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.8rem; }
 .bar-pct { color:var(--gold);font-size:0.75rem; }
 .bar-track { height:4px;background:var(--border);border-radius:2px;overflow:hidden; }
@@ -323,8 +323,8 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="hero-eyebrow" id="eyebrow">Cairo, Egypt · Open to Opportunities</div>
       <h1 class="hero-name">Omar<br/><em>Ahmed</em></h1>
       <p class="hero-title" id="hero-title">
-        Software Engineer · Web Developer · Cybersecurity Enthusiast<br/>
-        Building real products from Cairo at 15.
+        BUILDER · AI · TECHNOLOGY<br/>
+        I build technology, learn through real experiences, and document the journey.
       </p>
       <div class="hero-badges">
         <span class="badge badge-web">Web Dev</span>
@@ -367,6 +367,142 @@ body.ar .top-nav { flex-direction:row-reverse; }
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<style>
+/* Story-led portfolio sections */
+.story-grid { display:grid; grid-template-columns:1.15fr 0.85fr; gap:18px; }
+.story-card, .proof-card, .leadership-card, .now-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:16px;
+  padding:26px; position:relative; overflow:hidden;
+}
+.story-card::before, .proof-card::before, .leadership-card::before, .now-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:2px;
+  background:linear-gradient(90deg,var(--gold),var(--accent2),transparent);
+}
+.story-title { font-family:'Instrument Serif',serif; font-size:2.2rem; margin-bottom:10px; }
+.story-intro { color:var(--muted); font-size:0.84rem; line-height:1.7; max-width:680px; margin-bottom:22px; }
+.journey-list { display:grid; gap:14px; }
+.journey-item { display:grid; grid-template-columns:92px 1fr; gap:16px; align-items:start; }
+.journey-year { color:var(--gold); font-size:0.72rem; font-weight:800; letter-spacing:1px; padding-top:3px; }
+.journey-copy { border-left:1px solid var(--border); padding-left:16px; color:var(--muted); font-size:0.8rem; line-height:1.55; }
+.journey-copy strong { display:block; color:var(--text); margin-bottom:3px; font-size:0.86rem; }
+.proof-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+.proof-item { border:1px solid var(--border); border-radius:10px; padding:14px; background:rgba(255,255,255,0.025); }
+.proof-value { display:block; font-family:'Instrument Serif',serif; color:var(--gold); font-size:1.55rem; line-height:1; margin-bottom:5px; }
+.proof-label { color:var(--muted); font-size:0.7rem; line-height:1.4; }
+.section-kicker { color:var(--gold); font-size:0.65rem; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:12px; }
+.flagship { display:grid; grid-template-columns:0.8fr 1.2fr; gap:22px; align-items:center; }
+.flagship-copy h3 { font-family:'Instrument Serif',serif; font-size:2.25rem; margin-bottom:8px; }
+.flagship-copy p { color:var(--muted); font-size:0.82rem; line-height:1.7; margin-bottom:16px; }
+.flagship-link { color:var(--gold); text-decoration:none; font-size:0.74rem; font-weight:800; letter-spacing:.5px; }
+.flagship-metric { border:1px solid rgba(34,211,238,.25); border-radius:14px; padding:22px; background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(212,168,67,.04)); }
+.flagship-metric .metric { color:var(--accent2); font-family:'Instrument Serif',serif; font-size:3.4rem; line-height:1; }
+.flagship-metric p { color:var(--muted); font-size:.72rem; line-height:1.5; margin-top:8px; }
+.leadership-list { display:grid; gap:14px; }
+.leadership-item { display:flex; gap:12px; align-items:flex-start; }
+.leadership-icon { width:30px; height:30px; display:grid; place-items:center; border:1px solid rgba(212,168,67,.35); border-radius:9px; color:var(--gold); flex:none; }
+.leadership-item strong { display:block; font-size:.82rem; margin-bottom:3px; }
+.leadership-item span { color:var(--muted); font-size:.74rem; line-height:1.5; }
+.beyond-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+.beyond-item { padding:18px; border:1px solid var(--border); border-radius:12px; }
+.beyond-item strong { display:block; color:var(--gold); letter-spacing:1.5px; font-size:.72rem; margin-bottom:7px; }
+.beyond-item span { color:var(--muted); font-size:.72rem; line-height:1.45; }
+.now-next { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+.now-card h3 { font-family:'Instrument Serif',serif; font-size:1.8rem; margin-bottom:8px; }
+.now-card p { color:var(--muted); font-size:.8rem; line-height:1.7; }
+@media (max-width: 760px) {
+  .story-grid, .flagship, .now-next { grid-template-columns:1fr; }
+  .beyond-grid { grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 480px) { .beyond-grid { grid-template-columns:1fr; } .journey-item { grid-template-columns:70px 1fr; } }
+</style>
+
+
+<!-- STORY / PROOF -->
+<section class="section reveal" id="journey">
+  <div class="section-label">The Story Behind The Builds</div>
+  <div class="story-grid">
+    <div class="story-card">
+      <div class="section-kicker">THE JOURNEY</div>
+      <h2 class="story-title">From learning code to building systems.</h2>
+      <p class="story-intro">The portfolio is not a list of finished answers. It is a record of how Omar learns, builds with others, and turns ideas into real products.</p>
+      <div class="journey-list">
+        <div class="journey-item"><div class="journey-year">2024</div><div class="journey-copy"><strong>Started building with code</strong>Python fundamentals, experiments, and the first small tools.</div></div>
+        <div class="journey-item"><div class="journey-year">2025</div><div class="journey-copy"><strong>Built real products & explored AI</strong>Web platforms, educational systems, chatbots, and data-driven ideas.</div></div>
+        <div class="journey-item"><div class="journey-year">2026</div><div class="journey-copy"><strong>Teams, competitions, and public work</strong>Real-world delivery, collaboration, IoT security, RAG evaluation, and a growing public presence.</div></div>
+        <div class="journey-item"><div class="journey-year">NEXT</div><div class="journey-copy"><strong>Leadership · Entrepreneurship · International experiences</strong>Keep building, communicate the work, and learn in wider environments.</div></div>
+      </div>
+    </div>
+    <div class="proof-card">
+      <div class="section-kicker">PROOF</div>
+      <h2 class="story-title">Evidence over claims.</h2>
+      <div class="proof-grid">
+        <div class="proof-item"><span class="proof-value">20+</span><span class="proof-label">Public repositories built and shipped</span></div>
+        <div class="proof-item"><span class="proof-value">Final 5</span><span class="proof-label">National competition journey</span></div>
+        <div class="proof-item"><span class="proof-value">Team Lead</span><span class="proof-label">Secure Smart Home project</span></div>
+        <div class="proof-item"><span class="proof-value">Real Client</span><span class="proof-label">Medical website delivered live</span></div>
+        <div class="proof-item"><span class="proof-value">AI Systems</span><span class="proof-label">RAG and semantic communication</span></div>
+        <div class="proof-item"><span class="proof-value">Public</span><span class="proof-label">Open-source work and documentation</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- FLAGSHIP -->
+<section class="section reveal" id="featured-work">
+  <div class="section-label">Featured Work</div>
+  <div class="story-card flagship">
+    <div class="flagship-copy">
+      <div class="section-kicker">01 — FLAGSHIP PROJECT</div>
+      <h3>SANAD — Arabic RAG Evaluation Platform</h3>
+      <p>An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination.</p>
+      <a class="flagship-link" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">Explore SANAD on GitHub →</a>
+    </div>
+    <div class="flagship-metric"><div class="metric">RAG</div><p>Retrieval quality, grounded answers, and measurable AI systems — not just generated text.</p></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- LEADERSHIP / BEYOND CODE -->
+<section class="section reveal" id="experience">
+  <div class="section-label">Leadership & Experience</div>
+  <div class="story-grid">
+    <div class="leadership-card">
+      <div class="section-kicker">REAL-WORLD RESPONSIBILITY</div>
+      <div class="leadership-list">
+        <div class="leadership-item"><div class="leadership-icon">01</div><div><strong>Team Lead — Secure Smart Home</strong><span>Led a team through a national graduation competition and helped move the project from concept to the final stage.</span></div></div>
+        <div class="leadership-item"><div class="leadership-icon">02</div><div><strong>Team / Product Collaboration — Wave Store</strong><span>Worked with a team to build a real e-commerce and streetwear product.</span></div></div>
+        <div class="leadership-item"><div class="leadership-icon">03</div><div><strong>Real Client Work — Medical Website</strong><span>Built and delivered a live website for a healthcare-related business.</span></div></div>
+      </div>
+    </div>
+    <div class="leadership-card">
+      <div class="section-kicker">BEYOND CODE</div>
+      <div class="beyond-grid">
+        <div class="beyond-item"><strong>LEAD</strong><span>Teams · Projects · Competitions</span></div>
+        <div class="beyond-item"><strong>SPEAK</strong><span>Presentations · Content · Communication</span></div>
+        <div class="beyond-item"><strong>BUILD</strong><span>AI · Products · Web</span></div>
+        <div class="beyond-item"><strong>EXPLORE</strong><span>New environments · Collaboration</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- NOW / NEXT -->
+<section class="section reveal" id="direction">
+  <div class="section-label">Direction</div>
+  <div class="now-next">
+    <div class="now-card"><div class="section-kicker">NOW</div><h3>Building in public.</h3><p>Building products, exploring AI systems, improving security-aware development, and documenting the journey through real work.</p></div>
+    <div class="now-card"><div class="section-kicker">NEXT</div><h3>Wider rooms, bigger systems.</h3><p>Leadership → Public speaking → International collaboration → Entrepreneurship.</p></div>
   </div>
 </section>
 
