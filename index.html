@@ -185,6 +185,7 @@ body.ar .journey-copy { border-left:0; border-right:1px solid var(--border); pad
 .project-card:hover .project-gh-link { gap:10px; }
 
 .poster-wrap { perspective:900px; margin-bottom:16px; }
+.poster-link { display:block; }
 .project-poster { position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#0b0d12;cursor:zoom-in; }
 .project-poster img { width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transform:scale(1) rotateX(0) rotateY(0);transition:transform 0.15s ease-out;will-change:transform; }
 .project-poster::before { content:'';position:absolute;inset:0;border-radius:12px;padding:1px;background:linear-gradient(135deg,var(--gold),transparent 45%,var(--gold2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity 0.4s;pointer-events:none; }
@@ -211,6 +212,24 @@ body.ar .journey-copy { border-left:0; border-right:1px solid var(--border); pad
 .cert-date { font-size:0.68rem;color:var(--muted); }
 .cert-verify { display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;color:var(--accent2);text-decoration:none;margin-top:6px;font-weight:600;transition:gap 0.2s; }
 .cert-verify:hover { gap:8px; }
+
+.events-grid { display:grid;gap:16px;grid-template-columns:2fr 1fr; }
+.event-proof { display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px; }
+.event-proof-label { font-size:0.62rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase; }
+.event-qr { width:100%;max-width:150px;border-radius:10px;border:1px solid var(--border);display:block; }
+.event-proof-caption { font-size:0.68rem;color:var(--muted);line-height:1.4; }
+.event-card { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;transition:all 0.3s; }
+.event-card:hover { border-color:var(--gold); }
+.event-header { display:flex;gap:14px;align-items:flex-start;margin-bottom:14px; }
+.event-emoji { font-size:1.6rem;flex-shrink:0; }
+.event-name { font-size:1rem;font-weight:700;margin-bottom:4px; }
+.event-meta { font-size:0.72rem;color:var(--gold);letter-spacing:0.3px; }
+.event-role { font-size:0.74rem;color:var(--muted);margin-bottom:10px;font-weight:600; }
+.event-desc { font-size:0.82rem;line-height:1.6;color:var(--text);margin-bottom:14px; }
+.event-points { list-style:none;display:grid;gap:10px;padding:0;margin:0; }
+.event-points li { font-size:0.78rem;line-height:1.6;color:var(--muted);padding-left:16px;position:relative; }
+.event-points li::before { content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold); }
+.event-points li strong { color:var(--text); }
 
 .edu-card { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px;display:flex;gap:24px;align-items:flex-start;transition:border-color 0.3s; }
 .edu-card:hover { border-color:rgba(212,168,67,0.3); }
@@ -286,6 +305,8 @@ body.ar .top-nav { flex-direction:row-reverse; }
   .skills-grid{grid-template-columns:1fr 1fr;}
   .projects-grid{grid-template-columns:1fr;}
   .certs-grid{grid-template-columns:1fr 1fr;}
+  .events-grid{grid-template-columns:1fr;}
+  .event-header{flex-direction:column;gap:6px;}
   .lang-grid{grid-template-columns:1fr 1fr;}
   .cv-footer{padding:30px 24px;flex-direction:column;gap:12px;text-align:center;}
   .section-divider{margin:0 24px;width:calc(100% - 48px);}
@@ -555,14 +576,14 @@ body.ar .top-nav { flex-direction:row-reverse; }
   </div>
   <div class="projects-grid">
 
-    <a class="project-card featured" data-category="web tools" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
+    <div class="project-card featured" data-category="web tools">
       <div class="project-num">01</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarOS v2.0 desktop-style portfolio preview" src="https://lh3.googleusercontent.com/d/1owy7xOOvQRI-UAUadaUdKuzwiAd6wWlS=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
+      <a class="poster-link" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank"><div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarOS v2.0 desktop-style portfolio preview" src="https://lh3.googleusercontent.com/d/1owy7xOOvQRI-UAUadaUdKuzwiAd6wWlS=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div></a>
       <div class="project-name" id="p1-name">OmarOS v2.0</div><a class="demo-link" href="https://omarahameds2010-lab.github.io/omar-os/" target="_blank">Live Demo ↗</a>
       <div class="project-desc" id="p1-desc">Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart. Deployed on GitHub Pages.</div>
       <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">Canvas API</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
+      <a class="project-gh-link" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">View on GitHub →</a>
+    </div>
 
     <a class="project-card" data-category="web ai education" href="https://github.com/omarahameds2010-lab/LinguaStory" target="_blank">
       <div class="project-num">02</div>
@@ -591,14 +612,14 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
-    <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">
+    <div class="project-card" data-category="web">
       <div class="project-num">05</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Wave streetwear campaign poster" src="https://lh3.googleusercontent.com/d/1iEf73IqPPy4TIyzpQG4mnAcmJanwoe1n=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
+      <a class="poster-link" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank"><div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Wave streetwear campaign poster" src="https://lh3.googleusercontent.com/d/1iEf73IqPPy4TIyzpQG4mnAcmJanwoe1n=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div></a>
       <div class="project-name" id="p5-name">Wave Streetwear Platform</div><a class="demo-link" href="https://omarahameds2010-lab.github.io/wave-store/" target="_blank">Live Demo ↗</a>
       <div class="project-desc" id="p5-desc">Full-stack e-commerce for Wave streetwear brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.</div>
       <div class="project-stack"><span class="stack-chip">Node.js</span><span class="stack-chip">MongoDB</span><span class="stack-chip">Express</span><span class="stack-chip">HTML/CSS</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
+      <a class="project-gh-link" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">View on GitHub →</a>
+    </div>
 
     <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/OmarPizza" target="_blank">
       <div class="project-num">06</div>
@@ -647,11 +668,20 @@ body.ar .top-nav { flex-direction:row-reverse; }
 
     <a class="project-card" data-category="web ai tools" href="https://omarahameds2010-lab.github.io/MERIDIAN/" target="_blank">
       <div class="project-num">11</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Meridian global market terminal portfolio cover" src="meridian_portfolio_cover_a.jpg"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
+      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Meridian global market terminal portfolio cover" src="https://lh3.googleusercontent.com/d/1gEI6441WfAdRe5eu7Ar6d41rQtKqhPeX=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
       <div class="project-name" id="p11-name">Meridian</div>
       <div class="project-desc" id="p11-desc">Product engineering market terminal built collaboratively during an intensive team sprint. Team Leader / Main Developer responsible for system architecture, indicator ingestion, UI, and boundary-constrained decision surfaces.</div>
       <div class="project-stack"><span class="stack-chip">Product Engineering</span><span class="stack-chip">Market Analytics</span><span class="stack-chip">Team Sprint</span><span class="stack-chip">Live Data</span></div>
       <div class="project-gh-link">Open Live Terminal →</div>
+    </a>
+
+    <a class="project-card" data-category="web ai tools" href="https://cv-studio-woad-beta.vercel.app/" target="_blank">
+      <div class="project-num">12</div>
+      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="CV Studio resume builder preview" src="cv_studio_cover.jpg"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
+      <div class="project-name" id="p12-name">CV Studio</div>
+      <div class="project-desc" id="p12-desc">Premium SaaS-style CV/resume builder with a multi-step wizard, live side-by-side preview, 6 professional templates, AI-assisted writing help, and a dashboard to manage multiple CVs.</div>
+      <div class="project-stack"><span class="stack-chip">Next.js</span><span class="stack-chip">React</span><span class="stack-chip">TypeScript</span><span class="stack-chip">Tailwind CSS</span></div>
+      <div class="project-gh-link">Open Live App →</div>
     </a>
 
   </div>
@@ -688,6 +718,36 @@ body.ar .top-nav { flex-direction:row-reverse; }
     <div class="cert-card"><div class="cert-emoji">📊</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Business Analysis & Process Management</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/87EMP8I564TY" target="_blank" class="cert-verify">Verify ↗</a></div></div>
     <div class="cert-card"><div class="cert-emoji">🌐</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Build a Free Website with WordPress</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/9PD129TWX9NH" target="_blank" class="cert-verify">Verify ↗</a></div></div>
     <div class="cert-card"><div class="cert-emoji">📗</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Getting Started with Microsoft Excel</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/48ZU8RWGPWJ9" target="_blank" class="cert-verify">Verify ↗</a></div></div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<!-- EVENTS -->
+<section class="section reveal">
+  <div class="section-label" id="label-events">Events & Conferences</div>
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-header">
+        <div class="event-emoji">🌍</div>
+        <div>
+          <div class="event-name" id="ev1-name">Fi Africa 2026</div>
+          <div class="event-meta" id="ev1-meta">2–4 June 2026 · Egypt International Exhibition Center, Cairo · Co-located with Propak MENA</div>
+        </div>
+      </div>
+      <div class="event-role" id="ev1-role">Visitor — Full-Stack Developer, Student</div>
+      <div class="event-desc" id="ev1-desc">Engaged directly with industry professionals — effectively drove technical conversations and exchanged valuable insights.</div>
+      <ul class="event-points" id="ev1-points">
+        <li><strong>Technical Growth:</strong> Discovered modern full-stack methodologies and architecture practices to optimize software performance and development workflow.</li>
+        <li><strong>Leadership &amp; Communication:</strong> Practiced active listening, grew public speaking confidence, and successfully led tech-focused group discussions.</li>
+        <li><strong>Strategic Networking:</strong> Built meaningful connections with talented developers and industry peers, sparking ideas for future collaboration.</li>
+      </ul>
+    </div>
+    <div class="event-card event-proof">
+      <div class="event-proof-label" id="label-event-proof">Proof of Attendance</div>
+      <img class="event-qr" src="fi_africa_visitor_qr.jpg" alt="Fi Africa 2026 visitor badge QR code">
+      <div class="event-proof-caption" id="ev1-proof-caption">Visitor Badge — Fi Africa 2026</div>
+    </div>
   </div>
 </section>
 
@@ -913,7 +973,7 @@ function animRing(){
   requestAnimationFrame(animRing);
 }
 animRing();
-document.querySelectorAll('a,button,.stat-card,.skill-tag,.cert-card,.lang-card,.repo-card,.project-card').forEach(el=>{
+document.querySelectorAll('a,button,.stat-card,.skill-tag,.cert-card,.event-card,.lang-card,.repo-card,.project-card').forEach(el=>{
   el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';});
   el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';});
 });
@@ -995,6 +1055,11 @@ const content={
     p9name:'Secure Smart Home Eco-System',p9desc:'Graduation project for Digital Egypt Cubs: Flask REST API backend powering a Dashboard UI, a pandas-based Energy Calculator, ESP32/Wokwi Biometric Access with confidence-threshold logic, and a logic-gate Safety Circuit built on the CIA Triad.',
     p10name:'SANAD — Arabic RAG Evaluation Platform',p10desc:'AI engineering flagship project: an Arabic-first RAG evaluation platform with Arabic-aware chunking, multi-embedding-model comparison, and a golden dataset measuring real precision, recall, groundedness, and hallucination — no invented benchmarks.',
     p11name:'Meridian',p11desc:'Collaborative product-engineering market terminal. Team Leader / Main Developer responsible for system architecture, indicator ingestion, UI, and defensible decision surfaces.',
+    p12name:'CV Studio',p12desc:'Premium SaaS-style CV/resume builder — multi-step wizard, live preview, 6 templates, AI writing help, and a multi-CV dashboard.',
+    labelEvents:'Events & Conferences',
+    ev1Name:'Fi Africa 2026',ev1Meta:'2–4 June 2026 · Egypt International Exhibition Center, Cairo · Co-located with Propak MENA',ev1Role:'Visitor — Full-Stack Developer, Student',ev1Desc:'Engaged directly with industry professionals — effectively drove technical conversations and exchanged valuable insights.',
+    ev1PointsHTML:'<li><strong>Technical Growth:</strong> Discovered modern full-stack methodologies and architecture practices to optimize software performance and development workflow.</li><li><strong>Leadership &amp; Communication:</strong> Practiced active listening, grew public speaking confidence, and successfully led tech-focused group discussions.</li><li><strong>Strategic Networking:</strong> Built meaningful connections with talented developers and industry peers, sparking ideas for future collaboration.</li>',
+    labelEventProof:'Proof of Attendance',ev1ProofCaption:'Visitor Badge — Fi Africa 2026',
     edu1school:'Secondary School',edu1deg:'Baccalauréat — Second Year — Cairo, Egypt',
     edu2school:'DECI Level One — Udacity × MCIT Egypt',edu2deg:'Excel · Statistics · Web Design',
     edu3school:'iSchool — Advanced AI & Web Dev Tracks',edu3deg:'Coding Course — AI Tools & Web Development',
@@ -1019,6 +1084,11 @@ const content={
     p9name:'منظومة المنزل الذكي الآمن',p9desc:'مشروع تخرج لـ Digital Egypt Cubs: خادم Flask REST API يدير لوحة تحكم، حاسبة استهلاك طاقة بـ pandas، نظام دخول بيومتري بـ ESP32/Wokwi بمنطق عتبة ثقة، ودائرة أمان بالبوابات المنطقية مبنية على إطار CIA Triad.',
     p10name:'SANAD — منصة تقييم RAG العربية',p10desc:'مشروع هندسة الذكاء الاصطناعي الرئيسي: منصة تقييم RAG عربية أولاً بتقطيع نص واعٍ باللغة العربية، مقارنة بين عدة نماذج تضمين (embedding)، ومجموعة بيانات ذهبية تقيس دقة واستدعاء وهلوسة حقيقية — بدون أرقام مُختلَقة.',
     p11name:'Meridian',p11desc:'منصة تحليل أسواق بُنيت تعاونيًا خلال Sprint مكثف. قائد الفريق والمطور الرئيسي المسؤول عن معمارية النظام، وإدخال المؤشرات، والواجهة، وحدود القرار القابلة للدفاع.',
+    p12name:'CV Studio',p12desc:'منصة احترافية لبناء السيرة الذاتية بأسلوب SaaS — معالج متعدد الخطوات، معاينة حية، 6 قوالب، مساعدة كتابة بالذكاء الاصطناعي، ولوحة تحكم لإدارة أكثر من سيرة ذاتية.',
+    labelEvents:'الفعاليات والمؤتمرات',
+    ev1Name:'Fi Africa 2026',ev1Meta:'2–4 يونيو 2026 · مركز مصر الدولي للمعارض، القاهرة · بالتزامن مع Propak MENA',ev1Role:'زائر (Visitor) — Full-Stack Developer، طالب',ev1Desc:'تفاعل مباشر مع محترفين في المجال، وقيادة فعّالة لنقاشات تقنية وتبادل رؤى قيّمة.',
+    ev1PointsHTML:'<li><strong>نمو تقني:</strong> اكتشاف منهجيات وممارسات معمارية حديثة في الـ Full-Stack لتحسين أداء البرمجيات وسير العمل التطويري.</li><li><strong>القيادة والتواصل:</strong> إتقان الاستماع الفعّال، وزيادة الثقة في التحدث أمام الجمهور، وقيادة نقاشات جماعية تقنية بنجاح.</li><li><strong>بناء علاقات استراتيجي:</strong> بناء علاقات حقيقية مع مطورين موهوبين وزملاء في الصناعة، وفتح آفاق للتعاون المستقبلي.</li>',
+    labelEventProof:'إثبات الحضور',ev1ProofCaption:'بادچ الزائر — Fi Africa 2026',
     edu1school:'المرحلة الثانوية',edu1deg:'باكالوريا — السنة الثانية — القاهرة، مصر',
     edu2school:'برنامج DECI المستوى الأول — Udacity × MCIT مصر',edu2deg:'Excel · الإحصاء · تصميم الويب',
     edu3school:'iSchool — مسارات AI والويب المتقدمة',edu3deg:'دورة برمجة — أدوات AI وتطوير الويب',
@@ -1039,12 +1109,20 @@ function setLang(lang){
   document.getElementById('label-certs').textContent=d.labelCerts;
   document.getElementById('label-langs').textContent=d.labelLangs;
   ['sg1','sg2','sg3','sg4','sg5','sg6'].forEach(k=>{ const el=document.getElementById(k);if(el)el.textContent=d[k]; });
-  for(let i=1;i<=11;i++){
+  for(let i=1;i<=12;i++){
     const n=document.getElementById('p'+i+'-name');
     const desc=document.getElementById('p'+i+'-desc');
     if(n) n.textContent=d['p'+i+'name'];
     if(desc) desc.textContent=d['p'+i+'desc'];
   }
+  const evLabel=document.getElementById('label-events'); if(evLabel) evLabel.textContent=d.labelEvents;
+  const evName=document.getElementById('ev1-name'); if(evName) evName.textContent=d.ev1Name;
+  const evMeta=document.getElementById('ev1-meta'); if(evMeta) evMeta.textContent=d.ev1Meta;
+  const evRole=document.getElementById('ev1-role'); if(evRole) evRole.textContent=d.ev1Role;
+  const evDesc=document.getElementById('ev1-desc'); if(evDesc) evDesc.textContent=d.ev1Desc;
+  const evPoints=document.getElementById('ev1-points'); if(evPoints) evPoints.innerHTML=d.ev1PointsHTML;
+  const evProofLabel=document.getElementById('label-event-proof'); if(evProofLabel) evProofLabel.textContent=d.labelEventProof;
+  const evProofCaption=document.getElementById('ev1-proof-caption'); if(evProofCaption) evProofCaption.textContent=d.ev1ProofCaption;
   document.getElementById('edu1-school').textContent=d.edu1school;
   document.getElementById('edu1-deg').textContent=d.edu1deg;
   document.getElementById('edu2-school').textContent=d.edu2school;
