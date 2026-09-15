@@ -645,11 +645,20 @@ body.ar .top-nav { flex-direction:row-reverse; }
       <div class="project-gh-link">View on GitHub →</div>
     </a>
 
+    <a class="project-card" data-category="web ai tools" href="https://omarahameds2010-lab.github.io/MERIDIAN/" target="_blank">
+      <div class="project-num">11</div>
+      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Meridian global market terminal portfolio cover" src="meridian_portfolio_cover_a.jpg"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
+      <div class="project-name" id="p11-name">Meridian</div>
+      <div class="project-desc" id="p11-desc">Product engineering market terminal built collaboratively during an intensive team sprint. Team Leader / Main Developer responsible for system architecture, indicator ingestion, UI, and boundary-constrained decision surfaces.</div>
+      <div class="project-stack"><span class="stack-chip">Product Engineering</span><span class="stack-chip">Market Analytics</span><span class="stack-chip">Team Sprint</span><span class="stack-chip">Live Data</span></div>
+      <div class="project-gh-link">Open Live Terminal →</div>
+    </a>
+
   </div>
 
   <div style="text-align:center;margin-top:40px;">
     <button class="nav-link" onclick="showPage('projects')" style="font-size:0.8rem;padding:12px 28px;border-color:var(--gold);color:var(--gold);cursor:pointer;" id="see-all-btn">
-      See All 20 Projects →
+      See All 21 Projects →
     </button>
   </div>
 </section>
@@ -706,7 +715,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
   <div class="all-projects-page">
     <div class="all-projects-header reveal">
       <h1 id="archive-title">The <em>Archive</em></h1>
-      <p id="archive-desc">20 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.</p>
+      <p id="archive-desc">21 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.</p>
     </div>
     <div class="repos-grid">
 
@@ -870,6 +879,14 @@ body.ar .top-nav { flex-direction:row-reverse; }
         <div class="repo-arrow">View on GitHub →</div>
       </a>
 
+      <a class="repo-card reveal" href="https://omarahameds2010-lab.github.io/MERIDIAN/" target="_blank">
+        <div class="repo-icon">◈</div>
+        <div class="repo-name">Meridian — Global Market Terminal</div>
+        <div class="repo-desc">Collaborative product-engineering sprint translating live market indicators into structured decision surfaces with defensible data boundaries.</div>
+        <span class="repo-tag tag-ai">Product Engineering · Analytics</span>
+        <div class="repo-arrow">Open Live Terminal →</div>
+      </a>
+
     </div>
   </div>
 </div><!-- end page-projects -->
@@ -977,12 +994,13 @@ const content={
     p8name:'Python Basics Course',p8desc:'Beginner Python course covering variables, strings, numbers, data types, print statements, and functions.',
     p9name:'Secure Smart Home Eco-System',p9desc:'Graduation project for Digital Egypt Cubs: Flask REST API backend powering a Dashboard UI, a pandas-based Energy Calculator, ESP32/Wokwi Biometric Access with confidence-threshold logic, and a logic-gate Safety Circuit built on the CIA Triad.',
     p10name:'SANAD — Arabic RAG Evaluation Platform',p10desc:'AI engineering flagship project: an Arabic-first RAG evaluation platform with Arabic-aware chunking, multi-embedding-model comparison, and a golden dataset measuring real precision, recall, groundedness, and hallucination — no invented benchmarks.',
+    p11name:'Meridian',p11desc:'Collaborative product-engineering market terminal. Team Leader / Main Developer responsible for system architecture, indicator ingestion, UI, and defensible decision surfaces.',
     edu1school:'Secondary School',edu1deg:'Baccalauréat — Second Year — Cairo, Egypt',
     edu2school:'DECI Level One — Udacity × MCIT Egypt',edu2deg:'Excel · Statistics · Web Design',
     edu3school:'iSchool — Advanced AI & Web Dev Tracks',edu3deg:'Coding Course — AI Tools & Web Development',
     footerNote:'Built with code · Cairo, Egypt · 2026',
-    navCV:'CV',navProjects:'All Projects',seeAll:'See All 20 Projects →',
-    allTitle:'All <em>Projects</em>',allDesc:'20 public repositories — every one of them built, shipped, and committed. Click any card to open the repo on GitHub.',
+    navCV:'CV',navProjects:'All Projects',seeAll:'See All 21 Projects →',
+    allTitle:'All <em>Projects</em>',allDesc:'21 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.',
   },
   ar:{
     eyebrow:'القاهرة، مصر · متاح للفرص',
@@ -1000,12 +1018,13 @@ const content={
     p8name:'دورة أساسيات Python',p8desc:'دورة للمبتدئين تغطي المتغيرات والنصوص والأرقام وأنواع البيانات وأوامر الطباعة والدوال.',
     p9name:'منظومة المنزل الذكي الآمن',p9desc:'مشروع تخرج لـ Digital Egypt Cubs: خادم Flask REST API يدير لوحة تحكم، حاسبة استهلاك طاقة بـ pandas، نظام دخول بيومتري بـ ESP32/Wokwi بمنطق عتبة ثقة، ودائرة أمان بالبوابات المنطقية مبنية على إطار CIA Triad.',
     p10name:'SANAD — منصة تقييم RAG العربية',p10desc:'مشروع هندسة الذكاء الاصطناعي الرئيسي: منصة تقييم RAG عربية أولاً بتقطيع نص واعٍ باللغة العربية، مقارنة بين عدة نماذج تضمين (embedding)، ومجموعة بيانات ذهبية تقيس دقة واستدعاء وهلوسة حقيقية — بدون أرقام مُختلَقة.',
+    p11name:'Meridian',p11desc:'منصة تحليل أسواق بُنيت تعاونيًا خلال Sprint مكثف. قائد الفريق والمطور الرئيسي المسؤول عن معمارية النظام، وإدخال المؤشرات، والواجهة، وحدود القرار القابلة للدفاع.',
     edu1school:'المرحلة الثانوية',edu1deg:'باكالوريا — السنة الثانية — القاهرة، مصر',
     edu2school:'برنامج DECI المستوى الأول — Udacity × MCIT مصر',edu2deg:'Excel · الإحصاء · تصميم الويب',
     edu3school:'iSchool — مسارات AI والويب المتقدمة',edu3deg:'دورة برمجة — أدوات AI وتطوير الويب',
     footerNote:'مبني بالكود · القاهرة، مصر · 2026',
-    navCV:'السيرة الذاتية',navProjects:'كل المشاريع',seeAll:'عرض كل 20 مشروع →',
-    allTitle:'كل <em>المشاريع</em>',allDesc:'20 مستودع عام — كل واحد منهم مبني ومُسلَّم. اضغط على أي كارد لفتح الـ repo على GitHub.',
+    navCV:'السيرة الذاتية',navProjects:'كل المشاريع',seeAll:'عرض كل 21 مشروع →',
+    allTitle:'كل <em>المشاريع</em>',allDesc:'21 مستودعًا عامًا — سجل لما بنيته واختبرته وتعلمته ونشرته. اضغط على أي كارد لفتح الـ repo على GitHub.',
   }
 };
 function setLang(lang){
@@ -1020,7 +1039,7 @@ function setLang(lang){
   document.getElementById('label-certs').textContent=d.labelCerts;
   document.getElementById('label-langs').textContent=d.labelLangs;
   ['sg1','sg2','sg3','sg4','sg5','sg6'].forEach(k=>{ const el=document.getElementById(k);if(el)el.textContent=d[k]; });
-  for(let i=1;i<=10;i++){
+  for(let i=1;i<=11;i++){
     const n=document.getElementById('p'+i+'-name');
     const desc=document.getElementById('p'+i+'-desc');
     if(n) n.textContent=d['p'+i+'name'];
@@ -1193,4 +1212,3 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
 </script>
 </body>
 </html>
-
