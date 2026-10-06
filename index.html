@@ -448,9 +448,8 @@ body.ar .top-nav { flex-direction:row-reverse; }
 .flagship-metric p { color:var(--muted); font-size:.72rem; line-height:1.5; margin-top:8px; }
 .multitenant-card { display:grid;grid-template-columns:minmax(240px,.85fr) 1.15fr;gap:24px;align-items:center;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(14,14,18,.97) 45%,rgba(212,168,67,.04));border:1px solid rgba(34,211,238,.3);border-radius:16px;padding:20px;position:relative;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.25); }
 .multitenant-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent2),var(--gold),transparent); }
-.multitenant-visual { position:relative;border:1px solid rgba(69,217,255,.25);border-radius:12px;overflow:hidden;background:#070c17;cursor:zoom-in; }
-.multitenant-visual img { display:block;width:100%;height:auto;max-height:430px;object-fit:cover;object-position:top;transition:transform .35s ease; }
-.multitenant-visual:hover img { transform:scale(1.025); }
+.multitenant-visual { position:relative;border:1px solid rgba(69,217,255,.25);border-radius:12px;overflow:hidden;background:#070c17; }
+.multitenant-visual iframe { display:block;width:100%;height:430px;border:0;background:#070c17; }
 .multitenant-visual::after { content:'↗ OPEN ARCHITECTURE';position:absolute;right:10px;bottom:10px;padding:7px 9px;border-radius:7px;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);color:#fff;font-size:.58rem;letter-spacing:1px;font-weight:700;opacity:0;transition:opacity .25s; }
 .multitenant-visual:hover::after { opacity:1; }
 .multitenant-copy h3 { font-family:'Instrument Serif',serif;font-size:2.1rem;line-height:1.05;margin-bottom:10px; }
@@ -459,7 +458,7 @@ body.ar .top-nav { flex-direction:row-reverse; }
 .multitenant-tag { padding:5px 9px;border-radius:7px;border:1px solid rgba(34,211,238,.28);background:rgba(34,211,238,.06);color:var(--accent2);font-size:.64rem;font-weight:700; }
 .multitenant-meta { color:var(--gold);font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase; }
 .multitenant-link { color:var(--gold);text-decoration:none;font-size:.74rem;font-weight:800;letter-spacing:.5px; }
-@media (max-width:760px) { .multitenant-card { grid-template-columns:1fr; } .multitenant-visual img { max-height:none; } }
+@media (max-width:760px) { .multitenant-card { grid-template-columns:1fr; } .multitenant-visual iframe { height:520px; } }
 .leadership-list { display:grid; gap:14px; }
 .leadership-item { display:flex; gap:12px; align-items:flex-start; }
 .leadership-icon { width:30px; height:30px; display:grid; place-items:center; border:1px solid rgba(212,168,67,.35); border-radius:9px; color:var(--gold); flex:none; }
@@ -516,15 +515,15 @@ body.ar .top-nav { flex-direction:row-reverse; }
 <section class="section reveal" id="featured-work">
   <div class="section-label" id="label-featured-work">Featured Work</div>
   <div class="multitenant-card" style="margin-bottom:18px">
-    <div class="multitenant-visual" id="multitenant-visual" title="Open system architecture diagram">
-      <img id="multitenant-diagram" src="architecture-infographic.png" alt="Secure Scalable Multi-Tenant platform architecture by Omar Ahmed">
+    <div class="multitenant-visual" id="multitenant-visual" title="Live system architecture website">
+      <iframe id="multitenant-embed" src="https://omarahameds2010-lab.github.io/architecture-infographic/" title="Secure Scalable Multi-Tenant platform architecture by Omar Ahmed" loading="lazy"></iframe>
     </div>
     <div class="multitenant-copy">
       <div class="multitenant-meta" id="multitenant-kicker">02 — FLAGSHIP PLATFORM · ARCHITECTURE & SECURITY</div>
       <h3 id="multitenant-title">Secure Multi-Tenant E-Learning Platform</h3>
       <p id="multitenant-desc">A scalable SaaS learning platform designed around strict tenant isolation and defense in depth: PostgreSQL Row-Level Security with FORCE RLS, a non-superuser app_user, host-based tenant routing, and a seven-layer authorization engine covering tenant checks, RBAC, ownership, entitlements, feature flags, tenant policies, and plan limits.</p>
       <div class="multitenant-tags"><span class="multitenant-tag">PostgreSQL RLS</span><span class="multitenant-tag">Tenant Routing</span><span class="multitenant-tag">NestJS API</span><span class="multitenant-tag">Zero Trust</span><span class="multitenant-tag">SaaS Infrastructure</span></div>
-      <a class="multitenant-link" id="multitenant-link" href="#multitenant-visual">View System Architecture ↗</a>
+      <a class="multitenant-link" id="multitenant-link" href="https://omarahameds2010-lab.github.io/architecture-infographic/" target="_blank" rel="noopener noreferrer">Open Live Architecture ↗</a>
     </div>
   </div>
   <div class="story-card flagship">
@@ -1057,7 +1056,7 @@ const phaseTwoCopy = {
     heroTitle: 'BUILDER · TECHNOLOGY · AI<br/>I build technology, lead real projects, learn through real experiences, and document the journey.',
     storyLabel: 'The Story Behind The Builds', storyKicker: 'THE JOURNEY', storyTitle: 'From learning code to building systems.', storyIntro: 'The portfolio is not a list of finished answers. It is a record of how Omar learns, builds with others, and turns ideas into real products.',
     proofKicker: 'PROOF', proofTitle: 'Evidence over claims.', featuredLabel: 'Featured Work', flagshipKicker: '01 — FLAGSHIP PROJECT', flagshipTitle: 'SANAD — Arabic RAG Evaluation Platform', flagshipDesc: 'An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination.', flagshipLink: 'Explore SANAD on GitHub →', metric: 'EVALUATION<br/>FIRST', metricDesc: 'Retrieval · Groundedness · Recall · Hallucination',
-    multitenantKicker: '02 — FLAGSHIP PLATFORM · ARCHITECTURE & SECURITY', multitenantTitle: 'Secure Multi-Tenant E-Learning Platform', multitenantDesc: 'A scalable SaaS learning platform designed around strict tenant isolation and defense in depth: PostgreSQL Row-Level Security with FORCE RLS, a non-superuser app_user, host-based tenant routing, and a seven-layer authorization engine covering tenant checks, RBAC, ownership, entitlements, feature flags, tenant policies, and plan limits.', multitenantLink: 'View System Architecture ↗', nowTitle:'Build. Lead. Document.', nowDesc:'Building technology, taking responsibility in real projects, and documenting what I learn along the way.', nextKicker:'NEXT', nextTitle:'From apps to scalable SaaS platforms.', nextDesc:'Moving from standalone applications to scalable cloud SaaS platforms: building a secure multi-tenant learning system with PostgreSQL RLS, defense in depth, and architecture designed for millions of students and teachers.',
+    multitenantKicker: '02 — FLAGSHIP PLATFORM · ARCHITECTURE & SECURITY', multitenantTitle: 'Secure Multi-Tenant E-Learning Platform', multitenantDesc: 'A scalable SaaS learning platform designed around strict tenant isolation and defense in depth: PostgreSQL Row-Level Security with FORCE RLS, a non-superuser app_user, host-based tenant routing, and a seven-layer authorization engine covering tenant checks, RBAC, ownership, entitlements, feature flags, tenant policies, and plan limits.', multitenantLink: 'Open Live Architecture ↗', nowTitle:'Build. Lead. Document.', nowDesc:'Building technology, taking responsibility in real projects, and documenting what I learn along the way.', nextKicker:'NEXT', nextTitle:'From apps to scalable SaaS platforms.', nextDesc:'Moving from standalone applications to scalable cloud SaaS platforms: building a secure multi-tenant learning system with PostgreSQL RLS, defense in depth, and architecture designed for millions of students and teachers.',
     experienceLabel: 'Leadership & Experience', experienceKicker: 'REAL-WORLD RESPONSIBILITY', beyondKicker: 'BEYOND CODE', directionLabel: 'Direction', focusKicker: 'CURRENT TECHNICAL FOCUS', archiveTitle: 'The <em>Archive</em>', archiveDesc: '20 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.',
     filters: ['All','Web','AI & ML','Education','Security','Tools'], badges: ['AI Systems','Products','Leadership','Web','Security']
   },
@@ -1065,7 +1064,7 @@ const phaseTwoCopy = {
     heroTitle: 'بُنّاء · تكنولوجيا · ذكاء اصطناعي<br/>أبني التكنولوجيا، وأقود المشاريع الحقيقية، وأتعلم من التجارب، وأوثّق الرحلة.',
     storyLabel: 'القصة وراء المشاريع', storyKicker: 'الرحلة', storyTitle: 'من تعلّم البرمجة إلى بناء الأنظمة.', storyIntro: 'هذا البورتفوليو ليس قائمة بإجابات جاهزة؛ بل سجل لطريقة تعلّم عمر وبنائه مع الآخرين وتحويل الأفكار إلى منتجات حقيقية.',
     proofKicker: 'الدليل', proofTitle: 'الدليل قبل الادعاء.', featuredLabel: 'أعمال مختارة', flagshipKicker: '01 — المشروع الرئيسي', flagshipTitle: 'SANAD — منصة تقييم RAG العربية', flagshipDesc: 'نظام RAG عربي يركز على التقييم، ويعتمد على تقطيع واعٍ بالعربية، ومقارنة نماذج التضمين، ومجموعة بيانات تقيس الدقة والاستدعاء والارتكاز والهلوسة.', flagshipLink: 'استكشف SANAD على GitHub ←', metric: 'التقييم<br/>أولًا', metricDesc: 'الاسترجاع · الارتكاز · الاستدعاء · الهلوسة',
-    multitenantKicker: '02 — منصة رئيسية · المعمارية والأمان', multitenantTitle: 'منصة تعليم إلكتروني آمنة متعددة العملاء', multitenantDesc: 'منصة SaaS تعليمية قابلة للتوسع مبنية على عزل صارم لبيانات العملاء ودفاع متعدد الطبقات: PostgreSQL RLS مع FORCE RLS، وحساب app_user غير متفوق، وتوجيه العملاء عبر النطاق، ومحرك صلاحيات من سبع طبقات يشمل عزل العميل وRBAC والملكية والاستحقاقات ومفاتيح الميزات وسياسات العميل وحدود الخطة.', multitenantLink: 'عرض المعمارية النظامية ←', nowTitle:'ابنِ. قد. وثّق.', nowDesc:'أبني التكنولوجيا، وأتحمل مسؤولية المشاريع الحقيقية، وأوثّق ما أتعلمه في الطريق.', nextKicker:'التالي', nextTitle:'من التطبيقات إلى منصات SaaS قابلة للتوسع.', nextDesc:'أنتقل من بناء التطبيقات المنفردة إلى منصات SaaS سحابية قابلة للتوسع، مع بناء نظام تعليمي متعدد العملاء وآمن باستخدام PostgreSQL RLS ودفاع متعدد الطبقات ومعمارية جاهزة لملايين الطلاب والمعلمين.',
+    multitenantKicker: '02 — منصة رئيسية · المعمارية والأمان', multitenantTitle: 'منصة تعليم إلكتروني آمنة متعددة العملاء', multitenantDesc: 'منصة SaaS تعليمية قابلة للتوسع مبنية على عزل صارم لبيانات العملاء ودفاع متعدد الطبقات: PostgreSQL RLS مع FORCE RLS، وحساب app_user غير متفوق، وتوجيه العملاء عبر النطاق، ومحرك صلاحيات من سبع طبقات يشمل عزل العميل وRBAC والملكية والاستحقاقات ومفاتيح الميزات وسياسات العميل وحدود الخطة.', multitenantLink: 'فتح المعمارية الحية ←', nowTitle:'ابنِ. قد. وثّق.', nowDesc:'أبني التكنولوجيا، وأتحمل مسؤولية المشاريع الحقيقية، وأوثّق ما أتعلمه في الطريق.', nextKicker:'التالي', nextTitle:'من التطبيقات إلى منصات SaaS قابلة للتوسع.', nextDesc:'أنتقل من بناء التطبيقات المنفردة إلى منصات SaaS سحابية قابلة للتوسع، مع بناء نظام تعليمي متعدد العملاء وآمن باستخدام PostgreSQL RLS ودفاع متعدد الطبقات ومعمارية جاهزة لملايين الطلاب والمعلمين.',
     experienceLabel: 'القيادة والخبرة', experienceKicker: 'مسؤولية حقيقية', beyondKicker: 'ما وراء الكود', directionLabel: 'الاتجاه', focusKicker: 'التركيز التقني الحالي', archiveTitle: 'أرشيف <em>المشاريع</em>', archiveDesc: 'أكثر من 20 مستودعًا عامًا — سجل لما بنيته واختبرته وتعلمته ونشرته. اضغط على أي بطاقة لفتح المستودع على GitHub.',
     filters: ['الكل','الويب','الذكاء الاصطناعي','التعليم','الأمن','الأدوات'], badges: ['أنظمة AI','منتجات','قيادة','ويب','أمن']
   }
@@ -1239,12 +1238,6 @@ document.querySelectorAll('.project-poster').forEach(poster=>{
 });
 document.getElementById('ev2-photo-wrap').addEventListener('click', ()=>{
   const img = document.getElementById('ev2-photo');
-  posterModalImg.src = img.src;
-  posterModalImg.alt = img.alt;
-  posterModal.classList.add('open');
-});
-document.getElementById('multitenant-visual').addEventListener('click', ()=>{
-  const img = document.getElementById('multitenant-diagram');
   posterModalImg.src = img.src;
   posterModalImg.alt = img.alt;
   posterModal.classList.add('open');
