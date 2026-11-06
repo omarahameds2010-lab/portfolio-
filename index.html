@@ -1,1361 +1,760 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Omar Ahmed — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet"/>
-<style>
-:root {
-  --bg: #060608;
-  --surface: #0e0e12;
-  --border: #1c1c24;
-  --gold: #d4a843;
-  --gold2: #f0c96a;
-  --text: #eeeaf2;
-  --muted: #7a7890;
-  --accent: #4ade80;
-  --accent2: #22d3ee;
-}
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Syne', sans-serif;
-  min-height: 100vh;
-  overflow-x: hidden;
-  cursor: none;
-}
-.cursor { width:12px;height:12px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transition:transform 0.15s ease;mix-blend-mode:difference; }
-.cursor-ring { width:36px;height:36px;border:1px solid rgba(212,168,67,0.4);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transition:all 0.08s linear; }
-.hero-actions { display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 28px; }
-.hero-btn { padding:12px 22px;border-radius:8px;text-decoration:none;font-family:inherit;font-weight:700;font-size:0.78rem;letter-spacing:0.02em;cursor:pointer;transition:0.25s ease;display:inline-block; }
-.hero-btn.primary { background:var(--gold);color:#060608;border:1px solid var(--gold); }
-.hero-btn.secondary { color:var(--gold);border:1px solid var(--gold);background:transparent; }
-.hero-btn:hover { transform:translateY(-3px); }
-.project-filters { display:flex;gap:10px;flex-wrap:wrap;margin:18px 0 28px; }
-.filter-btn { padding:9px 18px;border-radius:100px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:inherit;font-size:0.75rem;font-weight:600;letter-spacing:0.02em;cursor:pointer;transition:0.25s ease; }
-.filter-btn:hover { border-color:var(--gold);color:var(--gold); }
-.filter-btn.active { background:var(--gold);color:#060608;border-color:var(--gold); }
-@media (hover:none),(pointer:coarse){ body{ cursor:auto; } .cursor,.cursor-ring{ display:none; } }
-body::before { content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6; }
-
-/* NAV */
-.top-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 16px 40px;
-  background: rgba(6,6,8,0.92);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo { font-family:'Instrument Serif',serif; font-size:1.1rem; color:var(--gold); text-decoration:none; }
-.nav-links { display:flex; gap:8px; align-items:center; }
-.nav-link {
-  padding: 7px 16px; border-radius: 20px; border: 1px solid transparent;
-  font-size: 0.75rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-  text-decoration: none; color: var(--muted); cursor: pointer; background: transparent;
-  font-family: 'Syne', sans-serif;
-  transition: all 0.2s;
-}
-.nav-link:hover, .nav-link.active { border-color: var(--gold); color: var(--gold); }
-.nav-link.active { background: rgba(212,168,67,0.08); }
-.lang-bar { display:flex;gap:4px;background:rgba(14,14,18,0.9);border:1px solid var(--border);border-radius:30px;padding:4px;backdrop-filter:blur(12px); }
-.lang-btn { padding:5px 14px;border-radius:24px;border:none;background:transparent;color:var(--muted);font-family:'Syne',sans-serif;font-size:0.72rem;font-weight:700;cursor:pointer;letter-spacing:1px;transition:all 0.2s; }
-.lang-btn.active { background:var(--gold);color:#060608; }
-
-/* PAGES */
-.page { display:none; min-height:100vh; padding-top:70px; }
-.page.active { display:block; }
-
-/* ===== PAGE 1: CV ===== */
-.hero {
-  min-height: calc(100vh - 70px);
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 60px 60px 60px;
-  position: relative; z-index: 1;
-}
-.hero-grid { display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;width:100%; }
-.hero-eyebrow { font-size:0.7rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 0.8s 0.1s forwards; }
-.hero-name { font-family:'Instrument Serif',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:400;line-height:1.05;margin-bottom:12px;opacity:0;animation:fadeUp 0.8s 0.2s forwards; }
-.hero-name em { font-style:italic;color:var(--gold); }
-.hero-title { font-size:clamp(0.85rem,1.5vw,1rem);color:var(--muted);font-weight:400;letter-spacing:0.5px;margin-bottom:32px;line-height:1.6;opacity:1;animation:fadeUp 0.8s 0.35s forwards; }
-.hero-badges { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;opacity:0;animation:fadeUp 0.8s 0.45s forwards; }
-.badge { padding:6px 14px;border-radius:20px;font-size:0.72rem;font-weight:700;letter-spacing:0.8px;border:1px solid; }
-.badge-web { border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,0.07); }
-.badge-sec { border-color:var(--accent);color:var(--accent);background:rgba(74,222,128,0.07); }
-.badge-ai  { border-color:var(--accent2);color:var(--accent2);background:rgba(34,211,238,0.07); }
-.hero-contacts { display:flex;flex-direction:column;gap:10px;opacity:0;animation:fadeUp 0.8s 0.55s forwards; }
-.contact-row { display:flex;align-items:center;gap:10px;font-size:0.8rem;color:var(--muted);text-decoration:none;transition:color 0.2s; }
-.contact-row:hover { color:var(--gold); }
-.contact-icon { width:28px;height:28px;border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0; }
-.hero-right { opacity:0;animation:fadeIn 1s 0.6s forwards; }
-.stats-grid { display:grid;grid-template-columns:1fr 1fr;gap:14px; }
-.stat-card { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;position:relative;overflow:hidden;transition:border-color 0.3s,transform 0.3s; }
-.stat-card:hover { border-color:var(--gold);transform:translateY(-4px); }
-.stat-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity 0.3s; }
-.stat-card:hover::before { opacity:1; }
-.stat-num { font-family:'Instrument Serif',serif;font-size:2.8rem;color:var(--gold);line-height:1;margin-bottom:6px; }
-.stat-label { font-size:0.72rem;color:var(--muted);letter-spacing:0.5px; }
-.stat-card.wide { grid-column:span 2; }
-.availability { display:flex;align-items:center;gap:10px;margin-top:8px; }
-.dot-green { width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite; }
-@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(74,222,128,0.4)}50%{box-shadow:0 0 0 8px rgba(74,222,128,0)} }
-.avail-text { font-size:0.82rem;color:var(--accent);font-weight:600; }
-
-.section-divider { height:1px;background:linear-gradient(90deg,transparent,var(--border) 20%,var(--border) 80%,transparent);margin:0 60px;width:calc(100% - 120px); }
-.section { max-width:1100px;margin:0 auto;padding:70px 60px;position:relative;z-index:1; }
-.section-label { font-size:0.65rem;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:40px;display:flex;align-items:center;gap:14px; }
-.section-label::after { content:'';flex:1;height:1px;background:var(--border); }
-
-.skills-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px; }
-.skill-group { background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px;transition:border-color 0.3s; }
-.skill-group:hover { border-color:rgba(212,168,67,0.3); }
-.skill-group-title { font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px; }
-.skill-tags { display:flex;flex-wrap:wrap;gap:7px; }
-.skill-tag { padding:5px 11px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;font-size:0.75rem;color:var(--text);transition:all 0.2s; }
-.skill-tag:hover { border-color:var(--gold);color:var(--gold);background:rgba(212,168,67,0.06); }
-.bar-skills { opacity:0.72; display:flex;flex-direction:column;gap:14px;margin-top:20px; }
-.bar-header { display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.8rem; }
-.bar-pct { color:var(--gold);font-size:0.75rem; }
-.bar-track { height:4px;background:var(--border);border-radius:2px;overflow:hidden; }
-.bar-fill { height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px;width:0;transition:width 1.2s cubic-bezier(0.4,0,0.2,1); }
-
-/* Featured projects (CV page) */
-.projects-grid { display:grid;grid-template-columns:1fr 1fr;gap:18px; }
-
-/* Neural OS background */
-body::before { z-index: -3; opacity: 0.22; }
-#neural-bg {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.62;
-}
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 50% 15%, rgba(212,168,67,0.08), transparent 34%),
-    linear-gradient(120deg, rgba(34,211,238,0.025), transparent 45%, rgba(212,168,67,0.025));
-}
-.top-nav, .page, .section, .hero, .cv-footer { position: relative; z-index: 1; }
-.project-card.featured { grid-column: span 2; }
-.project-card.featured .project-poster { aspect-ratio: 21 / 9; }
-@media (max-width: 700px) {
-  #neural-bg { opacity: 0.30; }
-  .project-card.featured { grid-column: span 1; }
-  .project-card.featured .project-poster { aspect-ratio: 16 / 9; }
-}
-@media (prefers-reduced-motion: reduce) {
-  #neural-bg { display: none; }
-}
-
-.project-card {
-  background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;
-  position:relative;overflow:hidden;transition:all 0.3s;
-  cursor:pointer; text-decoration:none; display:block; color:inherit;
-}
-.project-card:hover { border-color:var(--gold);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.5); }
-.project-card::after { content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(212,168,67,0.04),transparent);opacity:0;transition:opacity 0.3s; }
-.project-card:hover::after { opacity:1; }
-.project-num { font-family:'Instrument Serif',serif;font-size:3rem;color:var(--border);position:absolute;top:16px;right:20px;line-height:1;transition:color 0.3s; }
-.project-card:hover .project-num { color:rgba(212,168,67,0.15); }
-.project-name { font-size:1rem;font-weight:700;margin-bottom:8px;line-height:1.3; }
-.project-desc { font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:16px; }
-.project-stack { display:flex;flex-wrap:wrap;gap:6px; }
-.stack-chip { padding:3px 10px;background:rgba(255,255,255,0.04);border-radius:6px;font-size:0.68rem;color:var(--muted);font-weight:600;letter-spacing:0.5px; }
-
-.demo-link { display:inline-flex; margin-top:8px; color:var(--accent2); text-decoration:none; font-size:.7rem; font-weight:700; letter-spacing:.4px; }
-.demo-link:hover { color:var(--gold); }
-body.ar { direction:rtl; }
-body.ar .section-label::after { order:-1; }
-body.ar .journey-copy { border-left:0; border-right:1px solid var(--border); padding-left:0; padding-right:16px; }
-.project-gh-link {
-  display:inline-flex;align-items:center;gap:5px;font-size:0.72rem;color:var(--gold);
-  margin-top:14px;font-weight:700;letter-spacing:0.5px;transition:gap 0.2s;
-}
-.project-card:hover .project-gh-link { gap:10px; }
-
-.poster-wrap { perspective:900px; margin-bottom:16px; }
-.poster-link { display:block; }
-.project-poster { position:relative;border-radius:12px;overflow:hidden;aspect-ratio:16/9;background:#0b0d12;cursor:zoom-in; }
-.project-poster img { width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transform:scale(1) rotateX(0) rotateY(0);transition:transform 0.15s ease-out;will-change:transform; }
-.project-poster::before { content:'';position:absolute;inset:0;border-radius:12px;padding:1px;background:linear-gradient(135deg,var(--gold),transparent 45%,var(--gold2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity 0.4s;pointer-events:none; }
-.project-poster:hover::before { opacity:1; }
-.poster-glow { position:absolute;inset:0;background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(212,168,67,0.35),transparent 60%);opacity:0;transition:opacity 0.3s;pointer-events:none;mix-blend-mode:overlay; }
-.project-poster:hover .poster-glow { opacity:1; }
-.poster-expand { position:absolute;bottom:8px;right:8px;width:26px;height:26px;border-radius:7px;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;pointer-events:none; }
-.project-poster:hover .poster-expand { opacity:1; }
-.poster-expand svg { width:13px;height:13px;stroke:#fff; }
-
-.poster-modal { position:fixed;inset:0;background:rgba(6,7,10,0.92);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;z-index:999;padding:40px 20px; }
-.poster-modal.open { display:flex; }
-.poster-modal-frame { position:relative;max-width:520px;width:100%;aspect-ratio:4/5;background:#0b0d12;border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 90px rgba(0,0,0,0.6); }
-.poster-modal-frame img { width:100%;height:100%;object-fit:contain;display:block; }
-.poster-modal-close { position:absolute;top:-42px;right:0;width:34px;height:34px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--text);font-size:1.2rem;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer; }
-.poster-modal-close:hover { border-color:var(--gold);color:var(--gold); }
-
-.certs-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:14px; }
-.cert-card { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;transition:all 0.3s;display:flex;align-items:flex-start;gap:12px; }
-.cert-card:hover { border-color:var(--gold);transform:translateY(-3px); }
-.cert-emoji { font-size:1.3rem;flex-shrink:0;margin-top:2px; }
-.cert-issuer { font-size:0.62rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px; }
-.cert-name { font-size:0.82rem;font-weight:600;line-height:1.4;margin-bottom:4px; }
-.cert-date { font-size:0.68rem;color:var(--muted); }
-.cert-verify { display:inline-flex;align-items:center;gap:4px;font-size:0.65rem;color:var(--accent2);text-decoration:none;margin-top:6px;font-weight:600;transition:gap 0.2s; }
-.cert-verify:hover { gap:8px; }
-
-.events-grid { display:grid;gap:16px;grid-template-columns:2fr 1fr; }
-.event-proof { display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px; }
-.event-proof-label { font-size:0.62rem;color:var(--gold);letter-spacing:1.5px;text-transform:uppercase; }
-.event-qr { width:100%;max-width:150px;border-radius:10px;border:1px solid var(--border);display:block; }
-.event-proof-caption { font-size:0.68rem;color:var(--muted);line-height:1.4; }
-.event-card { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:26px;transition:all 0.3s; }
-.event-card:hover { border-color:var(--gold); }
-.event-header { display:flex;gap:14px;align-items:flex-start;margin-bottom:14px; }
-.event-emoji { font-size:1.6rem;flex-shrink:0; }
-.event-name { font-size:1rem;font-weight:700;margin-bottom:4px; }
-.event-meta { font-size:0.72rem;color:var(--gold);letter-spacing:0.3px; }
-.event-role { font-size:0.74rem;color:var(--muted);margin-bottom:10px;font-weight:600; }
-.event-desc { font-size:0.82rem;line-height:1.6;color:var(--text);margin-bottom:14px; }
-.event-points { list-style:none;display:grid;gap:10px;padding:0;margin:0; }
-.event-points li { font-size:0.78rem;line-height:1.6;color:var(--muted);padding-left:16px;position:relative; }
-.event-points li::before { content:'';position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--gold); }
-.event-points li strong { color:var(--text); }
-.event-memory-card { margin-top:16px;display:grid;grid-template-columns:minmax(190px,260px) 1fr;gap:24px;align-items:center;background:linear-gradient(135deg,rgba(212,168,67,0.09),rgba(14,14,18,0.96) 42%);border:1px solid var(--border);border-radius:16px;padding:18px;overflow:hidden;transition:all 0.3s; }
-.event-memory-card:hover { border-color:var(--gold);transform:translateY(-3px);box-shadow:0 18px 55px rgba(0,0,0,0.35); }
-.event-memory-media { position:relative;border-radius:12px;overflow:hidden;background:#0b0d12;aspect-ratio:4/5;cursor:zoom-in; }
-.event-memory-media::after { content:'↗';position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:8px;background:rgba(0,0,0,0.62);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;opacity:0;transition:opacity 0.25s; }
-.event-memory-media:hover::after { opacity:1; }
-.event-memory-media img { width:100%;height:100%;object-fit:cover;object-position:center;display:block;transition:transform 0.35s ease; }
-.event-memory-media:hover img { transform:scale(1.04); }
-.event-memory-kicker { font-size:0.62rem;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px; }
-.event-memory-title { font-size:1.15rem;font-weight:800;line-height:1.3;margin-bottom:7px; }
-.event-memory-meta { color:var(--gold2);font-size:0.74rem;line-height:1.5;margin-bottom:13px; }
-.event-memory-role { display:inline-flex;padding:5px 10px;border:1px solid rgba(74,222,128,0.35);border-radius:999px;color:var(--accent);font-size:0.68rem;font-weight:700;margin-bottom:13px; }
-.event-memory-desc { color:var(--muted);font-size:0.8rem;line-height:1.7; }
-@media(max-width:768px){ .event-memory-card{grid-template-columns:1fr;gap:18px;} .event-memory-media{max-width:260px;margin:0 auto;width:100%;} }
-
-.edu-card { background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:30px;display:flex;gap:24px;align-items:flex-start;transition:border-color 0.3s; }
-.edu-card:hover { border-color:rgba(212,168,67,0.3); }
-.edu-icon { font-size:2rem;flex-shrink:0; }
-.edu-school { font-size:1rem;font-weight:700;margin-bottom:4px; }
-.edu-degree { font-size:0.82rem;color:var(--muted);margin-bottom:10px; }
-.edu-year { font-size:0.7rem;color:var(--gold);letter-spacing:1px;font-weight:600; }
-
-.lang-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:14px; }
-.lang-card { background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;text-align:center;transition:all 0.3s; }
-.lang-card:hover { border-color:var(--gold);transform:translateY(-3px); }
-.lang-name { font-size:0.9rem;font-weight:700;margin-bottom:6px; }
-.lang-level { font-size:0.68rem;color:var(--gold);letter-spacing:1px;text-transform:uppercase; }
-
-.cv-footer { border-top:1px solid var(--border);padding:40px 60px;max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1; }
-.footer-name { font-family:'Instrument Serif',serif;font-size:1.2rem; }
-.footer-note { font-size:0.72rem;color:var(--muted); }
-
-/* ===== PAGE 2: ALL PROJECTS ===== */
-.all-projects-page { padding: 100px 60px 60px; max-width: 1100px; margin: 0 auto; }
-.all-projects-header { margin-bottom: 60px; }
-.all-projects-header h1 { font-family:'Instrument Serif',serif; font-size:clamp(2.5rem,5vw,4.5rem); margin-bottom:12px; }
-.all-projects-header h1 em { font-style:italic; color:var(--gold); }
-.all-projects-header p { color:var(--muted); font-size:0.9rem; line-height:1.7; max-width:500px; }
-.repos-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
-.repo-card {
-  background:var(--surface); border:1px solid var(--border); border-radius:14px;
-  padding:22px; text-decoration:none; color:inherit;
-  display:flex; flex-direction:column; gap:10px;
-  transition:all 0.3s; position:relative; overflow:hidden;
-}
-.repo-card:hover { border-color:var(--gold); transform:translateY(-4px); box-shadow:0 16px 50px rgba(0,0,0,0.4); }
-.repo-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--gold),transparent);opacity:0;transition:opacity 0.3s; }
-.repo-card:hover::before { opacity:1; }
-.repo-icon { font-size:1.4rem; }
-.repo-name { font-size:0.88rem; font-weight:700; color:var(--text); line-height:1.3; }
-.repo-desc { font-size:0.75rem; color:var(--muted); line-height:1.55; flex:1; }
-.repo-tag {
-  display:inline-flex; align-items:center; gap:4px;
-  font-size:0.65rem; font-weight:700; letter-spacing:0.8px;
-  padding:3px 9px; border-radius:6px; width:fit-content;
-  text-transform:uppercase;
-}
-.tag-web { background:rgba(212,168,67,0.1); color:var(--gold); border:1px solid rgba(212,168,67,0.2); }
-.tag-ai  { background:rgba(34,211,238,0.08); color:var(--accent2); border:1px solid rgba(34,211,238,0.2); }
-.tag-py  { background:rgba(74,222,128,0.08); color:var(--accent); border:1px solid rgba(74,222,128,0.2); }
-.tag-ecom{ background:rgba(167,139,250,0.08); color:#a78bfa; border:1px solid rgba(167,139,250,0.2); }
-.tag-data{ background:rgba(251,146,60,0.08); color:#fb923c; border:1px solid rgba(251,146,60,0.2); }
-.tag-iot { background:rgba(244,63,94,0.08); color:#fb7185; border:1px solid rgba(244,63,94,0.2); }
-.repo-arrow { font-size:0.72rem; color:var(--muted); transition:color 0.2s,transform 0.2s; margin-top:4px; }
-.repo-card:hover .repo-arrow { color:var(--gold); transform:translateX(4px); }
-
-/* ANIMATIONS */
-@keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
-@keyframes fadeIn { from{opacity:0}to{opacity:1} }
-.reveal { opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease; }
-.reveal.visible { opacity:1;transform:none; }
-
-/* Arabic */
-body.ar { font-family:'Cairo',sans-serif;direction:rtl; }
-body.ar .section-label::after { order:-1; }
-body.ar .contact-row { flex-direction:row-reverse; }
-body.ar .project-num { left:20px;right:auto; }
-body.ar .bar-header { flex-direction:row-reverse; }
-body.ar .cv-footer { flex-direction:row-reverse; }
-body.ar .top-nav { flex-direction:row-reverse; }
-
-/* Responsive */
-@media(max-width:768px){
-  .hero{padding:60px 24px 40px;}
-  .hero-grid{grid-template-columns:1fr;gap:40px;}
-  .section{padding:50px 24px;}
-  .skills-grid{grid-template-columns:1fr 1fr;}
-  .projects-grid{grid-template-columns:1fr;}
-  .certs-grid{grid-template-columns:1fr 1fr;}
-  .events-grid{grid-template-columns:1fr;}
-  .event-header{flex-direction:column;gap:6px;}
-  .lang-grid{grid-template-columns:1fr 1fr;}
-  .cv-footer{padding:30px 24px;flex-direction:column;gap:12px;text-align:center;}
-  .section-divider{margin:0 24px;width:calc(100% - 48px);}
-  .stats-grid{grid-template-columns:1fr 1fr;}
-  .repos-grid{grid-template-columns:1fr 1fr;}
-  .all-projects-page{padding:90px 24px 40px;}
-  .top-nav{padding:14px 20px;}
-  .nav-links{gap:4px;}
-  .nav-link{padding:6px 10px;font-size:0.65rem;}
-}
-@media(max-width:480px){
-  .repos-grid{grid-template-columns:1fr;}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omar Ahmed — Builder, Engineer, Systems Thinker</title>
+  <meta name="description" content="Omar Ahmed is a full-stack developer and AI systems builder from Cairo. Explore selected work in secure SaaS, Arabic RAG, web products, and IoT security." />
+  <meta name="author" content="Omar Ahmed" />
+  <meta name="theme-color" content="#050507" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Omar Ahmed — Builder, Engineer, Systems Thinker" />
+  <meta property="og:description" content="Selected work in secure SaaS, Arabic RAG, web products, and IoT security — built in Cairo." />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Omar Ahmed — Builder, Engineer, Systems Thinker" />
+  <meta name="twitter:description" content="Selected work in secure SaaS, Arabic RAG, web products, and IoT security — built in Cairo." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050507'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23d8b56a' text-anchor='middle'%3EOA%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Omar Ahmed",
+      "jobTitle": "Full-Stack Developer & AI Systems Builder",
+      "description": "Full-stack developer and AI systems builder from Cairo, Egypt.",
+      "email": "mailto:omarahameds2010@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Cairo",
+        "addressCountry": "EG"
+      },
+      "url": "https://omarahameds2010-lab.github.io/omar-os/",
+      "sameAs": [
+        "https://github.com/omarahameds2010-lab",
+        "https://linkedin.com/in/omar-ahmed-7b97613b1",
+        "https://omarahameds2010-lab.github.io/omar-os/"
+      ]
+    }
+  </script>
 </head>
 <body>
-<canvas id="neural-bg" aria-hidden="true"></canvas>
+  <canvas id="neural-bg" aria-hidden="true"></canvas>
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="ring"></div>
+  <!-- ================= HEADER ================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="nav-inner">
+      <a class="logo" href="#home" data-nav-link="home" aria-label="Omar Ahmed — home">
+        <span class="logo-mark" aria-hidden="true">OA</span>
+        <span class="logo-text">
+          Omar Ahmed
+          <small data-i18n="logo.role">Builder · Engineer</small>
+        </span>
+      </a>
 
-<!-- TOP NAV -->
-<nav class="top-nav">
-  <a class="nav-logo" href="#">Omar Ahmed</a>
-  <div class="nav-links">
-    <button class="nav-link active" onclick="showPage('cv')" id="nav-cv">CV</button>
-    <button class="nav-link" onclick="showPage('projects')" id="nav-projects">All Projects</button>
-    <div class="lang-bar">
-      <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
-      <button class="lang-btn" onclick="setLang('ar')" id="btn-ar">ع</button>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-link" href="#story" data-nav-link="story" data-i18n="nav.story">Story</a>
+        <a class="nav-link" href="#work" data-nav-link="work" data-i18n="nav.work">Work</a>
+        <a class="nav-link" href="#projects" data-nav-link="projects" data-i18n="nav.projects">Projects</a>
+        <a class="nav-link" href="#skills" data-nav-link="skills" data-i18n="nav.skills">Skills</a>
+        <a class="nav-link" href="#credentials" data-nav-link="credentials" data-i18n="nav.credentials">Credentials</a>
+        <a class="nav-link" href="#contact" data-nav-link="contact" data-i18n="nav.contact">Contact</a>
+        <a class="nav-link" href="#archive" data-nav-link="archive" data-i18n="nav.archive">Archive</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-toggle" role="group" aria-label="Language">
+          <button class="lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button>
+          <button class="lang-btn" type="button" data-lang="ar" aria-pressed="false">ع</button>
+        </div>
+        <a class="btn btn-small btn-primary nav-cta" href="#contact" data-nav-link="contact">
+          <span data-i18n="nav.cta">Let's talk</span>
+          <span class="arrow arrow-up" aria-hidden="true">↗</span>
+        </a>
+        <button class="menu-btn" type="button" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
+  </header>
+
+  <!-- ================= MOBILE MENU ================= -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-nav" aria-label="Mobile">
+      <a class="mobile-link" href="#home" data-nav-link="home"><span data-i18n="nav.home">Home</span><span>01</span></a>
+      <a class="mobile-link" href="#story" data-nav-link="story"><span data-i18n="nav.story">Story</span><span>02</span></a>
+      <a class="mobile-link" href="#work" data-nav-link="work"><span data-i18n="nav.work">Work</span><span>03</span></a>
+      <a class="mobile-link" href="#projects" data-nav-link="projects"><span data-i18n="nav.projects">Projects</span><span>04</span></a>
+      <a class="mobile-link" href="#skills" data-nav-link="skills"><span data-i18n="nav.skills">Skills</span><span>05</span></a>
+      <a class="mobile-link" href="#credentials" data-nav-link="credentials"><span data-i18n="nav.credentials">Credentials</span><span>06</span></a>
+      <a class="mobile-link" href="#contact" data-nav-link="contact"><span data-i18n="nav.contact">Contact</span><span>07</span></a>
+      <a class="mobile-link" href="#archive" data-nav-link="archive"><span data-i18n="nav.archive">Archive</span><span>08</span></a>
+    </nav>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button class="lang-btn" type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button class="lang-btn" type="button" data-lang="ar" aria-pressed="false">ع</button>
+    </div>
+    <p class="mobile-note" data-i18n="mobile.note">Cairo, Egypt · Open to internships & freelance</p>
   </div>
-</nav>
 
-<!-- ===== PAGE 1: CV ===== -->
-<div class="page active" id="page-cv">
+  <main id="main" tabindex="-1">
+    <!-- ================= HOME ================= -->
+    <div class="page active" id="page-home">
 
-<section class="hero">
-  <div class="hero-grid">
-    <div class="hero-left">
-      <div class="hero-eyebrow" id="eyebrow">Cairo, Egypt · Open to Opportunities</div>
-      <h1 class="hero-name">Omar<br/><em>Ahmed</em></h1>
-      <p class="hero-title" id="hero-title">
-      BUILD · LEAD · SPEAK · DOCUMENT · IMPACT<br/>
-      I turn ambitious ideas into technology and experiences that push boundaries and create real impact.
-      </p>
-      <div class="hero-badges">
-        <span class="badge badge-ai">AI Systems</span>
-        <span class="badge badge-web">Products</span>
-        <span class="badge badge-sec">Leadership</span>
-        <span class="badge badge-web">Web</span>
-        <span class="badge badge-sec">Security</span>
-      </div>
-      <div class="hero-actions">
-        <button class="hero-btn primary" onclick="showPage('projects')">View Featured Projects →</button>
-        <a class="hero-btn secondary" href="https://omar-studio-one.vercel.app/">Contact Me</a>
-      </div>
-      <div class="hero-contacts">
-        <a class="contact-row" href="mailto:omarahameds2010@gmail.com">
-          <span class="contact-icon">✉</span>omarahameds2010@gmail.com
-        </a>
-        <a class="contact-row" href="https://github.com/omarahameds2010-lab" target="_blank">
-          <span class="contact-icon">⌥</span>github.com/omarahameds2010-lab
-        </a>
-        <a class="contact-row" href="https://linkedin.com/in/omar-ahmed-7b97613b1" target="_blank">
-          <span class="contact-icon">in</span>linkedin.com/in/omar-ahmed-7b97613b1
-        </a>
-        <a class="contact-row" href="https://omarahameds2010-lab.github.io/omar-os/" target="_blank">
-          <span class="contact-icon">◈</span>Portfolio — OmarOS v2.0
-        </a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-num">20</div><div class="stat-label" id="stat1">GitHub Repos</div></div>
-        <div class="stat-card"><div class="stat-num">7</div><div class="stat-label" id="stat2">Certificates</div></div>
-        <div class="stat-card"><div class="stat-num">3</div><div class="stat-label" id="stat3">Languages Spoken</div></div>
-        <div class="stat-card"><div class="stat-num">15</div><div class="stat-label" id="stat4">Years Old — Already Building</div></div>
-        <div class="stat-card wide">
-          <div class="stat-label" id="stat5" style="margin-bottom:10px">Current Status</div>
-          <div class="availability">
-            <div class="dot-green"></div>
-            <span class="avail-text" id="avail-text">Available for internships & freelance</span>
+      <!-- HERO -->
+      <section class="hero" id="home" data-section="home">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow" data-i18n="hero.eyebrow">Cairo, Egypt · Open to internships & freelance</p>
+            <h1 class="hero-name" data-i18n="hero.name">Omar<br /><em>Ahmed</em></h1>
+            <p class="hero-tagline" data-i18n="hero.tagline">I turn ambitious ideas into <span class="gold">systems that ship</span>.</p>
+            <p class="hero-sub" data-i18n="hero.sub">From Arabic-first RAG platforms to secure multi-tenant SaaS, I care about the details that make a product real: architecture, security, performance, and the people using it.</p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="#work">
+                <span data-i18n="hero.ctaWork">Explore selected work</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="btn btn-ghost" href="#contact">
+                <span data-i18n="hero.ctaContact">Start a conversation</span>
+                <span class="arrow arrow-up" aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+            <div class="hero-chips">
+              <span class="chip" data-i18n="hero.chip1">AI systems</span>
+              <span class="chip" data-i18n="hero.chip2">Full-stack</span>
+              <span class="chip" data-i18n="hero.chip3">Security</span>
+              <span class="chip" data-i18n="hero.chip4">Product & leadership</span>
+            </div>
+
+            <div class="hero-meta">
+              <span><i class="pulse-dot" aria-hidden="true"></i><span data-i18n="hero.available">Available for select projects</span></span>
+              <span data-i18n="hero.location">Cairo, Egypt</span>
+            </div>
+          </div>
+
+          <div class="hero-visual">
+            <div class="orbit-wrap" aria-hidden="true">
+              <div class="orbit orbit-a"></div>
+              <div class="orbit orbit-b"></div>
+              <div class="orbit orbit-c"></div>
+              <div class="monogram">OA</div>
+              <span class="float-pill pill-1"><i></i>AI systems</span>
+              <span class="float-pill pill-2"><i></i>Full-stack</span>
+              <span class="float-pill pill-3"><i></i>Security</span>
+              <span class="float-pill pill-4"><i></i>Leadership</span>
+            </div>
+
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <b>30+</b>
+                <span data-i18n="hero.stat1Label">Public repositories</span>
+              </div>
+              <div class="hero-stat">
+                <b>7</b>
+                <span data-i18n="hero.stat2Label">Certificates</span>
+              </div>
+              <div class="hero-stat">
+                <b>3</b>
+                <span data-i18n="hero.stat3Label">Languages</span>
+              </div>
+              <div class="hero-stat">
+                <b data-i18n="hero.stat4Value">Final 5</b>
+                <span data-i18n="hero.stat4Label">National competition</span>
+              </div>
+            </div>
+
+            <a class="hero-note" href="#work">
+              <i class="pulse-dot" aria-hidden="true"></i>
+              <span class="hero-note-copy">
+                <b data-i18n="hero.cardKicker">Currently building</b>
+                <span data-i18n="hero.cardTitle">Secure multi-tenant e-learning</span>
+              </span>
+              <span class="hero-note-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- MARQUEE -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <div class="marquee-group">
+            <span>AI SYSTEMS</span><span>FULL-STACK</span><span>SECURITY</span><span>MULTI-TENANT SAAS</span><span>ARABIC RAG</span><span>PRODUCT</span><span>LEADERSHIP</span><span>IoT</span><span>OPEN SOURCE</span>
+          </div>
+          <div class="marquee-group">
+            <span>AI SYSTEMS</span><span>FULL-STACK</span><span>SECURITY</span><span>MULTI-TENANT SAAS</span><span>ARABIC RAG</span><span>PRODUCT</span><span>LEADERSHIP</span><span>IoT</span><span>OPEN SOURCE</span>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<div class="section-divider"></div>
-
-
-<style>
-/* Story-led portfolio sections */
-.story-grid { display:grid; grid-template-columns:1.15fr 0.85fr; gap:18px; }
-.focus-panel { margin-top:28px; padding:18px 20px; border:1px solid var(--border); border-radius:14px; background:rgba(255,255,255,0.02); }
-.focus-tags { display:flex; flex-wrap:wrap; gap:8px; }
-
-.story-card, .proof-card, .leadership-card, .now-card {
-  background:var(--surface); border:1px solid var(--border); border-radius:16px;
-  padding:26px; position:relative; overflow:hidden;
-}
-.story-card::before, .proof-card::before, .leadership-card::before, .now-card::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:2px;
-  background:linear-gradient(90deg,var(--gold),var(--accent2),transparent);
-}
-.story-title { font-family:'Instrument Serif',serif; font-size:2.2rem; margin-bottom:10px; }
-.story-intro { color:var(--muted); font-size:0.84rem; line-height:1.7; max-width:680px; margin-bottom:22px; }
-.journey-list { display:grid; gap:14px; }
-.journey-item { display:grid; grid-template-columns:92px 1fr; gap:16px; align-items:start; }
-.journey-year { color:var(--gold); font-size:0.72rem; font-weight:800; letter-spacing:1px; padding-top:3px; }
-.journey-copy { border-left:1px solid var(--border); padding-left:16px; color:var(--muted); font-size:0.8rem; line-height:1.55; }
-.journey-copy strong { display:block; color:var(--text); margin-bottom:3px; font-size:0.86rem; }
-.proof-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
-.proof-item { border:1px solid var(--border); border-radius:10px; padding:14px; background:rgba(255,255,255,0.025); }
-.proof-value { display:block; font-family:'Instrument Serif',serif; color:var(--gold); font-size:1.55rem; line-height:1; margin-bottom:5px; }
-.proof-label { color:var(--muted); font-size:0.7rem; line-height:1.4; }
-.section-kicker { color:var(--gold); font-size:0.65rem; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:12px; }
-.flagship { display:grid; grid-template-columns:0.8fr 1.2fr; gap:22px; align-items:center; }
-.flagship-copy h3 { font-family:'Instrument Serif',serif; font-size:2.25rem; margin-bottom:8px; }
-.flagship-copy p { color:var(--muted); font-size:0.82rem; line-height:1.7; margin-bottom:16px; }
-.flagship-link { color:var(--gold); text-decoration:none; font-size:0.74rem; font-weight:800; letter-spacing:.5px; }
-.flagship-metric { border:1px solid rgba(34,211,238,.25); border-radius:14px; padding:22px; background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(212,168,67,.04)); }
-.flagship-metric .metric { color:var(--accent2); font-family:'Instrument Serif',serif; font-size:3.4rem; line-height:1; }
-.flagship-metric p { color:var(--muted); font-size:.72rem; line-height:1.5; margin-top:8px; }
-.multitenant-card { display:grid;grid-template-columns:minmax(240px,.85fr) 1.15fr;gap:24px;align-items:center;background:linear-gradient(135deg,rgba(34,211,238,.08),rgba(14,14,18,.97) 45%,rgba(212,168,67,.04));border:1px solid rgba(34,211,238,.3);border-radius:16px;padding:20px;position:relative;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.25); }
-.multitenant-card::before { content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent2),var(--gold),transparent); }
-.multitenant-visual { position:relative;border:1px solid rgba(69,217,255,.25);border-radius:12px;overflow:hidden;background:#070c17; }
-.multitenant-visual iframe { display:block;width:100%;height:430px;border:0;background:#070c17; }
-.multitenant-visual::after { content:'↗ OPEN ARCHITECTURE';position:absolute;right:10px;bottom:10px;padding:7px 9px;border-radius:7px;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);color:#fff;font-size:.58rem;letter-spacing:1px;font-weight:700;opacity:0;transition:opacity .25s; }
-.multitenant-visual:hover::after { opacity:1; }
-.multitenant-copy h3 { font-family:'Instrument Serif',serif;font-size:2.1rem;line-height:1.05;margin-bottom:10px; }
-.multitenant-copy p { color:var(--muted);font-size:.82rem;line-height:1.7;margin-bottom:14px; }
-.multitenant-tags { display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px; }
-.multitenant-tag { padding:5px 9px;border-radius:7px;border:1px solid rgba(34,211,238,.28);background:rgba(34,211,238,.06);color:var(--accent2);font-size:.64rem;font-weight:700; }
-.multitenant-meta { color:var(--gold);font-size:.68rem;font-weight:800;letter-spacing:1px;text-transform:uppercase; }
-.multitenant-link { color:var(--gold);text-decoration:none;font-size:.74rem;font-weight:800;letter-spacing:.5px; }
-@media (max-width:760px) { .multitenant-card { grid-template-columns:1fr; } .multitenant-visual iframe { height:520px; } }
-.leadership-list { display:grid; gap:14px; }
-.leadership-item { display:flex; gap:12px; align-items:flex-start; }
-.leadership-icon { width:30px; height:30px; display:grid; place-items:center; border:1px solid rgba(212,168,67,.35); border-radius:9px; color:var(--gold); flex:none; }
-.leadership-item strong { display:block; font-size:.82rem; margin-bottom:3px; }
-.leadership-item span { color:var(--muted); font-size:.74rem; line-height:1.5; }
-.beyond-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
-.beyond-item { padding:18px; border:1px solid var(--border); border-radius:12px; }
-.beyond-item strong { display:block; color:var(--gold); letter-spacing:1.5px; font-size:.72rem; margin-bottom:7px; }
-.beyond-item span { color:var(--muted); font-size:.72rem; line-height:1.45; }
-.now-next { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
-.now-card h3 { font-family:'Instrument Serif',serif; font-size:1.8rem; margin-bottom:8px; }
-.now-card p { color:var(--muted); font-size:.8rem; line-height:1.7; }
-@media (max-width: 760px) {
-  .story-grid, .flagship, .now-next { grid-template-columns:1fr; }
-  .beyond-grid { grid-template-columns:1fr 1fr; }
-}
-@media (max-width: 480px) { .beyond-grid { grid-template-columns:1fr; } .journey-item { grid-template-columns:70px 1fr; } }
-</style>
-
-
-<!-- STORY / PROOF -->
-<section class="section reveal" id="journey">
-  <div class="section-label" id="label-story">The Story Behind The Builds</div>
-  <div class="story-grid">
-    <div class="story-card">
-      <div class="section-kicker" id="story-kicker">THE JOURNEY</div>
-      <h2 class="story-title" id="story-title">From learning code to building systems.</h2>
-      <p class="story-intro" id="story-intro">The portfolio is not a list of finished answers. It is a record of how Omar learns, builds with others, and turns ideas into real products.</p>
-      <div class="journey-list">
-        <div class="journey-item"><div class="journey-year">2024 · BUILD</div><div class="journey-copy"><strong>Started with code</strong>Built small things and learned by making.</div></div>
-        <div class="journey-item"><div class="journey-year">2025 · EXPERIMENT</div><div class="journey-copy"><strong>Moved from exercises to products</strong>Explored AI experiments and real use cases through shipped work.</div></div>
-        <div class="journey-item"><div class="journey-year">2026 · LEAD</div><div class="journey-copy"><strong>Teams, competitions, and real responsibility</strong>Client work, AI systems, IoT security, collaboration, and public work.</div></div>
-        <div class="journey-item"><div class="journey-year">NOW · EXPAND</div><div class="journey-copy"><strong>Building, speaking, and entering wider rooms</strong>Keep building, collaborate more, and turn experience into direction.</div></div>
-      </div>
-    </div>
-    <div class="proof-card">
-      <div class="section-kicker" id="proof-kicker">PROOF</div>
-      <h2 class="story-title" id="proof-title">Evidence over claims.</h2>
-      <div class="proof-grid">
-        <div class="proof-item"><span class="proof-value">20+</span><span class="proof-label">Public repositories</span></div>
-        <div class="proof-item"><span class="proof-value">Final 5</span><span class="proof-label">National competition</span></div>
-        <div class="proof-item"><span class="proof-value">Team Lead</span><span class="proof-label">Secure Smart Home project</span></div>
-        <div class="proof-item"><span class="proof-value">1st PAID CLIENT</span><span class="proof-label">Medical website</span></div>
-        <div class="proof-item"><span class="proof-value">AI SYSTEMS</span><span class="proof-label">RAG + Semantic Communication</span></div>
-        <div class="proof-item"><span class="proof-value">20+ BUILDS</span><span class="proof-label">Public work, tests, and shipped ideas</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- FLAGSHIP -->
-<section class="section reveal" id="featured-work">
-  <div class="section-label" id="label-featured-work">Featured Work</div>
-  <div class="multitenant-card" style="margin-bottom:18px">
-    <div class="multitenant-visual" id="multitenant-visual" title="Live system architecture website">
-      <iframe id="multitenant-embed" src="https://omarahameds2010-lab.github.io/architecture-infographic/" title="Secure Scalable Multi-Tenant platform architecture by Omar Ahmed" loading="lazy"></iframe>
-    </div>
-    <div class="multitenant-copy">
-      <div class="multitenant-meta" id="multitenant-kicker">01 — FLAGSHIP PLATFORM · ARCHITECTURE & SECURITY</div>
-      <h3 id="multitenant-title">Secure Multi-Tenant E-Learning Platform</h3>
-      <p id="multitenant-desc">A scalable SaaS learning platform designed around strict tenant isolation and defense in depth: PostgreSQL Row-Level Security with FORCE RLS, a non-superuser app_user, host-based tenant routing, and a seven-layer authorization engine covering tenant checks, RBAC, ownership, entitlements, feature flags, tenant policies, and plan limits.</p>
-      <div class="multitenant-tags"><span class="multitenant-tag">PostgreSQL RLS</span><span class="multitenant-tag">Tenant Routing</span><span class="multitenant-tag">NestJS API</span><span class="multitenant-tag">Zero Trust</span><span class="multitenant-tag">SaaS Infrastructure</span></div>
-      <a class="multitenant-link" id="multitenant-link" href="https://omarahameds2010-lab.github.io/architecture-infographic/" target="_blank" rel="noopener noreferrer">Open Live Architecture ↗</a>
-    </div>
-  </div>
-  <div class="story-card flagship">
-    <div class="flagship-copy">
-      <div class="section-kicker" id="flagship-kicker">02 — FLAGSHIP PROJECT</div>
-      <h3 id="flagship-title">SANAD — Arabic RAG Evaluation Platform</h3>
-      <p id="flagship-desc">An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination.</p>
-      <a class="flagship-link" id="flagship-link" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">Explore SANAD on GitHub →</a>
-    </div>
-    <div class="flagship-metric"><div class="metric" id="flagship-metric">EVALUATION<br/>FIRST</div><p id="flagship-metric-desc">Retrieval · Groundedness · Recall · Hallucination</p></div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- LEADERSHIP / BEYOND CODE -->
-<section class="section reveal" id="experience">
-  <div class="section-label" id="label-experience">Leadership & Experience</div>
-  <div class="story-grid">
-    <div class="leadership-card">
-      <div class="section-kicker" id="experience-kicker">REAL-WORLD RESPONSIBILITY</div>
-      <div class="leadership-list">
-        <div class="leadership-item"><div class="leadership-icon">01</div><div><strong>Team Lead — Secure Smart Home</strong><span>Led the team from concept to the national Final 5, coordinated responsibilities across the project, and owned the technical direction.</span></div></div>
-        <div class="leadership-item"><div class="leadership-icon">02</div><div><strong>Team / Product Collaboration — Wave Store</strong><span>Worked with a team to shape and build a real e-commerce and streetwear product from brand idea to working platform.</span></div></div>
-        <div class="leadership-item"><div class="leadership-icon">03</div><div><strong>Real Client Work — Medical Website</strong><span>Built and delivered a live healthcare-related website, taking responsibility for the final product and deployment.</span></div></div>
-      </div>
-    </div>
-    <div class="leadership-card">
-      <div class="section-kicker" id="beyond-kicker">BEYOND CODE</div>
-      <div class="beyond-grid">
-        <div class="beyond-item"><strong>LEAD</strong><span>Team leadership · Competitions · Projects</span></div>
-        <div class="beyond-item"><strong>SPEAK</strong><span>Presentations · Public speaking · Content</span></div>
-        <div class="beyond-item"><strong>BUILD</strong><span>AI systems · Products · Technology</span></div>
-        <div class="beyond-item"><strong>EXPLORE</strong><span>International · Collaboration · New environments</span></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- NOW / NEXT -->
-<section class="section reveal" id="direction">
-  <div class="section-label" id="label-direction">Direction</div>
-  <div class="now-next">
-    <div class="now-card"><div class="section-kicker" id="now-kicker">NOW</div><h3 id="now-title">Build. Lead. Document.</h3><p id="now-desc">Building technology, taking responsibility in real projects, and documenting what I learn along the way.</p></div>
-    <div class="now-card"><div class="section-kicker" id="next-kicker">NEXT</div><h3 id="next-title">From apps to scalable SaaS platforms.</h3><p id="next-desc">Moving from standalone applications to scalable cloud SaaS platforms: building a secure multi-tenant learning system with PostgreSQL RLS, defense in depth, and architecture designed for millions of students and teachers.</p></div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- SKILLS -->
-<section class="section reveal">
-  <div class="section-label" id="label-skills">Skills & Technologies</div>
-  <div class="skills-grid">
-    <div class="skill-group"><div class="skill-group-title" id="sg1">Frontend</div><div class="skill-tags"><span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span><span class="skill-tag">React</span><span class="skill-tag">Responsive Design</span><span class="skill-tag">RTL Layouts</span></div></div>
-    <div class="skill-group"><div class="skill-group-title" id="sg2">Backend</div><div class="skill-tags"><span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">MongoDB</span><span class="skill-tag">REST APIs</span><span class="skill-tag">Auth Systems</span></div></div>
-    <div class="skill-group"><div class="skill-group-title" id="sg3">Cybersecurity</div><div class="skill-tags"><span class="skill-tag">XSS Prevention</span><span class="skill-tag">SQL Injection</span><span class="skill-tag">Brute Force Protection</span><span class="skill-tag">Secure Auth</span></div></div>
-    <div class="skill-group"><div class="skill-group-title" id="sg4">AI & Data</div><div class="skill-tags"><span class="skill-tag">Machine Learning</span><span class="skill-tag">VQ-VAE</span><span class="skill-tag">Prompt Engineering</span><span class="skill-tag">AI Chatbots</span><span class="skill-tag">Data Visualization</span></div></div>
-    <div class="skill-group"><div class="skill-group-title" id="sg5">Tools</div><div class="skill-tags"><span class="skill-tag">Git & GitHub</span><span class="skill-tag">GitHub Pages</span><span class="skill-tag">VS Code</span><span class="skill-tag">MongoDB Atlas</span><span class="skill-tag">WordPress</span></div></div>
-    <div class="skill-group"><div class="skill-group-title" id="sg6">Other</div><div class="skill-tags"><span class="skill-tag">Excel (Advanced)</span><span class="skill-tag">Statistics</span><span class="skill-tag">Cash Flow</span><span class="skill-tag">Brand Building</span><span class="skill-tag">Technical Writing</span></div></div>
-  </div>
-  <div class="focus-panel">
-    <div class="section-kicker" id="focus-kicker">CURRENT TECHNICAL FOCUS</div>
-    <div class="focus-tags">
-      <span class="skill-tag">AI Systems</span>
-      <span class="skill-tag">Full-stack Applications</span>
-      <span class="skill-tag">Backend / API Architecture</span>
-      <span class="skill-tag">Security-aware Development</span>
-      <span class="skill-tag">Data & ML Experimentation</span>
-      <span class="skill-tag">Multi-Tenant Architecture</span>
-      <span class="skill-tag">SaaS Infrastructure</span>
-      <span class="skill-tag">Distributed Systems</span>
-    </div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- FEATURED PROJECTS -->
-<section class="section reveal">
-  <div class="section-label" id="label-projects">Featured Projects</div>
-  <div class="project-filters">
-    <button class="filter-btn active" id="filter-all" data-filter="all">All</button>
-    <button class="filter-btn" id="filter-web" data-filter="web">Web</button>
-    <button class="filter-btn" id="filter-ai" data-filter="ai">AI & ML</button>
-    <button class="filter-btn" id="filter-education" data-filter="education">Education</button>
-    <button class="filter-btn" id="filter-security" data-filter="security">Security</button>
-    <button class="filter-btn" id="filter-tools" data-filter="tools">Tools</button>
-  </div>
-  <div class="projects-grid">
-
-    <div class="project-card featured" data-category="web tools">
-      <div class="project-num">01</div>
-      <a class="poster-link" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank"><div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarOS v2.0 desktop-style portfolio preview" src="https://lh3.googleusercontent.com/d/1owy7xOOvQRI-UAUadaUdKuzwiAd6wWlS=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div></a>
-      <div class="project-name" id="p1-name">OmarOS v2.0</div><a class="demo-link" href="https://omarahameds2010-lab.github.io/omar-os/" target="_blank">Live Demo ↗</a>
-      <div class="project-desc" id="p1-desc">Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart. Deployed on GitHub Pages.</div>
-      <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">Canvas API</span></div>
-      <a class="project-gh-link" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">View on GitHub →</a>
-    </div>
-
-    <a class="project-card" data-category="web ai education" href="https://github.com/omarahameds2010-lab/LinguaStory" target="_blank">
-      <div class="project-num">02</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="LinguaStory app preview" src="https://lh3.googleusercontent.com/d/1ifSQqNkt3vZ131jb5Ucg14iI_-owFStL=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p2-name">LinguaStory</div>
-      <div class="project-desc" id="p2-desc">Full React app for English learning via AI collaborative storytelling. Story Builder, Fix My Sentence, Daily Challenge modes, XP system, and streak counter.</div>
-      <div class="project-stack"><span class="stack-chip">React</span><span class="stack-chip">JavaScript</span><span class="stack-chip">AI</span><span class="stack-chip">XP System</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <a class="project-card" data-category="web education" href="https://github.com/omarahameds2010-lab/Saleh-Arabic-Platform" target="_blank">
-      <div class="project-num">03</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Saleh Arabic learning platform preview" src="https://lh3.googleusercontent.com/d/1kPP8XAvzeJIplkeCJzC0aE1NZ9Kah2sU=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p3-name">Arabic Learning Platform</div>
-      <div class="project-desc" id="p3-desc">Complete 8-file Arabic RTL educational platform gifted to a teacher: auth, admin dashboard, student dashboard, exam engine, and protected video player.</div>
-      <div class="project-stack"><span class="stack-chip">HTML5</span><span class="stack-chip">CSS3</span><span class="stack-chip">JS</span><span class="stack-chip">RTL</span><span class="stack-chip">Auth</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <a class="project-card" data-category="ai" href="https://github.com/omarahameds2010-lab/Ultra-Efficient-Semantic-Communication" target="_blank">
-      <div class="project-num">04</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Semantic Communication AI project preview" src="https://lh3.googleusercontent.com/d/1thhpKGo88xI1lNlF6CGYdeWKjDjxyvIr=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p4-name">Semantic Communication AI</div>
-      <div class="project-desc" id="p4-desc">VQ-VAE architecture for IoT semantic data compression using PyTorch. Full repo with training scripts, matplotlib visualizations, and professional README.</div>
-      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">PyTorch</span><span class="stack-chip">VQ-VAE</span><span class="stack-chip">IoT</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <div class="project-card" data-category="web">
-      <div class="project-num">05</div>
-      <a class="poster-link" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank"><div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Wave streetwear campaign poster" src="https://lh3.googleusercontent.com/d/1iEf73IqPPy4TIyzpQG4mnAcmJanwoe1n=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div></a>
-      <div class="project-name" id="p5-name">Wave Streetwear Platform</div><a class="demo-link" href="https://omarahameds2010-lab.github.io/wave-store/" target="_blank">Live Demo ↗</a>
-      <div class="project-desc" id="p5-desc">Full-stack e-commerce for Wave streetwear brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.</div>
-      <div class="project-stack"><span class="stack-chip">Node.js</span><span class="stack-chip">MongoDB</span><span class="stack-chip">Express</span><span class="stack-chip">HTML/CSS</span></div>
-      <a class="project-gh-link" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">View on GitHub →</a>
-    </div>
-
-    <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/OmarPizza" target="_blank">
-      <div class="project-num">06</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="OmarPizza Ultimate app preview" src="https://lh3.googleusercontent.com/d/1hogmMH4-1GdmEROxb9kC3yLrp8qSptXe=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p6-name">OmarPizza Ultimate</div>
-      <div class="project-desc" id="p6-desc">Full restaurant web app with live cart, checkout, real-time order tracking, and hardened admin dashboard against XSS, SQL Injection, and brute-force.</div>
-      <div class="project-stack"><span class="stack-chip">HTML/CSS/JS</span><span class="stack-chip">Node.js</span><span class="stack-chip">Security</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <a class="project-card" data-category="web" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
-      <div class="project-num">07</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Medical clinic website preview" src="https://lh3.googleusercontent.com/d/1Knou5MvacYli2dYOOCaOORr_NLo0_H9Q=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p7-name">Medical Clinic Website</div>
-      <div class="project-desc" id="p7-desc">Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.</div>
-      <div class="project-stack"><span class="stack-chip">HTML</span><span class="stack-chip">CSS</span><span class="stack-chip">JS</span><span class="stack-chip">GitHub Pages</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <a class="project-card" data-category="tools education" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
-      <div class="project-num">08</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Python Basics course thumbnail" src="https://lh3.googleusercontent.com/d/1Hg_fxVoj7AkUXjXQhh6tVN9U3AZtQ6sE=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p8-name">Python Basics Course</div>
-      <div class="project-desc" id="p8-desc">Beginner Python course covering variables, strings, numbers, print statements, data types, and functions.</div>
-      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">Beginner Course</span><span class="stack-chip">Programming</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <a class="project-card" data-category="ai security tools" href="https://github.com/omarahameds2010-lab/-smart-home-ecosystem" target="_blank">
-      <div class="project-num">09</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Secure Smart Home Eco-System preview" src="https://lh3.googleusercontent.com/d/1QbsMB92pOwZIGmTfq01Ceu5Gr3ZR-h1z=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p9-name">Secure Smart Home Eco-System</div>
-      <div class="project-desc" id="p9-desc">Graduation project for Digital Egypt Cubs: Flask REST API backend powering a Dashboard UI, a pandas-based Energy Calculator, ESP32/Wokwi Biometric Access with confidence-threshold logic, and a logic-gate Safety Circuit built on the CIA Triad.</div>
-      <div class="project-stack"><span class="stack-chip">Flask</span><span class="stack-chip">ESP32</span><span class="stack-chip">Python</span><span class="stack-chip">IoT Security</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <a class="project-card" data-category="ai" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">
-      <div class="project-num">10</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="SANAD Arabic RAG evaluation platform poster" src="https://lh3.googleusercontent.com/d/1N342r5h1KN-enYdOZB-Ga9LeOV3RaPjQ=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p10-name">SANAD — Arabic RAG Evaluation Platform</div>
-      <div class="project-desc" id="p10-desc">AI engineering flagship project: an Arabic-first RAG evaluation platform with Arabic-aware chunking, multi-embedding-model comparison, and a golden dataset measuring real precision, recall, groundedness, and hallucination — no invented benchmarks.</div>
-      <div class="project-stack"><span class="stack-chip">Python</span><span class="stack-chip">RAG</span><span class="stack-chip">Embeddings</span><span class="stack-chip">Docker</span></div>
-      <div class="project-gh-link">View on GitHub →</div>
-    </a>
-
-    <a class="project-card" data-category="web ai tools" href="https://omarahameds2010-lab.github.io/MERIDIAN/" target="_blank">
-      <div class="project-num">11</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="Meridian global market terminal portfolio cover" src="https://lh3.googleusercontent.com/d/1gEI6441WfAdRe5eu7Ar6d41rQtKqhPeX=w1000"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p11-name">Meridian</div>
-      <div class="project-desc" id="p11-desc">Product engineering market terminal built collaboratively during an intensive team sprint. Team Leader / Main Developer responsible for system architecture, indicator ingestion, UI, and boundary-constrained decision surfaces.</div>
-      <div class="project-stack"><span class="stack-chip">Product Engineering</span><span class="stack-chip">Market Analytics</span><span class="stack-chip">Team Sprint</span><span class="stack-chip">Live Data</span></div>
-      <div class="project-gh-link">Open Live Terminal →</div>
-    </a>
-
-    <a class="project-card" data-category="web ai tools" href="https://cv-studio-woad-beta.vercel.app/" target="_blank">
-      <div class="project-num">12</div>
-      <div class="poster-wrap"><div class="project-poster"><img loading="lazy" alt="CV Studio resume builder preview" src="cv_studio_cover.jpg"><div class="poster-glow"></div><div class="poster-expand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"/><path d="M9 21H3v-6"/><path d="M21 3l-7 7"/><path d="M3 21l7-7"/></svg></div></div></div>
-      <div class="project-name" id="p12-name">CV Studio</div>
-      <div class="project-desc" id="p12-desc">Premium SaaS-style CV/resume builder with a multi-step wizard, live side-by-side preview, 6 professional templates, AI-assisted writing help, and a dashboard to manage multiple CVs.</div>
-      <div class="project-stack"><span class="stack-chip">Next.js</span><span class="stack-chip">React</span><span class="stack-chip">TypeScript</span><span class="stack-chip">Tailwind CSS</span></div>
-      <div class="project-gh-link">Open Live App →</div>
-    </a>
-
-  </div>
-
-  <div style="text-align:center;margin-top:40px;">
-    <button class="nav-link" onclick="showPage('projects')" style="font-size:0.8rem;padding:12px 28px;border-color:var(--gold);color:var(--gold);cursor:pointer;" id="see-all-btn">
-      See All 21 Projects →
-    </button>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- EDUCATION -->
-<section class="section reveal">
-  <div class="section-label" id="label-edu">Education</div>
-  <div style="display:flex;flex-direction:column;gap:16px;">
-    <div class="edu-card"><div class="edu-icon">🏫</div><div><div class="edu-school" id="edu1-school">Secondary School</div><div class="edu-degree" id="edu1-deg">Baccalauréat — Second Year — Cairo, Egypt</div><div class="edu-year">2024 – PRESENT</div></div></div>
-    <div class="edu-card"><div class="edu-icon">📊</div><div><div class="edu-school" id="edu2-school">DECI Level One — Udacity × MCIT Egypt</div><div class="edu-degree" id="edu2-deg">Excel · Statistics · Web Design</div><div class="edu-year">COMPLETED · NOV 2025</div></div></div>
-    <div class="edu-card"><div class="edu-icon">💻</div><div><div class="edu-school" id="edu3-school">iSchool — Advanced AI & Web Dev Tracks</div><div class="edu-degree" id="edu3-deg">Coding Course — AI Tools & Web Development</div><div class="edu-year">2025 – PRESENT</div></div></div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- CERTIFICATES -->
-<section class="section reveal">
-  <div class="section-label" id="label-certs">Certificates</div>
-  <div class="certs-grid">
-    <div class="cert-card"><div class="cert-emoji">🏛️</div><div><div class="cert-issuer">Udacity × MCIT Egypt</div><div class="cert-name">Digital Egypt Cubs Initiative — Level One</div><div class="cert-date">Nov 2025</div><a href="https://confirm.udacity.com/RP7C69Q5" target="_blank" class="cert-verify">Verify ↗</a></div></div>
-    <div class="cert-card"><div class="cert-emoji">🤖</div><div><div class="cert-issuer">Dubai Centre for AI</div><div class="cert-name">1 Million Prompters — AI Prompt Engineering</div><div class="cert-date">2025</div></div></div>
-    <div class="cert-card"><div class="cert-emoji">💰</div><div><div class="cert-issuer">HP LIFE Foundation</div><div class="cert-name">Cash Flow Management</div><div class="cert-date">Apr 2026</div></div></div>
-    <div class="cert-card"><div class="cert-emoji">💼</div><div><div class="cert-issuer">HP LIFE Foundation</div><div class="cert-name">AI for Business Professionals</div><div class="cert-date">Feb 2026</div></div></div>
-    <div class="cert-card"><div class="cert-emoji">📊</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Business Analysis & Process Management</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/87EMP8I564TY" target="_blank" class="cert-verify">Verify ↗</a></div></div>
-    <div class="cert-card"><div class="cert-emoji">🌐</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Build a Free Website with WordPress</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/9PD129TWX9NH" target="_blank" class="cert-verify">Verify ↗</a></div></div>
-    <div class="cert-card"><div class="cert-emoji">📗</div><div><div class="cert-issuer">Coursera</div><div class="cert-name">Getting Started with Microsoft Excel</div><div class="cert-date">Feb 2026</div><a href="https://coursera.org/verify/48ZU8RWGPWJ9" target="_blank" class="cert-verify">Verify ↗</a></div></div>
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- EVENTS -->
-<section class="section reveal">
-  <div class="section-label" id="label-events">Events & Conferences</div>
-  <div class="events-grid">
-    <div class="event-card">
-      <div class="event-header">
-        <div class="event-emoji">🌍</div>
-        <div>
-          <div class="event-name" id="ev1-name">Fi Africa 2026</div>
-          <div class="event-meta" id="ev1-meta">2–4 June 2026 · Egypt International Exhibition Center, Cairo · Co-located with Propak MENA</div>
+      <!-- STORY -->
+      <section class="section" id="story" data-section="story">
+        <div class="section-head" data-reveal>
+          <div>
+            <p class="section-label"><span class="section-index">01</span><span data-i18n="story.label">The story</span></p>
+            <h2 class="section-title" data-i18n="story.title">Built in public.<br /><em>Learned by doing.</em></h2>
+          </div>
+          <p class="section-desc" data-i18n="story.desc">I didn't start with a perfect plan. I started by building, shipping, and asking better questions.</p>
         </div>
+
+        <div class="story-grid">
+          <article class="story-card card" data-reveal>
+            <p data-i18n="story.p1">My first projects were small experiments. Then came real clients, a national competition, and AI systems that had to prove they worked. Each step made one thing clear: I want to build technology that holds up outside the demo.</p>
+            <p data-i18n="story.p2">Today I work across the stack — from database-level security and APIs to the interface people actually touch. I lead when the team needs direction, document what I learn, and keep shipping.</p>
+            <blockquote class="pull-quote" data-i18n="story.pull">The goal is not to look busy. It is to make things that work.</blockquote>
+
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-year">2024</div>
+                <div class="timeline-copy">
+                  <strong data-i18n="timeline.2024.title">The first build</strong>
+                  <p data-i18n="timeline.2024.desc">Started with code, small experiments, and the habit of finishing things.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-copy">
+                  <strong data-i18n="timeline.2025.title">From exercises to products</strong>
+                  <p data-i18n="timeline.2025.desc">Moved into AI experiments, client work, and projects with real users.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year">2026</div>
+                <div class="timeline-copy">
+                  <strong data-i18n="timeline.2026.title">Lead, ship, go deeper</strong>
+                  <p data-i18n="timeline.2026.desc">Led a national Final 5 team, built secure systems, and started working with real clients.</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-year" data-i18n="timeline.next.year">NEXT</div>
+                <div class="timeline-copy">
+                  <strong data-i18n="timeline.next.title">Scale the systems</strong>
+                  <p data-i18n="timeline.next.desc">Moving from standalone apps to secure, multi-tenant platforms built for real load.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <aside class="proof-card card" data-reveal>
+            <p class="kicker" data-i18n="proof.kicker">Proof</p>
+            <h3 data-i18n="proof.title">Proof, not promises.</h3>
+            <div class="proof-grid">
+              <div class="proof-item">
+                <span class="proof-value">30+</span>
+                <span class="proof-label" data-i18n="proof.reposLabel">Public repositories</span>
+              </div>
+              <div class="proof-item">
+                <span class="proof-value" data-i18n="proof.finalValue">Final 5</span>
+                <span class="proof-label" data-i18n="proof.finalLabel">National competition</span>
+              </div>
+              <div class="proof-item">
+                <span class="proof-value" data-i18n="proof.clientValue">1st</span>
+                <span class="proof-label" data-i18n="proof.clientLabel">Paid client delivered</span>
+              </div>
+              <div class="proof-item">
+                <span class="proof-value">7</span>
+                <span class="proof-label" data-i18n="proof.certsLabel">Certificates earned</span>
+              </div>
+            </div>
+            <p class="proof-note" data-i18n="proof.note">Every number here is tied to something I actually built, joined, or shipped.</p>
+          </aside>
+        </div>
+      </section>
+
+      <!-- WORK -->
+      <section class="section" id="work" data-section="work">
+        <div class="section-head" data-reveal>
+          <div>
+            <p class="section-label"><span class="section-index">02</span><span data-i18n="work.label">Selected work</span></p>
+            <h2 class="section-title" data-i18n="work.title">Two systems I'm <em>proud of</em>.</h2>
+          </div>
+          <p class="section-desc" data-i18n="work.desc">One is about secure architecture at scale. The other is about making AI measurable instead of magical.</p>
+        </div>
+
+        <article class="flagship card" data-reveal>
+          <div class="flagship-copy">
+            <p class="kicker" data-i18n="work.f1.kicker">01 — Flagship platform</p>
+            <h3 data-i18n="work.f1.title">Secure Multi-Tenant E-Learning Platform</h3>
+            <p data-i18n="work.f1.desc">A SaaS learning platform designed around strict tenant isolation and defense in depth: PostgreSQL Row-Level Security with FORCE RLS, a non-superuser app user, host-based tenant routing, and a seven-layer authorization engine covering tenant checks, RBAC, ownership, entitlements, feature flags, tenant policies, and plan limits.</p>
+            <div class="tag-row">
+              <span class="tag">PostgreSQL RLS</span>
+              <span class="tag">Tenant routing</span>
+              <span class="tag">NestJS</span>
+              <span class="tag">Zero trust</span>
+              <span class="tag">SaaS infrastructure</span>
+            </div>
+            <a class="text-link" href="https://omarahameds2010-lab.github.io/architecture-infographic/" target="_blank" rel="noopener">
+              <span data-i18n="work.f1.link">Open live architecture</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="flagship-visual">
+            <div class="arch" aria-hidden="true">
+              <div class="arch-head"><span data-i18n="arch.request">Request</span><span>tenant.acme.com</span></div>
+              <div class="arch-row"><b>01</b><span data-i18n="arch.layer1">Host-based tenant routing</span></div>
+              <div class="arch-row"><b>02</b><span data-i18n="arch.layer2">PostgreSQL FORCE RLS</span></div>
+              <div class="arch-row"><b>03</b><span data-i18n="arch.layer3">RBAC + ownership</span></div>
+              <div class="arch-row"><b>04</b><span data-i18n="arch.layer4">Entitlements & feature flags</span></div>
+              <div class="arch-row"><b>05</b><span data-i18n="arch.layer5">Tenant policies & plan limits</span></div>
+              <div class="arch-foot" data-i18n="arch.foot">7-layer authorization · Zero trust · Non-superuser app role</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="flagship card reverse" data-reveal>
+          <div class="flagship-copy">
+            <p class="kicker" data-i18n="work.f2.kicker">02 — Flagship AI</p>
+            <h3 data-i18n="work.f2.title">SANAD — Arabic RAG Evaluation Platform</h3>
+            <p data-i18n="work.f2.desc">An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination. No invented benchmarks.</p>
+            <div class="tag-row">
+              <span class="tag">Python</span>
+              <span class="tag">RAG</span>
+              <span class="tag">Embeddings</span>
+              <span class="tag">Docker</span>
+              <span class="tag">Evaluation</span>
+            </div>
+            <a class="text-link" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank" rel="noopener">
+              <span data-i18n="work.f2.link">Explore SANAD on GitHub</span>
+              <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+          <div class="flagship-visual">
+            <div class="metric-card" aria-hidden="true">
+              <p class="metric-kicker" data-i18n="work.metricKicker">Measured, not guessed</p>
+              <div class="metric-big" data-i18n="work.metric">EVALUATION<br />FIRST</div>
+              <div class="metric-list">
+                <div class="metric-row"><span data-i18n="work.metric.precision">Precision</span><span data-i18n="work.metric.measured">Measured</span></div>
+                <div class="metric-row"><span data-i18n="work.metric.recall">Recall</span><span data-i18n="work.metric.measured">Measured</span></div>
+                <div class="metric-row"><span data-i18n="work.metric.groundedness">Groundedness</span><span data-i18n="work.metric.measured">Measured</span></div>
+                <div class="metric-row"><span data-i18n="work.metric.hallucination">Hallucination</span><span data-i18n="work.metric.measured">Measured</span></div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- PROJECTS -->
+      <section class="section" id="projects" data-section="projects">
+        <div class="section-head" data-reveal>
+          <div>
+            <p class="section-label"><span class="section-index">03</span><span data-i18n="projects.label">Project archive</span></p>
+            <h2 class="section-title" data-i18n="projects.title">A body of work, not a <em>highlight reel</em>.</h2>
+          </div>
+          <p class="section-desc" data-i18n="projects.desc">Twelve selected builds across web, AI, education, security, and tools. The full archive holds every public project.</p>
+        </div>
+
+        <div class="filter-bar" id="featuredFilters" role="group" aria-label="Filter featured projects">
+          <button class="filter-btn active" type="button" data-filter="all" data-scope="featured" aria-pressed="true" data-i18n="projects.all">All</button>
+          <button class="filter-btn" type="button" data-filter="web" data-scope="featured" aria-pressed="false" data-i18n="projects.web">Web</button>
+          <button class="filter-btn" type="button" data-filter="ai" data-scope="featured" aria-pressed="false" data-i18n="projects.ai">AI & ML</button>
+          <button class="filter-btn" type="button" data-filter="education" data-scope="featured" aria-pressed="false" data-i18n="projects.education">Education</button>
+          <button class="filter-btn" type="button" data-filter="security" data-scope="featured" aria-pressed="false" data-i18n="projects.security">Security</button>
+          <button class="filter-btn" type="button" data-filter="tools" data-scope="featured" aria-pressed="false" data-i18n="projects.tools">Tools</button>
+          <button class="filter-btn" type="button" data-filter="ecommerce" data-scope="featured" aria-pressed="false" data-i18n="projects.ecommerce">E-commerce</button>
+        </div>
+
+        <div class="projects-grid" id="featuredGrid"></div>
+
+        <div class="projects-footer">
+          <a class="btn btn-ghost" href="#archive" data-nav-link="archive">
+            <span data-i18n="projects.openArchive">Open the full archive</span>
+            <span class="arrow arrow-up" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section class="section" id="skills" data-section="skills">
+        <div class="section-head" data-reveal>
+          <div>
+            <p class="section-label"><span class="section-index">04</span><span data-i18n="skills.label">Toolbox</span></p>
+            <h2 class="section-title" data-i18n="skills.title">The stack behind <em>the work</em>.</h2>
+          </div>
+          <p class="section-desc" data-i18n="skills.desc">I choose tools based on the problem, not the trend. These are the ones I reach for most.</p>
+        </div>
+
+        <div class="skills-grid">
+          <div class="skill-card card" data-reveal>
+            <h3 data-i18n="skills.frontend">Frontend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">React</span>
+              <span class="skill-tag">Next.js</span>
+              <span class="skill-tag">Responsive design</span>
+              <span class="skill-tag">RTL layouts</span>
+            </div>
+          </div>
+          <div class="skill-card card" data-reveal>
+            <h3 data-i18n="skills.backend">Backend</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">Flask</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">Auth systems</span>
+            </div>
+          </div>
+          <div class="skill-card card" data-reveal>
+            <h3 data-i18n="skills.security">Cybersecurity</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">XSS prevention</span>
+              <span class="skill-tag">SQL injection</span>
+              <span class="skill-tag">Brute-force protection</span>
+              <span class="skill-tag">Secure auth</span>
+              <span class="skill-tag">Zero trust</span>
+              <span class="skill-tag">RLS</span>
+            </div>
+          </div>
+          <div class="skill-card card" data-reveal>
+            <h3 data-i18n="skills.ai">AI & data</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Machine learning</span>
+              <span class="skill-tag">VQ-VAE</span>
+              <span class="skill-tag">RAG</span>
+              <span class="skill-tag">Embeddings</span>
+              <span class="skill-tag">Prompt engineering</span>
+              <span class="skill-tag">Data visualization</span>
+            </div>
+          </div>
+          <div class="skill-card card" data-reveal>
+            <h3 data-i18n="skills.tools">Tools & platforms</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Git & GitHub</span>
+              <span class="skill-tag">GitHub Pages</span>
+              <span class="skill-tag">VS Code</span>
+              <span class="skill-tag">Docker</span>
+              <span class="skill-tag">MongoDB Atlas</span>
+              <span class="skill-tag">WordPress</span>
+            </div>
+          </div>
+          <div class="skill-card card" data-reveal>
+            <h3 data-i18n="skills.other">Beyond code</h3>
+            <div class="skill-tags">
+              <span class="skill-tag">Excel (advanced)</span>
+              <span class="skill-tag">Statistics</span>
+              <span class="skill-tag">Cash flow</span>
+              <span class="skill-tag">Brand building</span>
+              <span class="skill-tag">Technical writing</span>
+              <span class="skill-tag">Public speaking</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="focus-panel card" data-reveal>
+          <div class="focus-copy">
+            <p class="kicker" data-i18n="skills.focusTitle">Current technical focus</p>
+            <p data-i18n="skills.focusDesc">Going deeper into secure, scalable systems — and the architecture that keeps them honest.</p>
+          </div>
+          <div class="tag-row">
+            <span class="tag" data-i18n="skills.focus1">AI systems</span>
+            <span class="tag" data-i18n="skills.focus2">Full-stack applications</span>
+            <span class="tag" data-i18n="skills.focus3">Backend / API architecture</span>
+            <span class="tag" data-i18n="skills.focus4">Security-aware development</span>
+            <span class="tag" data-i18n="skills.focus5">Data & ML experimentation</span>
+            <span class="tag" data-i18n="skills.focus6">Multi-tenant architecture</span>
+            <span class="tag" data-i18n="skills.focus7">SaaS infrastructure</span>
+            <span class="tag" data-i18n="skills.focus8">Distributed systems</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CREDENTIALS -->
+      <section class="section" id="credentials" data-section="credentials">
+        <div class="section-head" data-reveal>
+          <div>
+            <p class="section-label"><span class="section-index">05</span><span data-i18n="credentials.label">Credentials</span></p>
+            <h2 class="section-title" data-i18n="credentials.title">The paper <em>trail</em>.</h2>
+          </div>
+          <p class="section-desc" data-i18n="credentials.desc">Education, certifications, and rooms I've been in. Each one added a tool or a perspective.</p>
+        </div>
+
+        <div class="credentials-grid">
+          <div class="credential-panel card" data-reveal>
+            <p class="kicker" data-i18n="credentials.education">Education</p>
+            <div class="edu-list">
+              <div class="edu-card">
+                <div class="edu-school" data-i18n="edu.1.school">Secondary School</div>
+                <div class="edu-degree" data-i18n="edu.1.degree">Baccalauréat — Second Year — Cairo, Egypt</div>
+                <div class="edu-year" data-i18n="edu.1.year">2024 – Present</div>
+              </div>
+              <div class="edu-card">
+                <div class="edu-school" data-i18n="edu.2.school">DECI Level One — Udacity × MCIT Egypt</div>
+                <div class="edu-degree" data-i18n="edu.2.degree">Excel · Statistics · Web Design</div>
+                <div class="edu-year" data-i18n="edu.2.year">Completed · Nov 2025</div>
+              </div>
+              <div class="edu-card">
+                <div class="edu-school" data-i18n="edu.3.school">iSchool — Advanced AI & Web Dev Tracks</div>
+                <div class="edu-degree" data-i18n="edu.3.degree">Coding Course — AI Tools & Web Development</div>
+                <div class="edu-year" data-i18n="edu.3.year">2025 – Present</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="credential-panel card" data-reveal>
+            <p class="kicker" data-i18n="credentials.certificates">Certificates</p>
+            <div class="cert-list">
+              <div class="cert-row">
+                <div class="cert-main">
+                  <span class="cert-mark" aria-hidden="true">U</span>
+                  <div>
+                    <div class="cert-name" data-i18n="cert.1.name">Digital Egypt Cubs Initiative — Level One</div>
+                    <div class="cert-issuer" data-i18n="cert.1.issuer">Udacity × MCIT Egypt</div>
+                  </div>
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-date" data-i18n="cert.1.date">Nov 2025</span>
+                  <a class="cert-verify" href="https://confirm.udacity.com/RP7C69Q5" target="_blank" rel="noopener" data-i18n="credentials.verify">Verify ↗</a>
+                </div>
+              </div>
+
+              <div class="cert-row">
+                <div class="cert-main">
+                  <span class="cert-mark" aria-hidden="true">AI</span>
+                  <div>
+                    <div class="cert-name" data-i18n="cert.2.name">1 Million Prompters — AI Prompt Engineering</div>
+                    <div class="cert-issuer" data-i18n="cert.2.issuer">Dubai Centre for AI</div>
+                  </div>
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-date" data-i18n="cert.2.date">2025</span>
+                </div>
+              </div>
+
+              <div class="cert-row">
+                <div class="cert-main">
+                  <span class="cert-mark" aria-hidden="true">HP</span>
+                  <div>
+                    <div class="cert-name" data-i18n="cert.3.name">Cash Flow Management</div>
+                    <div class="cert-issuer" data-i18n="cert.3.issuer">HP LIFE Foundation</div>
+                  </div>
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-date" data-i18n="cert.3.date">Apr 2026</span>
+                </div>
+              </div>
+
+              <div class="cert-row">
+                <div class="cert-main">
+                  <span class="cert-mark" aria-hidden="true">HP</span>
+                  <div>
+                    <div class="cert-name" data-i18n="cert.4.name">AI for Business Professionals</div>
+                    <div class="cert-issuer" data-i18n="cert.4.issuer">HP LIFE Foundation</div>
+                  </div>
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-date" data-i18n="cert.4.date">Feb 2026</span>
+                </div>
+              </div>
+
+              <div class="cert-row">
+                <div class="cert-main">
+                  <span class="cert-mark" aria-hidden="true">BA</span>
+                  <div>
+                    <div class="cert-name" data-i18n="cert.5.name">Business Analysis & Process Management</div>
+                    <div class="cert-issuer" data-i18n="cert.5.issuer">Coursera</div>
+                  </div>
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-date" data-i18n="cert.5.date">Feb 2026</span>
+                  <a class="cert-verify" href="https://coursera.org/verify/87EMP8I564TY" target="_blank" rel="noopener" data-i18n="credentials.verify">Verify ↗</a>
+                </div>
+              </div>
+
+              <div class="cert-row">
+                <div class="cert-main">
+                  <span class="cert-mark" aria-hidden="true">WP</span>
+                  <div>
+                    <div class="cert-name" data-i18n="cert.6.name">Build a Free Website with WordPress</div>
+                    <div class="cert-issuer" data-i18n="cert.6.issuer">Coursera</div>
+                  </div>
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-date" data-i18n="cert.6.date">Feb 2026</span>
+                  <a class="cert-verify" href="https://coursera.org/verify/9PD129TWX9NH" target="_blank" rel="noopener" data-i18n="credentials.verify">Verify ↗</a>
+                </div>
+              </div>
+
+              <div class="cert-row">
+                <div class="cert-main">
+                  <span class="cert-mark" aria-hidden="true">XL</span>
+                  <div>
+                    <div class="cert-name" data-i18n="cert.7.name">Getting Started with Microsoft Excel</div>
+                    <div class="cert-issuer" data-i18n="cert.7.issuer">Coursera</div>
+                  </div>
+                </div>
+                <div class="cert-meta">
+                  <span class="cert-date" data-i18n="cert.7.date">Feb 2026</span>
+                  <a class="cert-verify" href="https://coursera.org/verify/48ZU8RWGPWJ9" target="_blank" rel="noopener" data-i18n="credentials.verify">Verify ↗</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="events-block">
+          <div class="events-head" data-reveal>
+            <div>
+              <p class="kicker" data-i18n="credentials.events">Events & conferences</p>
+              <p data-i18n="credentials.eventsDesc">I show up, listen, ask questions, and bring the useful parts back into the work.</p>
+            </div>
+          </div>
+
+          <div class="events-grid">
+            <article class="event-card card" data-reveal>
+              <a class="event-media" href="fi_africa_visitor_qr.jpg" target="_blank" rel="noopener" aria-label="Open Fi Africa 2026 visitor badge">
+                <img src="fi_africa_visitor_qr.jpg" alt="Fi Africa 2026 visitor badge for Omar Ahmed" loading="lazy" decoding="async" />
+                <span class="event-media-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="event-copy">
+                <div class="event-name" data-i18n="event.1.name">Fi Africa 2026</div>
+                <div class="event-meta" data-i18n="event.1.meta">2–4 June 2026 · Egypt International Exhibition Center, Cairo</div>
+                <div class="event-role" data-i18n="event.1.role">Visitor — Full-stack developer & student</div>
+                <p class="event-desc" data-i18n="event.1.desc">Met industry professionals, explored modern full-stack practices, and joined technical conversations on architecture and product.</p>
+              </div>
+            </article>
+
+            <article class="event-card card" data-reveal>
+              <a class="event-media" href="fdc-summit-omar-ahmed.jpeg" target="_blank" rel="noopener" aria-label="Open Future of Digital Countries Summit guest badge">
+                <img src="fdc-summit-omar-ahmed.jpeg" alt="Future of Digital Countries Summit guest badge for Omar Ahmed" loading="lazy" decoding="async" />
+                <span class="event-media-open" aria-hidden="true">↗</span>
+              </a>
+              <div class="event-copy">
+                <div class="event-name" data-i18n="event.2.name">Future of Digital Countries Summit</div>
+                <div class="event-meta" data-i18n="event.2.meta">22–23 September 2024 · Cairo, Egypt</div>
+                <div class="event-role" data-i18n="event.2.role">Guest</div>
+                <p class="event-desc" data-i18n="event.2.desc">Explored conversations around digital countries, technology, and innovation.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="language-strip card" data-reveal>
+          <p class="kicker" data-i18n="languages.title">Languages</p>
+          <div class="language-grid">
+            <div class="language-pill"><b data-i18n="lang.ar">Arabic</b><span data-i18n="lang.arLevel">Native</span></div>
+            <div class="language-pill"><b data-i18n="lang.en">English</b><span data-i18n="lang.enLevel">B2+ proficient</span></div>
+            <div class="language-pill"><b data-i18n="lang.de">German</b><span data-i18n="lang.deLevel">Beginner (A1)</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="contact-section" id="contact" data-section="contact">
+        <div class="contact-card" data-reveal>
+          <p class="section-label"><span class="section-index">06</span><span data-i18n="contact.label">Contact</span></p>
+          <h2 data-i18n="contact.title">Have an idea?<br /><em>Let's build it.</em></h2>
+          <p data-i18n="contact.desc">I'm open to internships, freelance projects, and collaborations where I can learn fast and contribute real work.</p>
+          <div class="contact-actions">
+            <a class="btn btn-primary" href="mailto:omarahameds2010@gmail.com">
+              <span data-i18n="contact.emailCta">Send an email</span>
+              <span class="arrow arrow-up" aria-hidden="true">↗</span>
+            </a>
+            <button class="btn btn-ghost" type="button" data-copy-email>
+              <span data-i18n="contact.copy">Copy email</span>
+            </button>
+          </div>
+          <div class="contact-links">
+            <a href="https://github.com/omarahameds2010-lab" target="_blank" rel="noopener">GitHub ↗</a>
+            <a href="https://linkedin.com/in/omar-ahmed-7b97613b1" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href="https://omarahameds2010-lab.github.io/omar-os/" target="_blank" rel="noopener">OmarOS ↗</a>
+          </div>
+          <p class="contact-location"><i class="dot" aria-hidden="true"></i><span data-i18n="contact.location">Cairo, Egypt</span> · <span data-i18n="contact.availability">Available for select projects</span></p>
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= ARCHIVE ================= -->
+    <div class="page" id="page-archive">
+      <div class="archive-page">
+        <div class="archive-head" data-reveal>
+          <a class="back-link" href="#home" data-nav-link="home"><span aria-hidden="true">←</span><span data-i18n="archive.back">Back to portfolio</span></a>
+          <p class="section-label"><span class="section-index">ALL</span><span data-i18n="archive.label">The archive</span></p>
+          <h1 data-i18n="archive.title">Every <em>build</em>.</h1>
+          <p data-i18n="archive.desc">The full record: public repositories, client work, experiments, and shipped ideas. Search by name, stack, or problem.</p>
+        </div>
+
+        <div class="archive-toolbar" data-reveal>
+          <label class="search-box">
+            <span class="sr-only" data-i18n="archive.searchLabel">Search projects</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="7"></circle>
+              <path d="m20 20-3.5-3.5"></path>
+            </svg>
+            <input type="search" id="archiveSearch" autocomplete="off" spellcheck="false" data-i18n-placeholder="archive.search" placeholder="Search projects, stacks, or keywords..." />
+          </label>
+          <div class="archive-filters" id="archiveFilters" role="group" aria-label="Filter archive" data-i18n-aria="archive.filterLabel">
+            <button class="filter-btn active" type="button" data-filter="all" data-scope="archive" aria-pressed="true" data-i18n="projects.all">All</button>
+            <button class="filter-btn" type="button" data-filter="web" data-scope="archive" aria-pressed="false" data-i18n="projects.web">Web</button>
+            <button class="filter-btn" type="button" data-filter="ai" data-scope="archive" aria-pressed="false" data-i18n="projects.ai">AI & ML</button>
+            <button class="filter-btn" type="button" data-filter="education" data-scope="archive" aria-pressed="false" data-i18n="projects.education">Education</button>
+            <button class="filter-btn" type="button" data-filter="security" data-scope="archive" aria-pressed="false" data-i18n="projects.security">Security</button>
+            <button class="filter-btn" type="button" data-filter="tools" data-scope="archive" aria-pressed="false" data-i18n="projects.tools">Tools</button>
+            <button class="filter-btn" type="button" data-filter="ecommerce" data-scope="archive" aria-pressed="false" data-i18n="projects.ecommerce">E-commerce</button>
+          </div>
+          <span class="archive-count" id="archiveCount" aria-live="polite">22 projects</span>
+        </div>
+
+        <div class="archive-grid" id="archiveGrid"></div>
+
+        <div class="empty-state" id="archiveEmpty" hidden>
+          <h2 data-i18n="archive.emptyTitle">Nothing matched that search.</h2>
+          <p data-i18n="archive.emptyDesc">Try a different keyword or clear the filters.</p>
+          <button class="btn btn-ghost" type="button" id="clearFilters" data-i18n="archive.clear">Clear filters</button>
+        </div>
+
+        <p class="archive-note" data-i18n="archive.note">Some cards open a live product; others open the source. Everything listed here is real work.</p>
       </div>
-      <div class="event-role" id="ev1-role">Visitor — Full-Stack Developer, Student</div>
-      <div class="event-desc" id="ev1-desc">Engaged directly with industry professionals — effectively drove technical conversations and exchanged valuable insights.</div>
-      <ul class="event-points" id="ev1-points">
-        <li><strong>Technical Growth:</strong> Discovered modern full-stack methodologies and architecture practices to optimize software performance and development workflow.</li>
-        <li><strong>Leadership &amp; Communication:</strong> Practiced active listening, grew public speaking confidence, and successfully led tech-focused group discussions.</li>
-        <li><strong>Strategic Networking:</strong> Built meaningful connections with talented developers and industry peers, sparking ideas for future collaboration.</li>
-      </ul>
     </div>
-    <div class="event-card event-proof">
-      <div class="event-proof-label" id="label-event-proof">Proof of Attendance</div>
-      <img class="event-qr" src="fi_africa_visitor_qr.jpg" alt="Fi Africa 2026 visitor badge QR code">
-      <div class="event-proof-caption" id="ev1-proof-caption">Visitor Badge — Fi Africa 2026</div>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="logo-mark" aria-hidden="true">OA</span>
+      <div>
+        <strong>Omar Ahmed</strong>
+        <p data-i18n="footer.tagline">Builder, engineer, and lifelong student.</p>
+      </div>
     </div>
-  </div>
-  <div class="event-memory-card">
-    <div class="event-memory-media" id="ev2-photo-wrap" title="Open event badge">
-      <img id="ev2-photo" src="fdc-summit-omar-ahmed.jpeg" alt="Omar Ahmed visitor badge at Future of Digital Countries Summit">
+    <div class="footer-links">
+      <a href="#story" data-nav-link="story" data-i18n="nav.story">Story</a>
+      <a href="#work" data-nav-link="work" data-i18n="nav.work">Work</a>
+      <a href="#projects" data-nav-link="projects" data-i18n="nav.projects">Projects</a>
+      <a href="#archive" data-nav-link="archive" data-i18n="nav.archive">Archive</a>
+      <button type="button" data-copy-email data-i18n="footer.email">Email</button>
+      <button type="button" data-print data-i18n="footer.print">Print CV</button>
     </div>
-    <div>
-      <div class="event-memory-kicker" id="ev2-kicker">Event Attendance · 2024</div>
-      <div class="event-memory-title" id="ev2-name">Future of Digital Countries Summit</div>
-      <div class="event-memory-meta" id="ev2-meta">22–23 September 2024 · Cairo, Egypt</div>
-      <div class="event-memory-role" id="ev2-role">Guest · Omar Ahmed</div>
-      <p class="event-memory-desc" id="ev2-desc">Attended the summit as a guest and explored conversations around the future of digital countries, technology, and innovation.</p>
-    </div>
-  </div>
-</section>
+    <p class="footer-copy">© <span id="year">2026</span> Omar Ahmed. <span data-i18n="footer.rights">All rights reserved.</span></p>
+  </footer>
 
-<div class="section-divider"></div>
-
-<!-- LANGUAGES -->
-<section class="section reveal">
-  <div class="section-label" id="label-langs">Languages</div>
-  <div class="lang-grid">
-    <div class="lang-card"><div class="lang-name">🇪🇬 Arabic</div><div class="lang-level">Native</div></div>
-    <div class="lang-card"><div class="lang-name">🇬🇧 English</div><div class="lang-level">B2+ Proficient</div></div>
-    <div class="lang-card"><div class="lang-name">🇩🇪 German</div><div class="lang-level">Beginner (A1)</div></div>
-  </div>
-</section>
-
-<footer class="cv-footer">
-  <div class="footer-name">Omar Ahmed</div>
-  <div class="footer-note" id="footer-note">Built with code · Cairo, Egypt · 2026</div>
-</footer>
-
-</div><!-- end page-cv -->
-
-<!-- ===== PAGE 2: ALL PROJECTS ===== -->
-<div class="page" id="page-projects">
-  <div class="all-projects-page">
-    <div class="all-projects-header reveal">
-      <h1 id="archive-title">The <em>Archive</em></h1>
-      <p id="archive-desc">21 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.</p>
-    </div>
-    <div class="repos-grid">
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/omar-os" target="_blank">
-        <div class="repo-icon">🖥️</div>
-        <div class="repo-name">OmarOS v2.0</div>
-        <div class="repo-desc">Browser OS-style portfolio with draggable windows, terminal, Snake game, music player & skills radar. Deployed live.</div>
-        <span class="repo-tag tag-web">Web App</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/LinguaStory" target="_blank">
-        <div class="repo-icon">📖</div>
-        <div class="repo-name">LinguaStory</div>
-        <div class="repo-desc">React app for English learning via AI storytelling. XP system, streak counter, 3 challenge modes.</div>
-        <span class="repo-tag tag-ai">React · AI</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Saleh-Arabic-Platform" target="_blank">
-        <div class="repo-icon">🎓</div>
-        <div class="repo-name">Arabic Learning Platform</div>
-        <div class="repo-desc">8-file RTL Arabic educational platform with auth, admin dashboard, exam engine & protected video player.</div>
-        <span class="repo-tag tag-web">Full Platform</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Saleh--Arabic--Platform" target="_blank">
-        <div class="repo-icon">📚</div>
-        <div class="repo-name">Arabic Learning Platform v2</div>
-        <div class="repo-desc">Updated version of the Arabic educational platform with refined design system and improved UX.</div>
-        <span class="repo-tag tag-web">Full Platform</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Ultra-Efficient-Semantic-Communication" target="_blank">
-        <div class="repo-icon">🤖</div>
-        <div class="repo-name">Semantic Communication AI</div>
-        <div class="repo-desc">VQ-VAE for IoT data compression using PyTorch. Training scripts, matplotlib visualizations & professional README.</div>
-        <span class="repo-tag tag-ai">Python · ML</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/wave-store" target="_blank">
-        <div class="repo-icon">👕</div>
-        <div class="repo-name">Wave Streetwear Store</div>
-        <div class="repo-desc">Full-stack e-commerce for Wave brand (Prado Clothing). Node.js + MongoDB Atlas REST API + frontend.</div>
-        <span class="repo-tag tag-ecom">E-Commerce</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/OmarPizza" target="_blank">
-        <div class="repo-icon">🍕</div>
-        <div class="repo-name">OmarPizza Ultimate</div>
-        <div class="repo-desc">Restaurant web app with live cart, order tracking & hardened admin dashboard (XSS, SQLi, brute-force protected).</div>
-        <span class="repo-tag tag-web">Full Stack</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/dr-ahmed-website" target="_blank">
-        <div class="repo-icon">🏥</div>
-        <div class="repo-name">Medical Clinic Website</div>
-        <div class="repo-desc">Professional medical clinic site — first real paid project. Deployed on GitHub Pages and delivered to client.</div>
-        <span class="repo-tag tag-web">Client Work</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/python-Basics" target="_blank">
-        <div class="repo-icon">🐍</div>
-        <div class="repo-name">Python Basics Course</div>
-        <div class="repo-desc">Beginner Python course covering variables, strings, numbers, data types, print statements, and functions.</div>
-        <span class="repo-tag tag-py">Python</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/OMAR--Portofolio-Extreme-V.3" target="_blank">
-        <div class="repo-icon">⚡</div>
-        <div class="repo-name">Portfolio Extreme V.3</div>
-        <div class="repo-desc">Advanced portfolio version with extreme UI effects and animations. An earlier flagship showcase site.</div>
-        <span class="repo-tag tag-web">Portfolio</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/portfolio-" target="_blank">
-        <div class="repo-icon">📄</div>
-        <div class="repo-name">Portfolio CV</div>
-        <div class="repo-desc">Professional CV-style portfolio with bilingual support (EN/AR), skill bars, project cards & certificates.</div>
-        <span class="repo-tag tag-web">Portfolio</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/GH-Bags" target="_blank">
-        <div class="repo-icon">👜</div>
-        <div class="repo-name">GH Bags</div>
-        <div class="repo-desc">E-commerce store for bags brand. Product showcase with shopping functionality and clean design.</div>
-        <span class="repo-tag tag-ecom">E-Commerce</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/DOKAN---LBS" target="_blank">
-        <div class="repo-icon">🏪</div>
-        <div class="repo-name">DOKAN LBS</div>
-        <div class="repo-desc">Location-based store (DOKAN) — web app with local business features and dynamic product listing.</div>
-        <span class="repo-tag tag-web">Web App</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/DOKAN-LBS" target="_blank">
-        <div class="repo-icon">🛍️</div>
-        <div class="repo-name">DOKAN LBS v2</div>
-        <div class="repo-desc">Updated DOKAN location-based store with improved UI and product management features.</div>
-        <span class="repo-tag tag-web">Web App</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Cinematic-bike-race-" target="_blank">
-        <div class="repo-icon">🚴</div>
-        <div class="repo-name">Cinematic Bike Race</div>
-        <div class="repo-desc">Cinematic-style web experience for a bike race theme. Creative UI with bold visual storytelling.</div>
-        <span class="repo-tag tag-web">Creative UI</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/temperature-converte-web" target="_blank">
-        <div class="repo-icon">🌡️</div>
-        <div class="repo-name">Temperature Converter</div>
-        <div class="repo-desc">Clean web-based temperature converter tool. Simple, fast, and functional utility app.</div>
-        <span class="repo-tag tag-web">Tool</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/cuddly-octo-system-Expanses-" target="_blank">
-        <div class="repo-icon">💸</div>
-        <div class="repo-name">Expenses Tracker</div>
-        <div class="repo-desc">Personal expense tracking web app with data entry, categorization, and spending summaries.</div>
-        <span class="repo-tag tag-data">Finance Tool</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/Codewars-live" target="_blank">
-        <div class="repo-icon">⚔️</div>
-        <div class="repo-name">Codewars Live</div>
-        <div class="repo-desc">Live coding challenge solutions and algorithm practice. Ongoing problem-solving portfolio on Codewars.</div>
-        <span class="repo-tag tag-py">Algorithms</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/-smart-home-ecosystem" target="_blank">
-        <div class="repo-icon">🏠</div>
-        <div class="repo-name">Secure Smart Home Eco-System</div>
-        <div class="repo-desc">Graduation project: Flask API, Dashboard UI, pandas Energy Calculator, ESP32 Biometric Access & logic-gate Safety Circuit (CIA Triad).</div>
-        <span class="repo-tag tag-iot">IoT · Security</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://github.com/omarahameds2010-lab/sanad-rag" target="_blank">
-        <div class="repo-icon">🔎</div>
-        <div class="repo-name">SANAD — Arabic RAG Platform</div>
-        <div class="repo-desc">Arabic-first RAG evaluation platform: Arabic-aware chunking, multi-embedding comparison & a golden dataset with real precision/recall/hallucination metrics.</div>
-        <span class="repo-tag tag-ai">AI · RAG</span>
-        <div class="repo-arrow">View on GitHub →</div>
-      </a>
-
-      <a class="repo-card reveal" href="https://omarahameds2010-lab.github.io/MERIDIAN/" target="_blank">
-        <div class="repo-icon">◈</div>
-        <div class="repo-name">Meridian — Global Market Terminal</div>
-        <div class="repo-desc">Collaborative product-engineering sprint translating live market indicators into structured decision surfaces with defensible data boundaries.</div>
-        <span class="repo-tag tag-ai">Product Engineering · Analytics</span>
-        <div class="repo-arrow">Open Live Terminal →</div>
-      </a>
-
+  <!-- ================= POSTER MODAL ================= -->
+  <div class="poster-modal" id="posterModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-frame">
+      <button class="modal-close" type="button" id="modalClose" aria-label="Close preview">&times;</button>
+      <img id="modalImg" src="" alt="" />
+      <div class="modal-caption">
+        <span id="modalTitle">Project preview</span>
+        <span id="modalMeta"></span>
+      </div>
     </div>
   </div>
-</div><!-- end page-projects -->
 
-<div class="poster-modal" id="posterModal">
-  <div class="poster-modal-frame">
-    <span class="poster-modal-close" id="posterModalClose">&times;</span>
-    <img id="posterModalImg" src="" alt="">
-  </div>
-</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <button class="to-top" type="button" id="toTop" aria-label="Back to top">↑</button>
 
-<script>
-// CURSOR
-const cursor = document.getElementById('cursor');
-const ring = document.getElementById('ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{
-  mx=e.clientX; my=e.clientY;
-  cursor.style.left=mx-6+'px'; cursor.style.top=my-6+'px';
-});
-function animRing(){
-  rx+=(mx-rx)*0.12; ry+=(my-ry)*0.12;
-  ring.style.left=rx-18+'px'; ring.style.top=ry-18+'px';
-  requestAnimationFrame(animRing);
-}
-animRing();
-document.querySelectorAll('a,button,.stat-card,.skill-tag,.cert-card,.event-card,.lang-card,.repo-card,.project-card').forEach(el=>{
-  el.addEventListener('mouseenter',()=>{cursor.style.transform='scale(2.5)';ring.style.transform='scale(1.5)';});
-  el.addEventListener('mouseleave',()=>{cursor.style.transform='scale(1)';ring.style.transform='scale(1)';});
-});
-
-// PAGE SWITCHING
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.nav-link[id^="nav-"]').forEach(b=>b.classList.remove('active'));
-  document.getElementById('nav-'+id).classList.add('active');
-  window.scrollTo(0,0);
-  setTimeout(initReveal,100);
-}
-
-// SCROLL REVEAL
-function initReveal(){
-  const io=new IntersectionObserver(entries=>{
-    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-  },{threshold:0.1});
-  document.querySelectorAll('.page.active .reveal').forEach(el=>{ el.classList.remove('visible'); io.observe(el); });
-}
-initReveal();
-
-// Phase-two language overlay for story sections, filters, badges, and archive.
-const phaseTwoCopy = {
-  en: {
-    heroTitle: 'BUILDER · TECHNOLOGY · AI<br/>I build technology, lead real projects, learn through real experiences, and document the journey.',
-    storyLabel: 'The Story Behind The Builds', storyKicker: 'THE JOURNEY', storyTitle: 'From learning code to building systems.', storyIntro: 'The portfolio is not a list of finished answers. It is a record of how Omar learns, builds with others, and turns ideas into real products.',
-    proofKicker: 'PROOF', proofTitle: 'Evidence over claims.', featuredLabel: 'Featured Work', flagshipKicker: '02 — FLAGSHIP PROJECT', flagshipTitle: 'SANAD — Arabic RAG Evaluation Platform', flagshipDesc: 'An evaluation-first Arabic RAG system built around Arabic-aware chunking, embedding comparison, and a golden dataset that measures precision, recall, groundedness, and hallucination.', flagshipLink: 'Explore SANAD on GitHub →', metric: 'EVALUATION<br/>FIRST', metricDesc: 'Retrieval · Groundedness · Recall · Hallucination',
-    multitenantKicker: '01 — FLAGSHIP PLATFORM · ARCHITECTURE & SECURITY', multitenantTitle: 'Secure Multi-Tenant E-Learning Platform', multitenantDesc: 'A scalable SaaS learning platform designed around strict tenant isolation and defense in depth: PostgreSQL Row-Level Security with FORCE RLS, a non-superuser app_user, host-based tenant routing, and a seven-layer authorization engine covering tenant checks, RBAC, ownership, entitlements, feature flags, tenant policies, and plan limits.', multitenantLink: 'Open Live Architecture ↗', nowTitle:'Build. Lead. Document.', nowDesc:'Building technology, taking responsibility in real projects, and documenting what I learn along the way.', nextKicker:'NEXT', nextTitle:'From apps to scalable SaaS platforms.', nextDesc:'Moving from standalone applications to scalable cloud SaaS platforms: building a secure multi-tenant learning system with PostgreSQL RLS, defense in depth, and architecture designed for millions of students and teachers.',
-    experienceLabel: 'Leadership & Experience', experienceKicker: 'REAL-WORLD RESPONSIBILITY', beyondKicker: 'BEYOND CODE', directionLabel: 'Direction', focusKicker: 'CURRENT TECHNICAL FOCUS', archiveTitle: 'The <em>Archive</em>', archiveDesc: '20 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.',
-    filters: ['All','Web','AI & ML','Education','Security','Tools'], badges: ['AI Systems','Products','Leadership','Web','Security']
-  },
-  ar: {
-    heroTitle: 'بُنّاء · تكنولوجيا · ذكاء اصطناعي<br/>أبني التكنولوجيا، وأقود المشاريع الحقيقية، وأتعلم من التجارب، وأوثّق الرحلة.',
-    storyLabel: 'القصة وراء المشاريع', storyKicker: 'الرحلة', storyTitle: 'من تعلّم البرمجة إلى بناء الأنظمة.', storyIntro: 'هذا البورتفوليو ليس قائمة بإجابات جاهزة؛ بل سجل لطريقة تعلّم عمر وبنائه مع الآخرين وتحويل الأفكار إلى منتجات حقيقية.',
-    proofKicker: 'الدليل', proofTitle: 'الدليل قبل الادعاء.', featuredLabel: 'أعمال مختارة', flagshipKicker: '02 — المشروع الرئيسي', flagshipTitle: 'SANAD — منصة تقييم RAG العربية', flagshipDesc: 'نظام RAG عربي يركز على التقييم، ويعتمد على تقطيع واعٍ بالعربية، ومقارنة نماذج التضمين، ومجموعة بيانات تقيس الدقة والاستدعاء والارتكاز والهلوسة.', flagshipLink: 'استكشف SANAD على GitHub ←', metric: 'التقييم<br/>أولًا', metricDesc: 'الاسترجاع · الارتكاز · الاستدعاء · الهلوسة',
-    multitenantKicker: '01 — منصة رئيسية · المعمارية والأمان', multitenantTitle: 'منصة تعليم إلكتروني آمنة متعددة العملاء', multitenantDesc: 'منصة SaaS تعليمية قابلة للتوسع مبنية على عزل صارم لبيانات العملاء ودفاع متعدد الطبقات: PostgreSQL RLS مع FORCE RLS، وحساب app_user غير متفوق، وتوجيه العملاء عبر النطاق، ومحرك صلاحيات من سبع طبقات يشمل عزل العميل وRBAC والملكية والاستحقاقات ومفاتيح الميزات وسياسات العميل وحدود الخطة.', multitenantLink: 'فتح المعمارية الحية ←', nowTitle:'ابنِ. قد. وثّق.', nowDesc:'أبني التكنولوجيا، وأتحمل مسؤولية المشاريع الحقيقية، وأوثّق ما أتعلمه في الطريق.', nextKicker:'التالي', nextTitle:'من التطبيقات إلى منصات SaaS قابلة للتوسع.', nextDesc:'أنتقل من بناء التطبيقات المنفردة إلى منصات SaaS سحابية قابلة للتوسع، مع بناء نظام تعليمي متعدد العملاء وآمن باستخدام PostgreSQL RLS ودفاع متعدد الطبقات ومعمارية جاهزة لملايين الطلاب والمعلمين.',
-    experienceLabel: 'القيادة والخبرة', experienceKicker: 'مسؤولية حقيقية', beyondKicker: 'ما وراء الكود', directionLabel: 'الاتجاه', focusKicker: 'التركيز التقني الحالي', archiveTitle: 'أرشيف <em>المشاريع</em>', archiveDesc: 'أكثر من 20 مستودعًا عامًا — سجل لما بنيته واختبرته وتعلمته ونشرته. اضغط على أي بطاقة لفتح المستودع على GitHub.',
-    filters: ['الكل','الويب','الذكاء الاصطناعي','التعليم','الأمن','الأدوات'], badges: ['أنظمة AI','منتجات','قيادة','ويب','أمن']
-  }
-};
-
-function applyPhaseTwoLanguage(lang) {
-  const d = phaseTwoCopy[lang];
-  const set = (id, value, html=false) => { const el = document.getElementById(id); if (el) html ? el.innerHTML = value : el.textContent = value; };
-  set('hero-title', d.heroTitle, true);
-  set('label-story', d.storyLabel); set('story-kicker', d.storyKicker); set('story-title', d.storyTitle); set('story-intro', d.storyIntro);
-  set('proof-kicker', d.proofKicker); set('proof-title', d.proofTitle); set('label-featured-work', d.featuredLabel); set('flagship-kicker', d.flagshipKicker); set('flagship-title', d.flagshipTitle); set('flagship-desc', d.flagshipDesc); set('flagship-link', d.flagshipLink); set('flagship-metric', d.metric, true); set('flagship-metric-desc', d.metricDesc);
-  set('multitenant-kicker', d.multitenantKicker); set('multitenant-title', d.multitenantTitle); set('multitenant-desc', d.multitenantDesc); set('multitenant-link', d.multitenantLink); set('now-title', d.nowTitle); set('now-desc', d.nowDesc); set('next-kicker', d.nextKicker); set('next-title', d.nextTitle); set('next-desc', d.nextDesc);
-  set('label-experience', d.experienceLabel); set('experience-kicker', d.experienceKicker); set('beyond-kicker', d.beyondKicker); set('label-direction', d.directionLabel); set('focus-kicker', d.focusKicker); set('archive-title', d.archiveTitle, true); set('archive-desc', d.archiveDesc);
-  ['filter-all','filter-web','filter-ai','filter-education','filter-security','filter-tools'].forEach((id, i) => set(id, d.filters[i]));
-  document.querySelectorAll('.hero-badges .badge').forEach((el, i) => { if (d.badges[i]) el.textContent = d.badges[i]; });
-}
-
-applyPhaseTwoLanguage('en');
-
-// BAR ANIMATION
-const barIO=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.querySelectorAll('.bar-fill').forEach(b=>{ b.style.width=b.dataset.width+'%'; });
-  });
-},{threshold:0.3});
-document.querySelectorAll('.bar-skills').forEach(el=>barIO.observe(el));
-
-// LANGUAGE
-const content={
-  en:{
-    eyebrow:'Cairo, Egypt · Open to Opportunities',
-    heroTitle:'Software Engineer · Web Developer · Cybersecurity Enthusiast<br/>Building real products from Cairo at 15.',
-    stat1:'GitHub Repos',stat2:'Certificates',stat3:'Languages Spoken',stat4:'Years Old — Already Building',stat5:'Current Status',availText:'Available for internships & freelance',
-    labelSkills:'Skills & Technologies',labelProjects:'Featured Projects',labelEdu:'Education',labelCerts:'Certificates',labelLangs:'Languages',
-    sg1:'Frontend',sg2:'Backend',sg3:'Cybersecurity',sg4:'AI & Data',sg5:'Tools',sg6:'Other',
-    p1name:'OmarOS v2.0',p1desc:'Browser-based OS-style portfolio with draggable windows, terminal emulator, Snake game, music player, and skills radar chart.',
-    p2name:'LinguaStory',p2desc:'Full React app for English learning via AI collaborative storytelling. Story Builder, Fix My Sentence, Daily Challenge, XP system, streak counter.',
-    p3name:'Arabic Learning Platform',p3desc:'Complete 8-file Arabic RTL educational platform gifted to a teacher: auth, admin, student dashboard, exam engine, and protected video player.',
-    p4name:'Semantic Communication AI',p4desc:'VQ-VAE architecture for IoT semantic data compression using PyTorch. Training scripts, matplotlib visualizations, professional README.',
-    p5name:'Wave Streetwear Platform',p5desc:'Full-stack e-commerce for Wave brand (Prado Clothing) — co-founded by Omar. Frontend + Node.js/MongoDB Atlas REST API backend.',
-    p6name:'OmarPizza Ultimate',p6desc:'Full restaurant web app with live cart, order tracking, and hardened admin dashboard against XSS, SQL Injection, and brute-force.',
-    p7name:'Medical Clinic Website',p7desc:'Professional medical clinic website deployed on GitHub Pages. First real paid client project — delivered and live.',
-    p8name:'Python Basics Course',p8desc:'Beginner Python course covering variables, strings, numbers, data types, print statements, and functions.',
-    p9name:'Secure Smart Home Eco-System',p9desc:'Graduation project for Digital Egypt Cubs: Flask REST API backend powering a Dashboard UI, a pandas-based Energy Calculator, ESP32/Wokwi Biometric Access with confidence-threshold logic, and a logic-gate Safety Circuit built on the CIA Triad.',
-    p10name:'SANAD — Arabic RAG Evaluation Platform',p10desc:'AI engineering flagship project: an Arabic-first RAG evaluation platform with Arabic-aware chunking, multi-embedding-model comparison, and a golden dataset measuring real precision, recall, groundedness, and hallucination — no invented benchmarks.',
-    p11name:'Meridian',p11desc:'Collaborative product-engineering market terminal. Team Leader / Main Developer responsible for system architecture, indicator ingestion, UI, and defensible decision surfaces.',
-    p12name:'CV Studio',p12desc:'Premium SaaS-style CV/resume builder — multi-step wizard, live preview, 6 templates, AI writing help, and a multi-CV dashboard.',
-    labelEvents:'Events & Conferences',
-    ev1Name:'Fi Africa 2026',ev1Meta:'2–4 June 2026 · Egypt International Exhibition Center, Cairo · Co-located with Propak MENA',ev1Role:'Visitor — Full-Stack Developer, Student',ev1Desc:'Engaged directly with industry professionals — effectively drove technical conversations and exchanged valuable insights.',
-    ev1PointsHTML:'<li><strong>Technical Growth:</strong> Discovered modern full-stack methodologies and architecture practices to optimize software performance and development workflow.</li><li><strong>Leadership &amp; Communication:</strong> Practiced active listening, grew public speaking confidence, and successfully led tech-focused group discussions.</li><li><strong>Strategic Networking:</strong> Built meaningful connections with talented developers and industry peers, sparking ideas for future collaboration.</li>',
-    labelEventProof:'Proof of Attendance',ev1ProofCaption:'Visitor Badge — Fi Africa 2026',
-    ev2Kicker:'Event Attendance · 2024',ev2Name:'Future of Digital Countries Summit',ev2Meta:'22–23 September 2024 · Cairo, Egypt',ev2Role:'Guest · Omar Ahmed',ev2Desc:'Attended the summit as a guest and explored conversations around the future of digital countries, technology, and innovation.',
-    edu1school:'Secondary School',edu1deg:'Baccalauréat — Second Year — Cairo, Egypt',
-    edu2school:'DECI Level One — Udacity × MCIT Egypt',edu2deg:'Excel · Statistics · Web Design',
-    edu3school:'iSchool — Advanced AI & Web Dev Tracks',edu3deg:'Coding Course — AI Tools & Web Development',
-    footerNote:'Built with code · Cairo, Egypt · 2026',
-    navCV:'CV',navProjects:'All Projects',seeAll:'See All 21 Projects →',
-    allTitle:'All <em>Projects</em>',allDesc:'21 public repositories — a record of what I have built, tested, learned, and shipped. Click any card to open the repo on GitHub.',
-  },
-  ar:{
-    eyebrow:'القاهرة، مصر · متاح للفرص',
-    heroTitle:'مهندس برمجيات · مطوّر ويب · متحمس للأمن السيبراني<br/>يبني منتجات حقيقية من القاهرة وعمره 15 عامًا.',
-    stat1:'مستودع GitHub',stat2:'شهادة',stat3:'لغات يتحدثها',stat4:'عامًا — يبني بالفعل',stat5:'الحالة الحالية',availText:'متاح للتدريب والعمل الحر',
-    labelSkills:'المهارات والتقنيات',labelProjects:'المشاريع المميزة',labelEdu:'التعليم',labelCerts:'الشهادات',labelLangs:'اللغات',
-    sg1:'الواجهة الأمامية',sg2:'الخادم',sg3:'الأمن السيبراني',sg4:'الذكاء الاصطناعي والبيانات',sg5:'الأدوات',sg6:'أخرى',
-    p1name:'OmarOS v2.0',p1desc:'بورتفوليو بنظام تشغيل في المتصفح: نوافذ قابلة للسحب، محاكي طرفية، لعبة ثعبان، مشغل موسيقى، ومخطط مهارات راداري.',
-    p2name:'LinguaStory',p2desc:'تطبيق React كامل لتعلم الإنجليزية عبر AI. Story Builder، Fix My Sentence، Daily Challenge، نظام XP وعداد streak.',
-    p3name:'منصة تعليم اللغة العربية',p3desc:'منصة تعليمية عربية RTL كاملة أُهديت لمعلم: تسجيل دخول، لوحة إدارة، نظام امتحانات، ومشغل فيديو محمي.',
-    p4name:'الذكاء الاصطناعي للاتصال الدلالي',p4desc:'معمارية VQ-VAE لضغط بيانات إنترنت الأشياء باستخدام PyTorch. سكريبتات تدريب ومخططات matplotlib.',
-    p5name:'Wave Streetwear Platform',p5desc:'منصة تجارة إلكترونية لماركة Wave — شارك عمر في تأسيسها. Frontend وخادم Node.js/MongoDB Atlas.',
-    p6name:'OmarPizza Ultimate',p6desc:'تطبيق مطعم كامل بعربة تسوق وتتبع طلبات، مع لوحة تحكم مؤمّنة ضد XSS وحقن SQL وهجمات القوة الغاشمة.',
-    p7name:'موقع عيادة طبية',p7desc:'موقع عيادة طبية احترافي على GitHub Pages. أول مشروع حقيقي مدفوع — تم التسليم والنشر.',
-    p8name:'دورة أساسيات Python',p8desc:'دورة للمبتدئين تغطي المتغيرات والنصوص والأرقام وأنواع البيانات وأوامر الطباعة والدوال.',
-    p9name:'منظومة المنزل الذكي الآمن',p9desc:'مشروع تخرج لـ Digital Egypt Cubs: خادم Flask REST API يدير لوحة تحكم، حاسبة استهلاك طاقة بـ pandas، نظام دخول بيومتري بـ ESP32/Wokwi بمنطق عتبة ثقة، ودائرة أمان بالبوابات المنطقية مبنية على إطار CIA Triad.',
-    p10name:'SANAD — منصة تقييم RAG العربية',p10desc:'مشروع هندسة الذكاء الاصطناعي الرئيسي: منصة تقييم RAG عربية أولاً بتقطيع نص واعٍ باللغة العربية، مقارنة بين عدة نماذج تضمين (embedding)، ومجموعة بيانات ذهبية تقيس دقة واستدعاء وهلوسة حقيقية — بدون أرقام مُختلَقة.',
-    p11name:'Meridian',p11desc:'منصة تحليل أسواق بُنيت تعاونيًا خلال Sprint مكثف. قائد الفريق والمطور الرئيسي المسؤول عن معمارية النظام، وإدخال المؤشرات، والواجهة، وحدود القرار القابلة للدفاع.',
-    p12name:'CV Studio',p12desc:'منصة احترافية لبناء السيرة الذاتية بأسلوب SaaS — معالج متعدد الخطوات، معاينة حية، 6 قوالب، مساعدة كتابة بالذكاء الاصطناعي، ولوحة تحكم لإدارة أكثر من سيرة ذاتية.',
-    labelEvents:'الفعاليات والمؤتمرات',
-    ev1Name:'Fi Africa 2026',ev1Meta:'2–4 يونيو 2026 · مركز مصر الدولي للمعارض، القاهرة · بالتزامن مع Propak MENA',ev1Role:'زائر (Visitor) — Full-Stack Developer، طالب',ev1Desc:'تفاعل مباشر مع محترفين في المجال، وقيادة فعّالة لنقاشات تقنية وتبادل رؤى قيّمة.',
-    ev1PointsHTML:'<li><strong>نمو تقني:</strong> اكتشاف منهجيات وممارسات معمارية حديثة في الـ Full-Stack لتحسين أداء البرمجيات وسير العمل التطويري.</li><li><strong>القيادة والتواصل:</strong> إتقان الاستماع الفعّال، وزيادة الثقة في التحدث أمام الجمهور، وقيادة نقاشات جماعية تقنية بنجاح.</li><li><strong>بناء علاقات استراتيجي:</strong> بناء علاقات حقيقية مع مطورين موهوبين وزملاء في الصناعة، وفتح آفاق للتعاون المستقبلي.</li>',
-    labelEventProof:'إثبات الحضور',ev1ProofCaption:'بادچ الزائر — Fi Africa 2026',
-    ev2Kicker:'حضور فعالية · 2024',ev2Name:'قمة مستقبل الدول الرقمية',ev2Meta:'22–23 سبتمبر 2024 · القاهرة، مصر',ev2Role:'ضيف · Omar Ahmed',ev2Desc:'حضر عمر القمة كضيف، واستكشف نقاشات حول مستقبل الدول الرقمية والتكنولوجيا والابتكار.',
-    edu1school:'المرحلة الثانوية',edu1deg:'باكالوريا — السنة الثانية — القاهرة، مصر',
-    edu2school:'برنامج DECI المستوى الأول — Udacity × MCIT مصر',edu2deg:'Excel · الإحصاء · تصميم الويب',
-    edu3school:'iSchool — مسارات AI والويب المتقدمة',edu3deg:'دورة برمجة — أدوات AI وتطوير الويب',
-    footerNote:'مبني بالكود · القاهرة، مصر · 2026',
-    navCV:'السيرة الذاتية',navProjects:'كل المشاريع',seeAll:'عرض كل 21 مشروع →',
-    allTitle:'كل <em>المشاريع</em>',allDesc:'21 مستودعًا عامًا — سجل لما بنيته واختبرته وتعلمته ونشرته. اضغط على أي كارد لفتح الـ repo على GitHub.',
-  }
-};
-function setLang(lang){
-  const d=content[lang];
-  document.getElementById('eyebrow').textContent=d.eyebrow;
-  document.getElementById('hero-title').innerHTML=d.heroTitle;
-  ['stat1','stat2','stat3','stat4','stat5'].forEach(k=>document.getElementById(k).textContent=d[k]);
-  document.getElementById('avail-text').textContent=d.availText;
-  document.getElementById('label-skills').textContent=d.labelSkills;
-  document.getElementById('label-projects').textContent=d.labelProjects;
-  document.getElementById('label-edu').textContent=d.labelEdu;
-  document.getElementById('label-certs').textContent=d.labelCerts;
-  document.getElementById('label-langs').textContent=d.labelLangs;
-  ['sg1','sg2','sg3','sg4','sg5','sg6'].forEach(k=>{ const el=document.getElementById(k);if(el)el.textContent=d[k]; });
-  for(let i=1;i<=12;i++){
-    const n=document.getElementById('p'+i+'-name');
-    const desc=document.getElementById('p'+i+'-desc');
-    if(n) n.textContent=d['p'+i+'name'];
-    if(desc) desc.textContent=d['p'+i+'desc'];
-  }
-  const evLabel=document.getElementById('label-events'); if(evLabel) evLabel.textContent=d.labelEvents;
-  const evName=document.getElementById('ev1-name'); if(evName) evName.textContent=d.ev1Name;
-  const evMeta=document.getElementById('ev1-meta'); if(evMeta) evMeta.textContent=d.ev1Meta;
-  const evRole=document.getElementById('ev1-role'); if(evRole) evRole.textContent=d.ev1Role;
-  const evDesc=document.getElementById('ev1-desc'); if(evDesc) evDesc.textContent=d.ev1Desc;
-  const evPoints=document.getElementById('ev1-points'); if(evPoints) evPoints.innerHTML=d.ev1PointsHTML;
-  const evProofLabel=document.getElementById('label-event-proof'); if(evProofLabel) evProofLabel.textContent=d.labelEventProof;
-  const evProofCaption=document.getElementById('ev1-proof-caption'); if(evProofCaption) evProofCaption.textContent=d.ev1ProofCaption;
-  const ev2Kicker=document.getElementById('ev2-kicker'); if(ev2Kicker) ev2Kicker.textContent=d.ev2Kicker;
-  const ev2Name=document.getElementById('ev2-name'); if(ev2Name) ev2Name.textContent=d.ev2Name;
-  const ev2Meta=document.getElementById('ev2-meta'); if(ev2Meta) ev2Meta.textContent=d.ev2Meta;
-  const ev2Role=document.getElementById('ev2-role'); if(ev2Role) ev2Role.textContent=d.ev2Role;
-  const ev2Desc=document.getElementById('ev2-desc'); if(ev2Desc) ev2Desc.textContent=d.ev2Desc;
-  document.getElementById('edu1-school').textContent=d.edu1school;
-  document.getElementById('edu1-deg').textContent=d.edu1deg;
-  document.getElementById('edu2-school').textContent=d.edu2school;
-  document.getElementById('edu2-deg').textContent=d.edu2deg;
-  document.getElementById('edu3-school').textContent=d.edu3school;
-  document.getElementById('edu3-deg').textContent=d.edu3deg;
-  document.getElementById('footer-note').textContent=d.footerNote;
-  document.getElementById('nav-cv').textContent=d.navCV;
-  document.getElementById('nav-projects').textContent=d.navProjects;
-  document.getElementById('see-all-btn').textContent=d.seeAll;
-  document.querySelector('.all-projects-header h1').innerHTML=d.allTitle;
-  document.querySelector('.all-projects-header p').textContent=d.allDesc;
-  document.body.classList.toggle('ar',lang==='ar');
-  document.getElementById('btn-en').classList.toggle('active',lang==='en');
-  document.getElementById('btn-ar').classList.toggle('active',lang==='ar');
-  document.documentElement.setAttribute('lang',lang);
-  applyPhaseTwoLanguage(lang);
-}
-// Poster tilt + spotlight effect (Wave / Smart Home / SANAD covers)
-document.querySelectorAll('.project-poster').forEach(poster=>{
-  const img = poster.querySelector('img');
-  const strength = 8; // max degrees of tilt
-  poster.addEventListener('mousemove', e=>{
-    const r = poster.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width;
-    const py = (e.clientY - r.top) / r.height;
-    const rx = (0.5 - py) * strength;
-    const ry = (px - 0.5) * strength;
-    img.style.transform = `scale(1.02) rotateX(${rx}deg) rotateY(${ry}deg)`;
-    poster.style.setProperty('--mx', `${px*100}%`);
-    poster.style.setProperty('--my', `${py*100}%`);
-  });
-  poster.addEventListener('mouseleave', ()=>{
-    img.style.transform = 'scale(1) rotateX(0) rotateY(0)';
-  });
-});
-
-// Poster modal — full uncropped view on click
-const posterModal = document.getElementById('posterModal');
-const posterModalImg = document.getElementById('posterModalImg');
-document.querySelectorAll('.project-poster').forEach(poster=>{
-  poster.addEventListener('click', e=>{
-    e.preventDefault();
-    e.stopPropagation();
-    const img = poster.querySelector('img');
-    posterModalImg.src = img.src.replace(/=w\d+$/, '=w1200');
-    posterModalImg.alt = img.alt;
-    posterModal.classList.add('open');
-  });
-});
-document.getElementById('ev2-photo-wrap').addEventListener('click', ()=>{
-  const img = document.getElementById('ev2-photo');
-  posterModalImg.src = img.src;
-  posterModalImg.alt = img.alt;
-  posterModal.classList.add('open');
-});
-function closePosterModal(){ posterModal.classList.remove('open'); posterModalImg.src=''; }
-document.getElementById('posterModalClose').addEventListener('click', closePosterModal);
-posterModal.addEventListener('click', e=>{ if(e.target===posterModal) closePosterModal(); });
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closePosterModal(); });
-
-// Project filters
-document.querySelectorAll('.filter-btn').forEach(button=>{
-  button.addEventListener('click', ()=>{
-    document.querySelectorAll('.filter-btn').forEach(btn=>btn.classList.remove('active'));
-    button.classList.add('active');
-    const filter = button.dataset.filter;
-    document.querySelectorAll('.project-card').forEach(card=>{
-      const categories = card.dataset.category || '';
-      card.style.display = (filter==='all' || categories.includes(filter)) ? '' : 'none';
-    });
-  });
-});
-
-
-// Neural OS background: subtle AI/data network with mouse interaction.
-const neuralCanvas = document.getElementById('neural-bg');
-const neuralCtx = neuralCanvas.getContext('2d');
-let neuralWidth = 0;
-let neuralHeight = 0;
-let neuralParticles = [];
-const neuralMouse = { x: null, y: null, radius: 150 };
-
-function resizeNeuralCanvas() {
-  const ratio = window.devicePixelRatio || 1;
-  neuralWidth = window.innerWidth;
-  neuralHeight = window.innerHeight;
-  neuralCanvas.width = neuralWidth * ratio;
-  neuralCanvas.height = neuralHeight * ratio;
-  neuralCanvas.style.width = neuralWidth + 'px';
-  neuralCanvas.style.height = neuralHeight + 'px';
-  neuralCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
-
-  const amount = neuralWidth < 700
-    ? 35
-    : Math.min(110, Math.floor((neuralWidth * neuralHeight) / 13000));
-
-  neuralParticles = Array.from({ length: amount }, () => ({
-    x: Math.random() * neuralWidth,
-    y: Math.random() * neuralHeight,
-    vx: (Math.random() - 0.5) * 0.25,
-    vy: (Math.random() - 0.5) * 0.25,
-    size: Math.random() * 1.8 + 0.5,
-    color: Math.random() > 0.82 ? '#22d3ee' : '#d4a843'
-  }));
-}
-
-function animateNeuralBackground() {
-  neuralCtx.clearRect(0, 0, neuralWidth, neuralHeight);
-
-  for (const particle of neuralParticles) {
-    particle.x += particle.vx;
-    particle.y += particle.vy;
-    if (particle.x < 0 || particle.x > neuralWidth) particle.vx *= -1;
-    if (particle.y < 0 || particle.y > neuralHeight) particle.vy *= -1;
-
-    if (neuralMouse.x !== null) {
-      const dx = neuralMouse.x - particle.x;
-      const dy = neuralMouse.y - particle.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < neuralMouse.radius) {
-        particle.x -= dx * 0.0007;
-        particle.y -= dy * 0.0007;
-      }
-    }
-
-    neuralCtx.beginPath();
-    neuralCtx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-    neuralCtx.fillStyle = particle.color;
-    neuralCtx.globalAlpha = 0.65;
-    neuralCtx.fill();
-  }
-
-  for (let i = 0; i < neuralParticles.length; i++) {
-    for (let j = i + 1; j < neuralParticles.length; j++) {
-      const first = neuralParticles[i];
-      const second = neuralParticles[j];
-      const dx = first.x - second.x;
-      const dy = first.y - second.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 125) {
-        neuralCtx.beginPath();
-        neuralCtx.moveTo(first.x, first.y);
-        neuralCtx.lineTo(second.x, second.y);
-        neuralCtx.strokeStyle = `rgba(212,168,67,${(1 - distance / 125) * 0.22})`;
-        neuralCtx.lineWidth = 0.6;
-        neuralCtx.stroke();
-      }
-    }
-  }
-
-  neuralCtx.globalAlpha = 1;
-  requestAnimationFrame(animateNeuralBackground);
-}
-
-window.addEventListener('resize', resizeNeuralCanvas);
-window.addEventListener('mousemove', event => {
-  neuralMouse.x = event.clientX;
-  neuralMouse.y = event.clientY;
-});
-window.addEventListener('mouseleave', () => {
-  neuralMouse.x = null;
-  neuralMouse.y = null;
-});
-
-if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  resizeNeuralCanvas();
-  animateNeuralBackground();
-}
-
-</script>
+  <script src="app.js"></script>
 </body>
 </html>
